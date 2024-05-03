@@ -5,11 +5,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage[table]{xcolor}
 
 % Questo commentalo se vuoi scrivere in inglese.
 \usepackage[italian]{babel}
 \usepackage[italian]{cleveref}
 \usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
 
 % Set the top margin to 0.5 inch
 \setlength{\topmargin}{-0.3in}
@@ -133,252 +135,411 @@ Di seguito lo schema finale:
 \section{Stima del volume dei dati}
 
 \begin{table}[H]
-    \caption{My Spreadsheet}
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
+        \rowcolor{lime!50} 
         \textbf{Concetto}& \textbf{Costrutto}& \textbf{Volume}\\ \hline
         Continente & E & 6 \\ \hline 
-        Composizione & A & 42 \\ \hline 
+        Composizione & R & 42 \\ \hline 
         Territorio & E & 42 \\ \hline 
-        Confinante & A & 200 \\ \hline 
+        Confinante & R & 168\\ \hline 
         Armate Iniziali & E & 4 \\ \hline
         Obiettivo & E & 14 \\ \hline 
         Esercito & E & 6 \\ \hline 
         Utente & E & 10.000 \\ \hline
         Giocatore & E & 450.000 \\ \hline 
-        Associazione & A & 450.000 \\ \hline 
+        Associazione & R & 450.000 \\ \hline 
         Partita & E & 100.000 \\ \hline 
-        Vincitore & A & 95.000 \\ \hline 
-        Partecipazione & A & 450.000 \\ \hline 
-        Utilizza & A & 450.000 \\ \hline 
-        Obiettivo Giocatore & A & 450.000 \\ \hline 
+        Vincitore & R & 95.000 \\ \hline 
+        Partecipazione & R & 450.000 \\ \hline 
+        Utilizza & R & 450.000 \\ \hline 
+        Obiettivo Giocatore & R & 450.000 \\ \hline 
         Turno & E & 7.200.000 \\ \hline
-        Effettuazione Turno & A & 7.200.000 \\ \hline
-        Suddivisione & A & 7.200.000 \\ \hline
-        Controllo Territorio & A & 302.400.000 \\ \hline
+        Effettuazione Turno & R & 7.200.000 \\ \hline
+        Suddivisione & R & 7.200.000 \\ \hline
+        Controllo Territorio & R & 67.200.000\\ \hline
         Spostamento & E & 6.300.000 \\ \hline 
-        Spostamento Turno & A & 6.300.000 \\ \hline 
-        Da & A & 6.300.000 \\ \hline 
-        A & A & 6.300.000 \\ \hline 
+        Spostamento Turno & R & 6.300.000 \\ \hline 
+        Da & R & 6.300.000 \\ \hline 
+        A & R & 6.300.000 \\ \hline 
         Attacco & E & 5.400.000 \\ \hline 
-        Attacco Turno & A & 5.400.000 \\ \hline 
-        Attaccante & A & 5.400.000 \\ \hline 
-        Difensore & A & 5.400.000 \\ \hline 
+        Attacco Turno & R & 5.400.000 \\ \hline 
+        Attaccante & R & 5.400.000 \\ \hline 
+        Difensore & R & 5.400.000 \\ \hline 
     \end{tabular}
 \end{table}
 
 \section{Descrizione delle operazioni principali}
 
-Questa sezione, come quella riguardante il design dettagliato va svolta \textbf{singolarmente da ogni membro del gruppo}.
-%
-Nella prima parte, ciascuno dovrà mostrare degli esempi di codice particolarmente ben realizzati,
-che dimostrino proefficienza con funzionalità avanzate del linguaggio e capacità di spingersi oltre le librerie mostrate a lezione.
+Segue una lista delle operazioni da effettuare e la relativa frequenza:
 
-\begin{itemize}
-	\item \textbf{Elencare} (fare un semplice elenco per punti, non un testo!) le feature \textit{avanzate} del linguaggio e dell'ecosistema Java che sono state
-utilizzate. Le feature di interesse sono:
-	\begin{itemize}
-		\item Progettazione con generici, ad esempio costruzione di nuovi tipi generici, e uso di generici bounded.
-		L'uso di classi generiche di libreria non è considerato avanzato.
-		\item Uso di lambda expressions
-		\item Uso di \texttt{Stream}, di \texttt{Optional} o di altri costrutti funzionali
-		\item Uso di reflection
-		\item Definizione ed uso di nuove annotazioni
-		\item Uso del Java Platform Module System
-		\item Uso di parti della libreria JDK non spiegate a lezione (networking, compressione, parsing XML, eccetera...)
-		\item Uso di librerie di terze parti (incluso JavaFX): Google Guava, Apache Commons...
-	\end{itemize}
-	\item Si faccia molta attenzione a non scrivere banalità, elencando qui features di tipo ``core'', come le eccezioni, le enumerazioni, o le inner class: nessuna di queste è considerata avanzata.
-	\item Per ogni feature avanzata, mostrata, includere:
-	\begin{itemize}
-		\item Nome della feature
-		\item Permalink GitHub al punto nel codice in cui è stata utilizzata
-	\end{itemize}
-\end{itemize}
-
-In questa sezione, \textit{dopo l'elenco},
-vanno menzionati ed attributi con precisione eventuali pezzi di codice ``riadattati'' (o scopiazzati...) da Internet o da altri progetti,
-pratica che tolleriamo ma che non raccomandiamo.
-%
-Si rammenta agli studenti che non è consentito partire da progetti esistenti e procedere per modifiche successive.
-%
-Si ricorda anche che i docenti hanno in mano strumenti antiplagio piuttosto raffinati e che ``capiscono'' il codice e la storia delle modifiche del progetto,
-per cui tecniche banali come cambiare nomi (di classi, metodi, campi, parametri, o variabili locali),
-aggiungere o togliere commenti,
-oppure riordinare i membri di una classe vengono individuate senza problemi.
-%
-Le regole del progetto spiegano in dettaglio l'approccio dei docenti verso atti gravi come il plagiarismo.
-
-I pattern di design \textbf{non} vanno messi qui.
-%
-L'uso di pattern di design (come suggerisce il nome) è un aspetto avanzato di design, non di implementazione,
-e non va in questa sezione.
-
-\subsection*{Elementi positivi}
-
-\begin{itemize}
-	\item Si elencano gli aspetti avanzati di linguaggio che sono stati impiegati
-	\item Si elencano le librerie che sono state utilizzate
-	\item Per ciascun elemento, si fornisce un permalink
-	\item Ogni permalink fa riferimento ad uno snippet di codice scritto dall'autore della sezione (i docenti verificheranno usando \texttt{git blame})
-	\item Se si è utilizzato un particolare algoritmo, se ne cita la fonte originale.
-	Ad esempio, se si è usato Mersenne Twister per la generazione di numeri pseudo-random, si cita \cite{mersenne}.
-	\item Si identificano parti di codice prese da altri progetti, dal web, o comunque scritte in forma originale da altre persone.
-	In tal senso, si ricorda che agli ingegneri non è richiesto di re-inventare la ruota continuamente:
-	se si cita debitamente la sorgente è tollerato fare uso di di snippet di codice open source per risolvere velocemente problemi non banali.
-	Nel caso in cui si usino snippet di codice di qualità discutibile,
-	oltre a menzionarne l'autore originale si invitano gli studenti ad adeguare tali parti di codice agli standard e allo stile del progetto.
-	Contestualmente, si fa presente che è largamente meglio fare uso di una libreria che copiarsi pezzi di codice:
-	qualora vi sia scelta (e tipicamente c'è), si preferisca la prima via.
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
-	\item Si elencano feature core del linguaggio invece di quelle segnalate. Esempi di feature core da non menzionare sono:
-    \begin{itemize}
-        \item eccezioni;
-        \item classi innestate;
-        \item enumerazioni;
-        \item interfacce.
-    \end{itemize}
-	\item Si elencano applicazioni di terze parti (peggio se per usarle occorre licenza, e lo studente ne è sprovvisto) che non c'entrano nulla con lo sviluppo, ad esempio:
-    \begin{itemize}
-        \item Editor di grafica vettoriale come Inkscape o Adobe Illustrator;
-        \item Editor di grafica scalare come GIMP o Adobe Photoshop;
-        \item Editor di audio come Audacity;
-        \item Strumenti di design dell'interfaccia grafica come SceneBuilder: il codice è in ogni caso inteso come sviluppato da voi.
-    \end{itemize}
-	\item Si descrivono aspetti di scarsa rilevanza, o si scende in dettagli inutili.
-	\item Sono presenti parti di codice sviluppate originalmente da altri che non vengono debitamente segnalate.
-	In tal senso, si ricorda agli studenti che i docenti hanno accesso a tutti i progetti degli anni passati,
-	a Stack Overflow,
-	ai principali blog di sviluppatori ed esperti Java,
-	ai blog dedicati allo sviluppo di soluzioni e applicazioni
-	(inclusi blog dedicati ad Android e allo sviluppo di videogame),
-	nonché ai vari GitHub, GitLab, e Bitbucket.
-	Conseguentemente, è \emph{molto} conveniente \emph{citare} una fonte ed usarla invece di tentare di spacciare per proprio il lavoro di altri.
-	\item Si elencano design pattern
-\end{itemize}
-
-\subsection{Esempio}
-
-\subsubsection{Utilizzo della libreria SLF4J}
-
-Utilizzata in vari punti.
-Un esempio è \url{https://github.com/AlchemistSimulator/Alchemist/blob/5c17f8b76920c78d955d478864ac1f11508ed9ad/alchemist-swingui/src/main/java/it/unibo/alchemist/boundary/swingui/effect/impl/EffectBuilder.java#L49}
-
-\subsubsection{Utilizzo di \texttt{LoadingCache} dalla libreria Google Guava}
-
-Permalink: \url{https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/protelis/AlchemistExecutionContext.java#L141-L143}
-
-\subsubsection{Utilizzo di \texttt{Stream} e lambda expressions}
-
-Usate pervasivamente. Il seguente è un singolo esempio.
-Permalink: \url{https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/model/ProtelisIncarnation.java#L98-L120}
-
-\subsubsection{Scrittura di metodo generico con parametri contravarianti}
-
-Permalink: \url{https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/protelis/AlchemistExecutionContext.java#L141-L143}
-
-\subsubsection{Protezione da corse critiche usando \texttt{Semaphore}}
-
-Permalink: \url{https://github.com/AlchemistSimulator/Alchemist/blob/d8a1799027d7d685569e15316a32e6394632ce71/alchemist-incarnation-protelis/src/main/java/it/unibo/alchemist/model/ProtelisIncarnation.java#L388-L440}
-
+\begin{table}[htbp]
+    \begin{tabular}{lll}
+        \rowcolor{lime!50} 
+        \textbf{N.} & \textbf{Operazione} & \textbf{Freq.} \\
+        1 & Registrare un nuovo utente & 2/g \\ 
+        2 & Registrare una nuova partita & 10/g \\ 
+        3 & Determinare il numero di armate iniziali da assegnare ai giocatori & 10/g \\ 
+        4 & Registrare un nuovo turno all'interno di una partita & 160/g \\
+        5 & Mostrare il giocatore a cui appartiene un territorio in un certo turno & 500/g \\ 
+        6 & Registrare un attacco & 120/g \\ 
+        7 & Registrare uno spostamento & 140/g \\ 
+        8 & Determinare le armate da assegnare ad un giocatore nella fase di rinforzo & 160/g \\ 
+        9 & Mostrare la classifica dei giocatori, in base al numero di territori posseduti & 160/g \\
+        10 & Registrare una vittoria & 9/g \\
+        11 & Mostrare la classifica globale degli utenti, in base al numero di vittorie & 1/set \\
+    \end{tabular}
+\end{table}
 
 \section{Schemi di navigazione e tabelle degli accessi}
+
+Si riportano di seguito le tabelle degli accessi per le operazioni sopra descritte. \par
+Si noti che, al fine del calcolo dei costi, gli accessi in scrittura sono considerati di peso doppio rispetto a quelli in lettura.
+
+\subsubsection{OP 1 - Registrare un nuovo utente}
+
+\begin{table}[htbp]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo} \\ \hline 
+        Utente & E & 1 & S \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 2L * 2 $\rightarrow$ 4 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 2 - Registrare una nuova partita}
+
+Dato che un'istanza di giocatore è valida solo all'interno della partita alla quale partecipa, al momento della creazione
+di una nuova partita vengono creati anche i relativi giocatori, che in media sono 4.5, assegnandovi un esercito ed un obiettivo casuale.
+
+\begin{table}[htbp]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Partita & E & 1 & S \\ \hline
+        Giocatore & E & 4.5 & S \\ \hline
+        Associazione & R & 4.5 & S \\ \hline
+        Obiettivo Giocatore & R & 4.5 & S \\ \hline
+        Utilizza & R & 4.5 & S \\ \hline
+        Partecipazione & R & 4.5 & S \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 23.5S * 10 $\rightarrow$ 470 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 3 - Determinare il numero di armate iniziali da assegnare ai giocatori}
+
+Questa operazione viene svolta all'inizio di ogni partita (si suppone che tale partita sia già stata creata). \par
+Occorre contare i giocatori partecipanti e leggere il corrispondente numero di armate iniziali.
+
+\begin{table}[htbp]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Partecipazione & A & 4.5 & L \\ \hline
+        Armate Iniziali & E & 1 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 5.5L * 10 $\rightarrow$ 55 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{OP 4 - Registrare un nuovo turno}
+
+È necessario, in particolare, memorizzare i territori posseduti ad inizio turno, mediamente 9.33 (42 territori divisi tra 4.5 giocatori).
+
+\begin{table}[htbp]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 1 & S \\ \hline
+        Suddivisione & R & 1 & S \\ \hline
+        Effettuazione Turno & R & 1 & S \\ \hline
+        Controllo Territorio & R & 9.33 & S \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 12.33S * 160 $\rightarrow$ 3946 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 5 - Mostrare il giocatore a cui appartiene un territorio} 
+
+Per trovare il giocatore al quale appartiene un certo territorio al turno numero $n$, occorre controllare l'$n$-esimo turno di tutti i giocatori.  \par
+Ci sono in media 4.5 giocatori/partita e la somma dei territori da essi controllati in un qualsiasi turno $n$ deve corrispondere al numero totale di territori presenti, ovvero 42.  \par
+Nel caso peggiore occorre perciò controllare tutte le 42 istanze di "\textit{Controllo Territorio}", distribuite nei 4,5 turni. \par
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo} \\ \hline
+        Turno & E & 4.5 & L \\ \hline
+        Controllo Territorio & R & 42 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 46.5L * 500 $\rightarrow$ 23250 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{OP 6 - Registrare un attacco}
+
+Si assume che il turno sia già stato creato. \par
+Per portare a termine l'operazione è necessario verificare che i due territori, attaccante e difensore, siano:
+\begin{itemize}
+    \item \textbf{diversi}: occorre la lettura dei 2 territori.
+    \item \textbf{confinanti}: è sufficiente verificare che uno dei due territori confini con l'altro, poichè la relazione è simmetrica (se A confina con B allora B confina con A). Ci sono 42 territori e 168 confini, quindi in media andranno eseguite 4 letture.
+    \item \textbf{appartenenti a giocatori differenti}: per il giocatore di turno basta leggere i territori controllati, mentre per il difensore tale informazione va ricavata in maniera analoga alla query precedente, controllando per tutti i giocatori \textit{meno l'attaccante}.
+\end{itemize}
+
+Per rendere più agevole la comprensione della tabella degli accessi si evidenziano i costi extra relativi ai controlli sopra indicati.
+\begin{table}[htbp]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Attacco Turno & R & 1 & S \\ \hline
+        Attacco & E & 1 & S \\ \hline
+        Attaccante & R & 1 & S \\ \hline
+        Difensore & R & 1 & S \\ \hline
+        % CHECKS %
+        \rowcolor{orange!20} 
+        Territorio & E & 2 & L \\ \hline
+        \rowcolor{orange!20} 
+        Confinante & R & 4 & L \\ \hline
+        \rowcolor{orange!20} 
+        Controllo Territorio & R & 9.33 & L \\ \hline
+        \rowcolor{orange!20} 
+        Turno & E & 3.5 & L \\ \hline
+        \rowcolor{orange!20} 
+        Controllo Territorio & R & 32.67 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} (51.5L + 4S) * 120 $\rightarrow$ 7140 al giorno } \\ 
+        \end{tabular}
+\end{table}
+
+\subsubsection{OP 7 - Registrare uno spostamento}
+
+Si assume che il turno sia già stato creato. \par
+Per portare a termine l'operazione è necessario verificare che i due territori siano diversi, confinanti e appartenenti allo stesso giocatore. I primi due controlli sono analoghi a queli effettuati nel caso dell'attacco, mentre per controllare se i territori appartengono allo stesso giocatore è sufficiente leggerne i territori controllati.
+\begin{table}[htbp]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Spostamento Turno & R & 1 & S \\ \hline
+        Spostamento & E & 1 & S \\ \hline
+        Da & R & 1 & S \\ \hline
+        A & R & 1 & S \\ \hline
+        % CHECKS %
+        \rowcolor{orange!30} 
+        Territorio & E & 2 & L \\ \hline
+        \rowcolor{orange!30} 
+        Confinante & R & 4 & L \\ \hline
+        \rowcolor{orange!30} 
+        Controllo Territorio & R & 9.33 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} (15.33L + 4S) * 140 $\rightarrow$ 3266 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 8 - Determinare le armate da assegnare ad un giocatore nella fase di rinforzo} 
+
+Tale operazione viene eseguita nel contesto di un turno. Occorre leggere tutti i territori controllati dal giocatore e verificare se possiede uno o più continenti (6 in totale).
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Controllo Territorio & R & 9.33 & L \\ \hline
+        Continente & E & 6 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 10.33L * 160 $\rightarrow$ 2453 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 9 - Mostrare la classifica dei giocatori, in base al numero di territori posseduti}
+
+Tale operazione viene eseguita nel contesto di un certo turno di numero $n$. \par
+Per ciascun giocatore è necessario contare i relativi territori posseduti al turno $n$-esimo.
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 4.5 & L \\ \hline
+        Controllo Territorio & R & 42 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 46.5L * 160 $\rightarrow$ 7440 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 10 - Registrare una vittoria}
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Vincitore & R & 1 & S \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 1S * 9 $\rightarrow$ 18 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 11 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}        
+
+Leggendo tutte le tuple da "\textit{Vincitore}" è possibile risalire ai giocatori e successivamente ai relativi utenti. 
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Vincitore & R & 95.000 & L \\ \hline
+        Giocatore & E & 95.000 & L \\ \hline
+        Utente & E & 95.000 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 285000L $\rightarrow$ 285000 a settimana } \\ 
+    \end{tabular}
+\end{table}
+
+\pagebreak
+
 \section{Raffinamento dello schema}
+
+Nello schema E/R sono state eliminate le seguenti relazioni:
+\begin{itemize}
+    \setlength\itemsep{1pt}
+    \item Associazione, importando codiceFiscale (rinominato in codUtente) in Giocatore
+    \item Obiettivo Giocatore, importando codObiettivo in Giocatore
+    \item Utilizza, importando codEsercito in Giocatore
+    \item Partecipazione, importando codPartita in Giocatore
+    \item Effettuazione Turno, importando codGiocatore in Turno
+    \item Suddivisione, importando codPartita in Turno
+    \item Attacco Turno, importando codAttacco in Turno e rendendolo opzionale
+    \item Spostamento Turno, importando codSpostamento in Turno e rendendolo opzionale
+    \item Da, importando nome (rinominato in territorioPartenza) in Spostamento
+    \item A, importando nome (rinominato in territorioArrivo) in Spostamento
+    \item Composizione, importando nome (rinominato in continente) in Territorio
+    \item Vincitore, reificata importando codPartita da Partita e codGiocatore da Giocatore
+    \item Controllo Territorio, reificata importando numeroTurno, codPartita e codGiocatore da Turno e nome da Territorio
+    \item Attaccante, esportandone gli attributi (armateSchierate e armatePerse) in Attacco 
+    \item Difensore, esportandone gli attributi (difArmateSchierate e difArmatePerse) in Attacco 
+    \item Confinante, reificata importando nome da Territorio (rinominati in terrA e terrB)
+\end{itemize}
+
+\pagebreak
+
 \section{Analisi delle ridondanze}
-\section{Traduzione di entità e associazioni}
+
+\subsubsection{OP 9 - Mostrare la classifica dei giocatori, in base al numero di territori controllati}
+
+È stata inserita una ridondanza aggiungendo in Turno l'attributo ridondante \textit{territoriControllati}.
+Come si può vedere dalla tabella sottostante, tale ridondanza agevola notevolmente l'operazione di conteggio dei territori:
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 4.5 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 4.5L * 160 $\rightarrow$ 720 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+Senza ridondanza:
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{yellow!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 4.5 & L \\ \hline
+        Controllo Territorio & R & 42 & L \\ \hline
+        \rowcolor{yellow!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 46.5L * 160 $\rightarrow$ 7440 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 11 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}        
+
+Introducendo l'attributo ridondante "\textit{vittorie}" in Utente è possibile redigere la classifica effettuando molte meno letture, poichè è suficiente leggere tutti gli utenti. \par
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Utente & E & 10000 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 10000L $\rightarrow$ 10000 a settimana } \\ 
+    \end{tabular}
+\end{table}
+
+Senza ridondanza:
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{yellow!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Vincitore & R & 95.000 & L \\ \hline
+        Giocatore & E & 95.000 & L \\ \hline
+        Utente & E & 95.000 & L \\ \hline
+        \rowcolor{yellow!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 285000L $\rightarrow$ 285000 a settimana } \\ 
+    \end{tabular}
+\end{table}
+
+Per completezza si sottolinea che l'introduzione di un attributo ridondante comporta anche un aumento nel costo dell'operazione 10 (registrazione di una vittoria), che passa da 18/g a 45/g, come mostrato nella tabella sottostante. \par 
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Vincitore & R & 1 & S \\ \hline
+        Utente & R & 1 & L \\ \hline
+        Utente & R & 1 & S \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} (1L + 2S) * 9 $\rightarrow$ 45 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\pagebreak
+
+Calcolo dei costi senza ridondanza:
+
+\begin{itemize}
+    \item OP 10: 285000 a settimana
+    \item OP 11: 18 * 7 = 126 a settimana
+\end{itemize}
+
+\textbf{Totale}: 285126 a settimana. \\ \\
+Con ridondanza:
+
+\begin{itemize}
+    \item OP 10: 10000 a settimana
+    \item OP 11: 45 * 7 = 315 a settimana
+\end{itemize}
+
+\textbf{Totale}: 10315 a settimana. \par
+Dopo aver analizzato la variazione nei costi delle due operazioni sull'arco di una settimana, emerge che conviene mantenere la ridondanza.  
+
+\section{Traduzione di entità e associazioni in relazioni}
+
+\begin{description}
+    \item \textbf{UTENTI} (\underline{codiceFiscale}, nome, cognome, dataNascita, vittorie) \par
+    \item \textbf{PARTITE} (\underline{codPartita}, data) \par
+    \item \textbf{OBIETTIVI} (\underline{codObiettivo}, descrizione) \par
+    \item \textbf{ESERCITI} (\underline{codEsercito}, colore) \par
+    \item \textbf{GIOCATORI} (\underline{codGiocatore}, nickname, codUtente: UTENTI, codPartita: PARTITE, codObiettivo: OBIETTIVI, codEsercito: ESERCITI) \par
+    \item \textbf{VINCITORI} (\underline{codPartita}: PARTITE, codGiocatore: GIOCATORI) \par
+    \item \textbf{ARMATE\_INIZIALI} (\underline{numGiocatori}, numArmate) \par
+    \item \textbf{TURNI} ((\underline{numeroTurno}, \underline{codParita}: PARTITE, \underline{codGiocatore}: GIOCATORI), territoriControllati, codSpostamento*: SPOSTAMENTI, codAttacco*: ATTACCHI) \par
+    \item \textbf{ATTACCHI} (\underline{codAttacco}, vittoria*, armateSchierate, armatePerse, difArmateSchierate, difArmatePerse, attaccante: TERRITORI, difensore: TERRITORI) \par
+    \item \textbf{SPOSTAMENTI} (\underline{codSpostamento}, numArmate, territorioPartenza: TERRITORI, territorioArrivo: TERRITORI) \par
+    \item \textbf{CONTINENTI} (\underline{nome}, bonusArmate) \par
+    \item \textbf{TERRITORI} (\underline{nome}, continente: CONTINENTI) \par
+    \item \textbf{CONFINI} ((\underline{terrA}: TERRITORI, \underline{terrB}: TERRITORI)) \par
+    \item \textbf{CONTROLLI\_TERRITORIO} (((\underline{numeroTurno}, \underline{codParita}, \underline{codGiocatore}): TURNI, \underline{territorio}: TERRITORI), numArmate) \par
+\end{description}
+
 \section{Schema relazione finale}
 \section{Traduzione delle operazioni in query SQL}
 \chapter{Progettazione dell'applicazione}
-
-In quest'ultimo capitolo si tirano le somme del lavoro svolto e si delineano eventuali sviluppi
-futuri.
-
-\textit{Nessuna delle informazioni incluse in questo capitolo verrà utilizzata per formulare la valutazione finale}, a meno che non sia assente o manchino delle sezioni obbligatorie.
-%
-Al fine di evitare pregiudizi involontari, l'intero capitolo verrà letto dai docenti solo dopo aver formulato la valutazione.
-
 \section{Descrizione dell'architettura dell'applicazione realizzata}
-
-\textbf{È richiesta una sezione per ciascun membro del gruppo, obbligatoriamente}.
-%
-Ciascuno dovrà autovalutare il proprio lavoro, elencando i punti di forza e di debolezza in quanto prodotto.
-Si dovrà anche cercare di descrivere \emph{in modo quanto più obiettivo possibile} il proprio ruolo all'interno del gruppo.
-Si ricorda, a tal proposito, che ciascuno studente è responsabile solo della propria sezione: non è un problema se ci sono opinioni contrastanti, a patto che rispecchino effettivamente l'opinione di chi le scrive.
-Nel caso in cui si pensasse di portare avanti il progetto, ad esempio perché effettivamente impiegato, o perché sufficientemente ben riuscito da poter esser usato come dimostrazione di esser capaci progettisti, si descriva brevemente verso che direzione portarlo.
-
-\section{Difficoltà incontrate e commenti per i docenti}
-
-Questa sezione, \textbf{opzionale}, può essere utilizzata per segnalare ai docenti eventuali problemi o difficoltà incontrate nel corso o nello svolgimento del progetto, può essere vista come una seconda possibilità di valutare il corso (dopo quella offerta dalle rilevazioni della didattica) avendo anche conoscenza delle modalità e delle difficoltà collegate all'esame, cosa impossibile da fare usando le valutazioni in aula per ovvie ragioni.
-%
-È possibile che alcuni dei commenti forniti vengano utilizzati per migliorare il corso in futuro: sebbene non andrà a vostro beneficio, potreste fare un favore ai vostri futuri colleghi.
-%
-Ovviamente \textit{il contenuto della sezione non impatterà il voto finale}.
-
-\appendix
-\chapter{Guida utente}
-
-Capitolo in cui si spiega come utilizzare il software. Nel caso in cui il suo uso sia del tutto
-banale, tale capitolo può essere omesso.
-%
-A tal riguardo, si fa presente agli studenti che i docenti non hanno mai utilizzato il software
-prima, per cui aspetti che sembrano del tutto banali a chi ha sviluppato l'applicazione possono non
-esserlo per chi la usa per la prima volta.
-%
-Se, ad esempio, per cominciare una partita con un videogioco è necessario premere la barra
-spaziatrice, o il tasto ``P'', è necessario che gli studenti lo segnalino.
-
-\subsection*{Elementi positivi}
-
-\begin{itemize}
- \item Si istruisce in modo semplice l'utente sull'uso dell'applicazione, eventualmente facendo uso di schermate e descrizioni.
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
- \item Si descrivono in modo eccessivamente minuzioso tutte le caratteristiche, anche minori, del software in oggetto.
- \item Manca una descrizione che consenta ad un utente qualunque di utilizzare almeno le funzionalità primarie dell'applicativo.
-\end{itemize}
-
-\chapter{Esercitazioni di laboratorio}
-
-In questo capitolo ciascuno studente elenca gli esercizi di laboratorio che ha svolto
-(se ne ha svolti),
-elencando i permalink dei post sul forum dove è avvenuta la consegna.
-%
-Questa sezione potrebbe essere processata da strumenti automatici,
-per cui link a oggetti diversi dal permalink della consegna,
-errori nell'email o nel nome del laboratorio possono portare ad ignorare alcune consegne,
-si raccomanda la massima precisione.
-
-\section*{Esempio}
-
-\subsection{paolino.paperino@studio.unibo.it}
-
-\begin{itemize}
- \item Laboratorio 04: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=12345#p123456}
- \item Laboratorio 06: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222}
- \item Laboratorio 09: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999}
-\end{itemize}
-
-\subsection{paperon.depaperoni@studio.unibo.it}
-
-\begin{itemize}
- \item Laboratorio 04: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=12345#p123456}
- \item Laboratorio 05: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222}
- \item Laboratorio 06: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999}
- \item Laboratorio 07: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222}
- \item Laboratorio 08: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999}
- \item Laboratorio 09: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222}
- \item Laboratorio 10: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=99999#p999999}
- \item Laboratorio 11: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=22222#p222222}
-\end{itemize}
-
-
-\bibliographystyle{alpha}
-\bibliography{13-template}
 
 \end{document}
