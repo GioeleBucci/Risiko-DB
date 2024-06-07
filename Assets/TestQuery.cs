@@ -1,7 +1,8 @@
 using UnityEngine;
-using UnityEngine.Networking;
-using System.Collections;
 using MySqlConnector;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -15,19 +16,24 @@ public class DatabaseManager : MonoBehaviour
       // Connection successful, you can now execute queries or perform other database operations
       Debug.Log("Connected to database.");
 
-      string query = "SELECT * FROM testTable";
+      string query = "SELECT * FROM obiettivo";
+      List<string> results = new List<string>();
       MySqlCommand command = new MySqlCommand(query, connection);
       MySqlDataReader reader = command.ExecuteReader();
       while (reader.Read())
       {
-        for (int i = 0; i < reader.FieldCount; i++)
-        {
-          Debug.Log("Column " + i + ": " + reader[i]);
-        }
+        results.Add(reader.GetString(reader.GetOrdinal("descrizione")));
       }
-
-      // Don't forget to close the connection when you're done
+      List<string> objectives = GetObjectivePool(results, 3);
       connection.Close();
+
+      DateTime currentDate = DateTime.Now;
+      connection = SqlUtils.NewConnection();
+      connection.Open();
+      MySqlCommand insertCommand = new MySqlCommand(Queries.CREATE_MATCH, connection);
+      insertCommand.Parameters.AddWithValue("@data", currentDate.ToString("yyyy-MM-dd"));
+      insertCommand.ExecuteNonQuery();
+
     }
     catch (MySqlException ex)
     {
@@ -36,5 +42,10 @@ public class DatabaseManager : MonoBehaviour
     }
     // StartCoroutine(InsertDataCoroutine("name", 0));
 
+  }
+
+  private List<string> GetObjectivePool(List<string> objectives, int poolSize)
+  {
+    return objectives.OrderBy(x => UnityEngine.Random.value).Take(poolSize).ToList();
   }
 }
