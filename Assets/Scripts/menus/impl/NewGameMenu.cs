@@ -8,7 +8,7 @@ public class NewGameMenu : AbstractMenu
   private Button okButton;
   private SliderInt playerCountSlider;
   private TextField dateTextField;
-  public NewGameMenu(AbstractMenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public NewGameMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {

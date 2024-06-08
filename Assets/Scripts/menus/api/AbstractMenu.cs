@@ -3,21 +3,21 @@ using UnityEngine.UIElements;
 
 public abstract class AbstractMenu
 {
-  public VisualTreeAsset menu { get; }
+  public VisualTreeAsset visualTree { get; }
 
   protected VisualElement root { get => manager.document.rootVisualElement; }
 
-  private AbstractMenuManager manager;
+  protected MenuManager manager { get; }
 
   /// <summary>
   /// Initializes a new instance of the <see cref="AbstractMenu"/> class.
   /// </summary>
   /// <param name="manager">The menu manager.</param>
   /// <param name="menu">The VisualTreeAsset representing the menu.</param>
-  public AbstractMenu(AbstractMenuManager manager, VisualTreeAsset menu)
+  public AbstractMenu(MenuManager manager, VisualTreeAsset menu)
   {
     this.manager = manager;
-    this.menu = menu;
+    this.visualTree = menu;
   }
 
   /// <summary>

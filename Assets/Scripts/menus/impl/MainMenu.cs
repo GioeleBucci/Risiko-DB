@@ -4,7 +4,7 @@ public class MainMenu : AbstractMenu
 {
   private Button newGameButton;
 
-  public MainMenu(AbstractMenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public MainMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {
@@ -19,6 +19,6 @@ public class MainMenu : AbstractMenu
 
   private void OnNewGameButtonClicked()
   {
-    UnityEngine.Debug.Log("New Game Button Clicked");
+    ChangeMenu(manager.newGameMenu);
   }
 }
