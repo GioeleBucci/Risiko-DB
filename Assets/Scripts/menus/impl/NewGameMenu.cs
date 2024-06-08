@@ -1,5 +1,6 @@
 using System;
-using System.Collections.Generic;
+using MySqlConnector;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class NewGameMenu : AbstractMenu
@@ -22,6 +23,24 @@ public class NewGameMenu : AbstractMenu
   protected override void SetUICallbacks()
   {
     backButton.clicked += OnBackButtonClicked;
-    //TODO ADD REST
+    okButton.clicked += createMatch;
+  }
+
+  private void createMatch()
+  {
+    int playerCount = playerCountSlider.value;
+    string date = dateTextField.value;
+    DateTime parsedDate;
+    if (DateTime.TryParse(date, out parsedDate))
+    {
+      string arg = parsedDate.ToString("yyyy-MM-dd");
+      Debug.Log("Creating match with date: " + arg);
+      MySqlParameter dateParam = new MySqlParameter("@date", MySqlDbType.Date) { Value = parsedDate };
+      SqlUtils.ExecuteNonQuery(Queries.CREATE_MATCH, dateParam);
+    }
+    else
+    {
+      dateTextField.value = "Invalid date";
+    }
   }
 }

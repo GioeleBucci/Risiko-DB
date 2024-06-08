@@ -60,5 +60,5 @@ public abstract class AbstractMenu
   /// </summary>
   /// <param name="args">UI elements to be validated.</param>
   /// <returns><c>true</c> if all the UI elements are not null</returns>
-  protected bool Validate(params VisualElement[] args) => args.All(arg => arg != null);
+  protected bool Validate(VisualElement[] args) => args.All(arg => arg != null);
 }

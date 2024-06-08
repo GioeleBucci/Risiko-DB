@@ -26,15 +26,12 @@ public static class SqlUtils
     return resultList;
   }
 
-  public static void ExecuteNonQuery(string query, params string[] parameters)
+  public static void ExecuteNonQuery(string query, params MySqlParameter[] parameters)
   {
     MySqlConnection connection = NewConnection();
     connection.Open();
     MySqlCommand command = new MySqlCommand(query, connection);
-    foreach (string parameter in parameters)
-    {
-      command.Parameters.Add(parameter);
-    }
+    command.Parameters.AddRange(parameters);
     command.ExecuteNonQuery();
     connection.Close();
   }
