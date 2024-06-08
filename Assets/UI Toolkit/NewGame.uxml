@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Container" class="background">
         <ui:Label text="Register a New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal;" />
-        <ui:SliderInt label="Players Count" high-value="6" low-value="3" show-input-field="true" usage-hints="None" class="slider" />
-        <ui:TextField picking-mode="Ignore" label="Date" class="textfield" />
+        <ui:SliderInt label="Players Count" high-value="6" low-value="3" show-input-field="true" usage-hints="None" name="PlayerCount" class="slider" />
+        <ui:TextField picking-mode="Ignore" label="Date" name="DateField" class="textfield" />
         <ui:VisualElement style="height: 100%; flex-direction: row; justify-content: center; align-self: auto; width: 100%;">
             <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-left: 50px; margin-right: 50px;" />
             <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 0; margin-left: 50px;" />

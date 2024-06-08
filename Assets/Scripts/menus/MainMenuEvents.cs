@@ -23,8 +23,7 @@ public class MainMenuEvents : MonoBehaviour
   public void ChangeMenu(VisualTreeAsset newMenu)
   {
     previousMenu = document.visualTreeAsset;
-    document.rootVisualElement.Clear();
-    document.rootVisualElement.Add(newMenu.CloneTree());
+    document.visualTreeAsset = newMenu;
     var backButton = document.rootVisualElement.Q<Button>("BackButton");
     if (backButton != null)
     {
