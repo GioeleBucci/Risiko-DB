@@ -5,5 +5,5 @@ public class Queries
                                       + "VALUES(@date);";
   public static string CREATE_PLAYER = "INSERT INTO GIOCATORE (nickname, cognome, email, password)"
                                        + "VALUES(@nome, @cognome, @email, @password);";
-
+  public static string GET_USERS = "SELECT codiceFiscale, nome, cognome FROM utente;";
 }

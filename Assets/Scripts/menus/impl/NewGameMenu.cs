@@ -37,6 +37,7 @@ public class NewGameMenu : AbstractMenu
       Debug.Log("Creating match with date: " + arg);
       MySqlParameter dateParam = new MySqlParameter("@date", MySqlDbType.Date) { Value = parsedDate };
       SqlUtils.ExecuteNonQuery(Queries.CREATE_MATCH, dateParam);
+      manager.ChangeMenu(manager.newPlayerMenu); // TODO we need to pass the player count to the next menu
     }
     else
     {

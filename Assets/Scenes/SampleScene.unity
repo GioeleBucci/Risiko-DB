@@ -772,8 +772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc245a4b67d8f04b9fa76645254e5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 9197481963319205126, guid: a675bd4c6d322074f9e3d3efa3f5243d, type: 3}
-  newGameMenu: {fileID: 0}
+  mainMenuTree: {fileID: 9197481963319205126, guid: a675bd4c6d322074f9e3d3efa3f5243d, type: 3}
+  newGameMenuTree: {fileID: 9197481963319205126, guid: 8cabb01269d70f24a9fed34c5c080eea, type: 3}
+  newPlayerMenuTree: {fileID: 9197481963319205126, guid: ad8c5c62c5322cc4ab82ae5209f516f6, type: 3}
 --- !u!1 &343377911
 GameObject:
   m_ObjectHideFlags: 0
