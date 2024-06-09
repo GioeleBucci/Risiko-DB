@@ -26,9 +26,9 @@ public class MenuManager : MonoBehaviour
     ChangeMenu(mainMenu);
   }
 
-  public void ChangeMenu(AbstractMenu newMenu)
+  public void ChangeMenu(AbstractMenu newMenu, params object[] args)
   {
     document.visualTreeAsset = newMenu.visualTree;
-    newMenu.Init();
+    newMenu.Init(args);
   }
 }

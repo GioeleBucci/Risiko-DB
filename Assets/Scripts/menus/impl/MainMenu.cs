@@ -17,6 +17,8 @@ public class MainMenu : AbstractMenu
     newGameButton.clicked += OnNewGameButtonClicked;
   }
 
+  
+
   private void OnNewGameButtonClicked()
   {
     ChangeMenu(manager.newGameMenu);

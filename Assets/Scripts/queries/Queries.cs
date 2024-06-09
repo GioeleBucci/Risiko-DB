@@ -3,7 +3,12 @@ public class Queries
   // OP 2 
   public static string CREATE_MATCH = "INSERT INTO PARTITA (data)"
                                       + "VALUES(@date);";
-  public static string CREATE_PLAYER = "INSERT INTO GIOCATORE (nickname, cognome, email, password)"
-                                       + "VALUES(@nome, @cognome, @email, @password);";
   public static string GET_USERS = "SELECT codiceFiscale, nome, cognome FROM utente;";
+
+  public static string GET_ID_OF_LAST_MATCH_CREATED = "SELECT codPartita "
+                                                    + "FROM PARTITA "
+                                                    + "WHERE codPartita = (SELECT MAX(codPartita) FROM PARTITA);";
+  public static string CREATE_PLAYER = "INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) "
+                                      + "VALUES (@nickname, @matchID, @userID, @objID, @armyID);";
+
 }

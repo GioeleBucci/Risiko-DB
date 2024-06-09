@@ -21,6 +21,11 @@ public abstract class AbstractMenu
   }
 
   /// <summary>
+  /// An implementation of menu may need to recieve some data from the previous menu.
+  /// </summary>
+  protected virtual void RecieveParameters(object[] args) { }
+
+  /// <summary>
   /// Fetches the UI elements.
   /// </summary>
   /// <returns>An array of VisualElements that will be validated</returns>
@@ -28,12 +33,13 @@ public abstract class AbstractMenu
 
   protected abstract void SetUICallbacks();
 
-  public void Init()
+  public void Init(object[] args)
   {
     if (!Validate(FetchUIElements()))
     {
       throw new System.ArgumentException("Validation failed. One or more parameters are null.");
     }
+    RecieveParameters(args);
     SetUICallbacks();
   }
 
