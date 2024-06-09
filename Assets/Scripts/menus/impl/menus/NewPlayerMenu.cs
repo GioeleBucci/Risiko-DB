@@ -64,7 +64,8 @@ public class NewPlayerMenu : AbstractMenu
     var armyAndObj = randomPool[playersLeft - 1];
     int armyID = armyAndObj.Item1.Item1;
     int objectiveID = armyAndObj.Item2.Item1;
-    // Show a popup window with a message (TODO)
+    // Show a popup window with a message 
+    manager.popupManager.ShowPlayerCreatedPopup(armyAndObj.Item1.Item2, armyAndObj.Item2.Item2);
     Debug.Log($"Your army is {armyAndObj.Item1.Item2} and your objective is {armyAndObj.Item2.Item2}");
     // Add player to the database
     SqlUtils.ExecuteNonQuery(Queries.CREATE_PLAYER, new MySqlParameter[] {

@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
   [SerializeField] private VisualTreeAsset mainMenuTree;
   [SerializeField] private VisualTreeAsset newGameMenuTree;
   [SerializeField] private VisualTreeAsset newPlayerMenuTree;
+  public PopupManager popupManager { get; private set; }
   public AbstractMenu oldMenu { get; set; }
   public UIDocument document { get; private set; }
   public AbstractMenu mainMenu { get; private set; }
@@ -20,6 +21,7 @@ public class MenuManager : MonoBehaviour
   protected void Awake()
   {
     document = GetComponent<UIDocument>();
+    popupManager = FindObjectOfType<PopupManager>();
     mainMenu = new MainMenu(this, mainMenuTree);
     newGameMenu = new NewGameMenu(this, newGameMenuTree);
     newPlayerMenu = new NewPlayerMenu(this, newPlayerMenuTree);
