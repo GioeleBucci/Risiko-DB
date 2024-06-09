@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Background" class="background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.47); -unity-background-image-tint-color: rgb(255, 0, 0); justify-content: center;">
+        <ui:VisualElement name="Window" style="flex-grow: 0; background-color: rgb(255, 255, 255); justify-content: center; align-self: center; width: 55%; height: 40%; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; align-items: center; color: rgb(0, 0, 0);">
+            <ui:VisualElement name="Header" style="width: 100%; height: 20%; background-color: rgb(59, 68, 129); border-top-left-radius: 30px; border-top-right-radius: 30px; justify-content: center; align-items: center; align-self: center;">
+                <ui:Label tabindex="-1" text="INFO" parse-escape-sequences="true" display-tooltip-when-elided="true" class="header" style="margin-top: 0; margin-bottom: 0; color: rgb(255, 255, 255); font-size: 65%; -unity-text-align: middle-center; text-overflow: ellipsis; align-self: center; margin-right: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; justify-content: flex-start; align-items: stretch; -unity-font-style: normal;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Body" style="align-self: center; justify-content: center; align-items: center; height: 80%; width: 90%;">
+                <ui:VisualElement style="flex-grow: 1; width: 100%; height: 100%;">
+                    <ui:Label tabindex="-1" text="INFOMSG" parse-escape-sequences="true" display-tooltip-when-elided="true" name="InfoLabel" style="height: 60%; width: 100%; -unity-font: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/gunplay/gunplay%20rg.otf?fileID=12800000&amp;guid=b6e46e52ee751c14d914e053fbddb54a&amp;type=3#gunplay rg&quot;); font-size: 32px; -unity-font-definition: initial; color: rgb(65, 56, 56); white-space: normal; text-overflow: clip; -unity-text-align: upper-left; margin-top: 3%; background-color: rgba(74, 74, 74, 0);" />
+                </ui:VisualElement>
+                <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="width: 50%; height: 26%; margin-right: 0; margin-left: 0; margin-top: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-bottom: 1%; color: rgb(65, 56, 56); justify-content: center; align-items: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -12,7 +12,6 @@ public class PopupManager : MonoBehaviour
   {
     document = GetComponent<UIDocument>();
     document.visualTreeAsset = null;
-    // MenuManager menuManager = GetComponentInParent<MenuManager>();
   }
 
   public void ShowPlayerCreatedPopup(string army, string objective)

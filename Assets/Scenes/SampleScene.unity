@@ -4271,7 +4271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCreatedPopup: {fileID: 9197481963319205126, guid: 4013ad84bc127714e8b57e50a9a7261e, type: 3}
-  errorPopup: {fileID: 0}
+  errorPopup: {fileID: 9197481963319205126, guid: be50973cf65a07d4c95a7418ac3945fe, type: 3}
 --- !u!1 &2039925439
 GameObject:
   m_ObjectHideFlags: 0

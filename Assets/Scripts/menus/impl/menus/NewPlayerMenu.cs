@@ -66,15 +66,21 @@ public class NewPlayerMenu : AbstractMenu
     int objectiveID = armyAndObj.Item2.Item1;
     // Show a popup window with a message 
     manager.popupManager.ShowPlayerCreatedPopup(armyAndObj.Item1.Item2, armyAndObj.Item2.Item2);
-    Debug.Log($"Your army is {armyAndObj.Item1.Item2} and your objective is {armyAndObj.Item2.Item2}");
     // Add player to the database
-    SqlUtils.ExecuteNonQuery(Queries.CREATE_PLAYER, new MySqlParameter[] {
-      new("@nickname", nicknameField.value),
-      new("@matchID", matchID),
-      new("@userID", userID),
-      new("@objID", objectiveID),
-      new("@armyID", armyID)
-    });
+    try
+    {
+      SqlUtils.ExecuteNonQuery(Queries.CREATE_PLAYER, new MySqlParameter[] {
+        new("@nickname", nicknameField.value),
+        new("@matchID", matchID),
+        new("@userID", userID),
+        new("@objID", objectiveID),
+        new("@armyID", armyID)
+      });
+    }
+    catch (Exception ex)
+    {
+      manager.popupManager.ShowErrorPopup("Error creating player: " + ex.Message);
+    }
     playersLeft--;
   }
 
