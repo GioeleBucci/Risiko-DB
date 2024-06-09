@@ -75,4 +75,6 @@
     width: 65%;
     justify-content: center;
     align-items: center;
+    -unity-text-align: upper-center;
+    white-space: normal;
 }

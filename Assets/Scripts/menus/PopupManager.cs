@@ -4,9 +4,9 @@ using UnityEngine.UIElements;
 public class PopupManager : MonoBehaviour
 {
   [SerializeField] private VisualTreeAsset playerCreatedPopup;
+  [SerializeField] private VisualTreeAsset errorPopup;
   private UIDocument document;
   private VisualElement root { get => document.rootVisualElement; }
-
 
   private void Awake()
   {
@@ -22,6 +22,15 @@ public class PopupManager : MonoBehaviour
     armyLabel.text = $"ARMY: {army}";
     Label objectiveLabel = root.Q<Label>("ObjectiveLabel");
     objectiveLabel.text = $"OBJECTIVE: {objective}";
+    Button okButton = root.Q<Button>("OkButton");
+    okButton.clicked += () => document.visualTreeAsset = null;
+  }
+
+  public void ShowErrorPopup(string message)
+  {
+    document.visualTreeAsset = errorPopup;
+    Label errorLabel = root.Q<Label>("ErrorLabel");
+    errorLabel.text = message;
     Button okButton = root.Q<Button>("OkButton");
     okButton.clicked += () => document.visualTreeAsset = null;
   }

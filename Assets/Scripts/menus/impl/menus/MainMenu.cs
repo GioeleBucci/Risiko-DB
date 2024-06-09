@@ -3,24 +3,20 @@ using UnityEngine.UIElements;
 public class MainMenu : AbstractMenu
 {
   private Button newGameButton;
+  private Button newUserButton;
 
   public MainMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {
     newGameButton = root.Q<Button>("NewGameButton");
-    return new VisualElement[] { newGameButton };
+    newUserButton = root.Q<Button>("NewUserButton");
+    return new VisualElement[] { newGameButton, newUserButton };
   }
 
   protected override void SetUICallbacks()
   {
-    newGameButton.clicked += OnNewGameButtonClicked;
-  }
-
-  
-
-  private void OnNewGameButtonClicked()
-  {
-    ChangeMenu(manager.newGameMenu);
+    newGameButton.clicked += () => ChangeMenu(manager.newGameMenu);
+    newUserButton.clicked += () => ChangeMenu(manager.newUserMenu);
   }
 }

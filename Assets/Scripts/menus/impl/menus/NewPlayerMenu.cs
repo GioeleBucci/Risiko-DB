@@ -69,11 +69,11 @@ public class NewPlayerMenu : AbstractMenu
     Debug.Log($"Your army is {armyAndObj.Item1.Item2} and your objective is {armyAndObj.Item2.Item2}");
     // Add player to the database
     SqlUtils.ExecuteNonQuery(Queries.CREATE_PLAYER, new MySqlParameter[] {
-      new MySqlParameter("@nickname", nicknameField.value),
-      new MySqlParameter("@matchID", matchID),
-      new MySqlParameter("@userID", userID),
-      new MySqlParameter("@objID", objectiveID),
-      new MySqlParameter("@armyID", armyID)
+      new("@nickname", nicknameField.value),
+      new("@matchID", matchID),
+      new("@userID", userID),
+      new("@objID", objectiveID),
+      new("@armyID", armyID)
     });
     playersLeft--;
   }

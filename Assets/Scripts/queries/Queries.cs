@@ -1,5 +1,8 @@
 public class Queries
 {
+  // OP 1
+  public static string CREATE_USER = "INSERT INTO UTENTE (codiceFiscale, nome, cognome) "
+                                    + "VALUES (@id, @name, @surname);";
   // OP 2 
   public static string CREATE_MATCH = "INSERT INTO PARTITA (data)"
                                       + "VALUES(@date);";
