@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySqlConnector;
+using UnityEngine;
 
 public static class SqlUtils
 {
@@ -10,12 +11,13 @@ public static class SqlUtils
     return new MySqlConnection(connectionString);
   }
 
-  public static List<T> ExecuteQuery<T>(string query, Func<MySqlDataReader, T> mapFunction)
+  public static List<T> ExecuteQuery<T>(string query, Func<MySqlDataReader, T> mapFunction, params MySqlParameter[] parameters)
   {
     List<T> resultList = new List<T>();
     MySqlConnection connection = NewConnection();
     connection.Open();
     MySqlCommand command = new MySqlCommand(query, connection);
+    command.Parameters.AddRange(parameters);
     MySqlDataReader reader = command.ExecuteReader();
     while (reader.Read())
     {

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using MySqlConnector;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -36,7 +37,12 @@ public class NewGameMenu : AbstractMenu
       string arg = parsedDate.ToString("yyyy-MM-dd");
       Debug.Log("Creating match with date: " + arg);
       MySqlParameter dateParam = new MySqlParameter("@date", parsedDate);
-      SqlUtils.ExecuteNonQuery(Queries.CREATE_MATCH, dateParam); 
+      SqlUtils.ExecuteNonQuery(Queries.CREATE_MATCH, dateParam);
+      // Tell how many troops each player has (OP 3)
+      int troopCount = SqlUtils.ExecuteQuery(Queries.GET_INITIAL_TROOPS,
+        reader => reader.GetInt32("numArmate"),
+        new MySqlParameter[] { new("@playerCount", playerCount) }).First();
+      manager.popupManager.ShowInfoPopup($"Match created successfully!\nEach player will starts with {troopCount} troops.");
       manager.ChangeMenu(manager.newPlayerMenu, playerCount); // TODO we probably need to pass the match id as well
     }
     else

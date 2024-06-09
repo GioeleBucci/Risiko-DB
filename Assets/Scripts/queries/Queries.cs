@@ -13,5 +13,6 @@ public class Queries
                                                     + "WHERE codPartita = (SELECT MAX(codPartita) FROM PARTITA);";
   public static string CREATE_PLAYER = "INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) "
                                       + "VALUES (@nickname, @matchID, @userID, @objID, @armyID);";
-
+  // OP 3
+  public static string GET_INITIAL_TROOPS = "SELECT numArmate FROM ARMATE_INIZIALI where numGiocatori = @playerCount;";
 }

@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public class NewPlayerMenu : AbstractMenu
 {
   private int playersLeft; // Number of players left to add
+  private int matchID;
   private List<((int, string), (int, string))> randomPool; // List of random objectives and armies
   private Button backButton;
   private Button okButton;
@@ -25,6 +26,8 @@ public class NewPlayerMenu : AbstractMenu
     playersLeft = (int)args[0];
     Debug.Log("Recieved player count: " + playersLeft);
     randomPool = GetRandomPool(playersLeft);
+    // get ID of the latest match created
+    matchID = SqlUtils.ExecuteQuery(Queries.GET_ID_OF_LAST_MATCH_CREATED, reader => reader.GetInt32("codPartita")).First();
   }
 
   protected override VisualElement[] FetchUIElements()
@@ -58,8 +61,6 @@ public class NewPlayerMenu : AbstractMenu
     }
     string selectedLine = dropdownField.value;
     string userID = selectedLine.Substring(selectedLine.IndexOf("(") + 1, selectedLine.IndexOf(")") - selectedLine.IndexOf("(") - 1);
-    // get ID of the latest match created
-    int matchID = SqlUtils.ExecuteQuery(Queries.GET_ID_OF_LAST_MATCH_CREATED, reader => reader.GetInt32("codPartita")).First();
     // get random objective and army
     var armyAndObj = randomPool[playersLeft - 1];
     int armyID = armyAndObj.Item1.Item1;
