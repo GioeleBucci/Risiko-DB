@@ -4,6 +4,7 @@ public class MainMenu : AbstractMenu
 {
   private Button newGameButton;
   private Button newUserButton;
+  private Button newTurnButton;
 
   public MainMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
@@ -11,12 +12,14 @@ public class MainMenu : AbstractMenu
   {
     newGameButton = root.Q<Button>("NewGameButton");
     newUserButton = root.Q<Button>("NewUserButton");
-    return new VisualElement[] { newGameButton, newUserButton };
+    newTurnButton = root.Q<Button>("NewTurnButton");
+    return new VisualElement[] { newGameButton, newUserButton, newTurnButton };
   }
 
   protected override void SetUICallbacks()
   {
     newGameButton.clicked += () => ChangeMenu(manager.newGameMenu);
     newUserButton.clicked += () => ChangeMenu(manager.newUserMenu);
+    newTurnButton.clicked += () => ChangeMenu(manager.newTurnMenu);
   }
 }

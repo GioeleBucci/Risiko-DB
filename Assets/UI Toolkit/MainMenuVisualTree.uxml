@@ -4,6 +4,6 @@
         <ui:Label text="RisiKo! DB" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal; color: rgb(255, 255, 255);" />
         <ui:Button text="New User" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewUserButton" class="button" />
         <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewGameButton" class="button" />
-        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+        <ui:Button text="Register a new Turn" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewTurnButton" class="button" />
     </ui:VisualElement>
 </ui:UXML>

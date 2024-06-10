@@ -1250,6 +1250,7 @@ MonoBehaviour:
   newUserMenuTree: {fileID: 9197481963319205126, guid: c487c92cd4ab5e047817be31e9e12ace, type: 3}
   newGameMenuTree: {fileID: 9197481963319205126, guid: 8cabb01269d70f24a9fed34c5c080eea, type: 3}
   newPlayerMenuTree: {fileID: 9197481963319205126, guid: ad8c5c62c5322cc4ab82ae5209f516f6, type: 3}
+  newTurnMenuTree: {fileID: 9197481963319205126, guid: 6fbcf8dfd89cc4d44886968d5112fde9, type: 3}
 --- !u!1 &343377911
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,7 +3837,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1010249637}
   - component: {fileID: 1010249638}
-  - component: {fileID: 1010249639}
   - component: {fileID: 1010249640}
   m_Layer: 0
   m_Name: Argentina
@@ -3912,18 +3912,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1010249639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010249636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22eee690124a0bd4eb454368bd4b30e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!60 &1010249640
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6333,6 +6321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1482847344}
+  - component: {fileID: 1482847345}
   m_Layer: 0
   m_Name: MAP
   m_TagString: Untagged
@@ -6362,6 +6351,18 @@ Transform:
   - {fileID: 378618526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1482847345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482847343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75349fb9769c2a4bb4283d883e39fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1616825851
 GameObject:
   m_ObjectHideFlags: 0
