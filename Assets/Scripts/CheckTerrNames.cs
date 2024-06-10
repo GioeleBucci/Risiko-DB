@@ -13,7 +13,7 @@ public class CheckTerrNames : MonoBehaviour
 
     foreach (string name in mapNames)
     {
-      Debug.Log($"Checking {name}");
+      // Debug.Log($"Checking {name}");
       if (!dbNames.Contains(name))
       {
         // Debug.LogError($"Territorio {name} non presente nel database");

@@ -6,12 +6,14 @@ public class NewTurnMenu : AbstractMenu
 {
   private DropdownField matchSelector;
   private DropdownField playerSelector;
+  private Button backButton;
   public NewTurnMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {
     matchSelector = root.Q<DropdownField>("DropdownMatch");
     playerSelector = root.Q<DropdownField>("DropdownPlayer");
+    backButton = root.Q<Button>("BackButton");
     List<int> matches = SqlUtils.ExecuteQuery(Queries.GET_MATCHES_IDS, reader => reader.GetInt32("codPartita"));
     matchSelector.choices = matches.ConvertAll(x => x.ToString());
     matchSelector.RegisterValueChangedCallback((evt) =>
@@ -30,5 +32,6 @@ public class NewTurnMenu : AbstractMenu
 
   protected override void SetUICallbacks()
   {
+    backButton.clicked += OnBackButtonClicked;
   }
 }

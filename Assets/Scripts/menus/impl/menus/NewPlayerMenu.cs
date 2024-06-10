@@ -77,12 +77,12 @@ public class NewPlayerMenu : AbstractMenu
         new("@objID", objectiveID),
         new("@armyID", armyID)
       });
+      playersLeft--;
     }
     catch (Exception ex)
     {
       manager.popupManager.ShowErrorPopup("Error creating player: " + ex.Message);
     }
-    playersLeft--;
   }
 
   private List<((int, string), (int, string))> GetRandomPool(int poolSize)
