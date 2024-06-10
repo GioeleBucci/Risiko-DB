@@ -1,24 +1,34 @@
 using System.Collections.Generic;
+using MySqlConnector;
 using UnityEngine;
 using UnityEngine.UIElements;
 public class NewTurnMenu : AbstractMenu
 {
-  private DropdownField dropdownMatch;
-  private DropdownField dropdownPlayer;
+  private DropdownField matchSelector;
+  private DropdownField playerSelector;
   public NewTurnMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {
-    dropdownMatch = root.Q<DropdownField>("DropdownMatch");
-    dropdownPlayer = root.Q<DropdownField>("DropdownPlayer");
+    matchSelector = root.Q<DropdownField>("DropdownMatch");
+    playerSelector = root.Q<DropdownField>("DropdownPlayer");
     List<int> matches = SqlUtils.ExecuteQuery(Queries.GET_MATCHES_IDS, reader => reader.GetInt32("codPartita"));
-    dropdownMatch.choices = matches.ConvertAll(x => x.ToString());
-    dropdownMatch.value = dropdownMatch.choices[0];
-    return new VisualElement[] { dropdownMatch, dropdownPlayer };
+    matchSelector.choices = matches.ConvertAll(x => x.ToString());
+    matchSelector.RegisterValueChangedCallback((evt) =>
+    {
+      Debug.Log("Selected new match: " + evt.newValue);
+      List<string> nicknames = SqlUtils.ExecuteQuery(Queries.GET_PLAYERS_NICKS_IN_MATCH,
+        reader => reader.GetString("nickname"),
+        new MySqlParameter[] { new MySqlParameter("matchID", evt.newValue) });
+      Debug.Log("Fetched nicknames: " + string.Join(", ", nicknames));
+      playerSelector.choices = nicknames;
+      playerSelector.value = playerSelector.choices[0];
+    });
+    matchSelector.value = matchSelector.choices[0];
+    return new VisualElement[] { matchSelector, playerSelector };
   }
 
   protected override void SetUICallbacks()
   {
-    throw new System.NotImplementedException();
   }
 }
