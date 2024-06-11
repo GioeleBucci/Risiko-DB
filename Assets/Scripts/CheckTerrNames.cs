@@ -26,6 +26,14 @@ public class CheckTerrNames : MonoBehaviour
     foreach (Transform child in parentTransform)
     {
       outputList.Add(child.gameObject.name);
+      var collider = child.gameObject.GetComponent<PolygonCollider2D>();
+      {
+        if (collider != null)
+        {
+          Debug.Log("Disabling collider");
+          collider.enabled = false;
+        }
+      }
       check(child, outputList);
     }
   }

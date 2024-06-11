@@ -13,7 +13,9 @@ public class MenuManager : MonoBehaviour
   [SerializeField] private VisualTreeAsset newGameMenuTree;
   [SerializeField] private VisualTreeAsset newPlayerMenuTree;
   [SerializeField] private VisualTreeAsset newTurnMenuTree;
+  [SerializeField] private VisualTreeAsset mapSelectMenuTree;
   public PopupManager popupManager { get; private set; }
+  public MapManager mapManager { get; private set; }
   public AbstractMenu oldMenu { get; set; }
   public UIDocument document { get; private set; }
   public AbstractMenu mainMenu { get; private set; }
@@ -21,16 +23,19 @@ public class MenuManager : MonoBehaviour
   public AbstractMenu newGameMenu { get; private set; }
   public AbstractMenu newPlayerMenu { get; private set; }
   public AbstractMenu newTurnMenu { get; private set; }
+  public AbstractMenu mapSelectMenu { get; private set; }
 
   protected void Awake()
   {
     document = GetComponent<UIDocument>();
     popupManager = FindObjectOfType<PopupManager>();
+    mapManager = FindObjectOfType<MapManager>();
     mainMenu = new MainMenu(this, mainMenuTree);
     newUserMenu = new NewUserMenu(this, newUserMenuTree);
     newGameMenu = new NewGameMenu(this, newGameMenuTree);
     newPlayerMenu = new NewPlayerMenu(this, newPlayerMenuTree);
     newTurnMenu = new NewTurnMenu(this, newTurnMenuTree);
+    mapSelectMenu = new MapSelectMenu(this, mapSelectMenuTree);
     ChangeMenu(mainMenu);
   }
 

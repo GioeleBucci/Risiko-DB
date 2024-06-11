@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement name="Container" focusable="true" class="container background" style="background-color: rgba(59, 100, 91, 0.51);">
+    <ui:VisualElement name="Container" class="container background" style="background-color: rgba(59, 100, 91, 0.51);">
         <ui:Label text="RisiKo! DB" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal; color: rgb(255, 255, 255);" />
         <ui:Button text="New User" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewUserButton" class="button" />
         <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewGameButton" class="button" />

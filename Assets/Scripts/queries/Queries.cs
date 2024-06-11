@@ -6,7 +6,7 @@ public class Queries
   // OP 2 Create a new match
   public static string CREATE_MATCH = "INSERT INTO PARTITA (data)"
                                       + "VALUES(@date);";
-  public static string GET_USERS = "SELECT codiceFiscale, nome, cognome FROM utente;";
+  public static string GET_USERS = "SELECT * FROM utente;";
 
   public static string GET_ID_OF_LAST_MATCH_CREATED = "SELECT codPartita "
                                                     + "FROM PARTITA "
@@ -18,6 +18,10 @@ public class Queries
   // OP 4 Register a new turn in a certain match
   public static string GET_MATCHES_IDS = "SELECT codPartita FROM PARTITA;";
 
-  public static string GET_PLAYERS_NICKS_IN_MATCH = "SELECT nickname FROM GIOCATORE where codPartita = @matchID;";
+  public static string GET_PLAYERS_IN_MATCH = "SELECT * FROM GIOCATORE where codPartita = @matchID;";
 
+  public static string GET_PLAYER_LATEST_TURN = "SELECT MAX(numeroTurno) " +
+                                                "FROM turno " +
+                                                "WHERE codGiocatore = @playerID;";
+  // Operations to add the player's controlled territories in a certain turn TODO
 }

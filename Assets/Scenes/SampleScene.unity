@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 15761979}
   m_Layer: 0
   m_Name: Scandinavia
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 49265298}
   m_Layer: 0
   m_Name: Cita
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 95720424}
   m_Layer: 0
   m_Name: Stati Uniti Orientali
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 96458640}
   m_Layer: 0
   m_Name: Islanda
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 171225842}
   m_Layer: 0
   m_Name: Egitto
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -886,7 +886,7 @@ GameObject:
   - component: {fileID: 197180489}
   m_Layer: 0
   m_Name: Africa del Nord
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 215126609}
   m_Layer: 0
   m_Name: Territori del Nord Ovest
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 343377914}
   m_Layer: 0
   m_Name: Stati Uniti Occidentali
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1417,8 +1417,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378618525}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1441,7 +1441,7 @@ GameObject:
   - component: {fileID: 419186649}
   m_Layer: 0
   m_Name: Alaska
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1732,7 +1732,7 @@ GameObject:
   - component: {fileID: 522634871}
   m_Layer: 0
   m_Name: "Per\xF9"
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1885,7 +1885,7 @@ GameObject:
   - component: {fileID: 526505573}
   m_Layer: 0
   m_Name: Afghanistan
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2105,8 +2105,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527221600}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2125,7 +2125,7 @@ GameObject:
   - component: {fileID: 534570266}
   m_Layer: 0
   m_Name: Mongolia
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2282,7 +2282,7 @@ GameObject:
   - component: {fileID: 548279433}
   m_Layer: 0
   m_Name: Brasile
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2445,7 +2445,7 @@ GameObject:
   - component: {fileID: 609010157}
   m_Layer: 0
   m_Name: Africa Meridionale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2683,7 +2683,7 @@ GameObject:
   - component: {fileID: 630562657}
   m_Layer: 0
   m_Name: Cina
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2844,7 +2844,7 @@ GameObject:
   - component: {fileID: 764607392}
   m_Layer: 0
   m_Name: Jacuzia
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2994,7 +2994,7 @@ GameObject:
   - component: {fileID: 817197287}
   m_Layer: 0
   m_Name: Europa Meridionale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3165,8 +3165,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821598689}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3197,7 +3197,7 @@ GameObject:
   - component: {fileID: 833047972}
   m_Layer: 0
   m_Name: Australia Occidentale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3360,8 +3360,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841885777}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3386,7 +3386,7 @@ GameObject:
   - component: {fileID: 857953403}
   m_Layer: 0
   m_Name: Africa Orientale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3540,7 +3540,7 @@ GameObject:
   - component: {fileID: 870613920}
   m_Layer: 0
   m_Name: Madagascar
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3683,7 +3683,7 @@ GameObject:
   - component: {fileID: 988739354}
   m_Layer: 0
   m_Name: Urali
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3838,9 +3838,10 @@ GameObject:
   - component: {fileID: 1010249637}
   - component: {fileID: 1010249638}
   - component: {fileID: 1010249640}
+  - component: {fileID: 1010249641}
   m_Layer: 0
   m_Name: Argentina
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3989,6 +3990,18 @@ PolygonCollider2D:
       - {x: -1.66, y: -2.135}
       - {x: -1.76, y: -2.085}
   m_UseDelaunayMesh: 0
+--- !u!114 &1010249641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010249636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22eee690124a0bd4eb454368bd4b30e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1086688212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4002,7 +4015,7 @@ GameObject:
   - component: {fileID: 1086688215}
   m_Layer: 0
   m_Name: Giappone
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4151,7 +4164,7 @@ GameObject:
   - component: {fileID: 1147191573}
   m_Layer: 0
   m_Name: India
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4313,7 +4326,7 @@ GameObject:
   - component: {fileID: 1169727090}
   m_Layer: 0
   m_Name: America Centrale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4466,7 +4479,7 @@ GameObject:
   - component: {fileID: 1200639630}
   m_Layer: 0
   m_Name: Venezuela
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4616,7 +4629,7 @@ GameObject:
   - component: {fileID: 1201655491}
   m_Layer: 0
   m_Name: Alberta
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4755,7 +4768,7 @@ GameObject:
   - component: {fileID: 1244870330}
   m_Layer: 0
   m_Name: Gran Bretagna
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4907,7 +4920,7 @@ GameObject:
   - component: {fileID: 1249381520}
   m_Layer: 0
   m_Name: Indonesia
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5068,7 +5081,7 @@ GameObject:
   - component: {fileID: 1271780786}
   m_Layer: 0
   m_Name: Europa Occidentale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5220,7 +5233,7 @@ GameObject:
   - component: {fileID: 1288859083}
   m_Layer: 0
   m_Name: Ontario
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5366,7 +5379,7 @@ GameObject:
   - component: {fileID: 1328049971}
   m_Layer: 0
   m_Name: Europa Settentrionale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5513,7 +5526,7 @@ GameObject:
   - component: {fileID: 1344972450}
   m_Layer: 0
   m_Name: Ucraina
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5692,7 +5705,7 @@ GameObject:
   - component: {fileID: 1364293497}
   m_Layer: 0
   m_Name: Australia Orientale
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5844,7 +5857,7 @@ GameObject:
   - component: {fileID: 1380446135}
   m_Layer: 0
   m_Name: Medio Oriente
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6003,7 +6016,7 @@ GameObject:
   - component: {fileID: 1409996264}
   m_Layer: 0
   m_Name: Quebec
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6154,7 +6167,7 @@ GameObject:
   - component: {fileID: 1428052087}
   m_Layer: 0
   m_Name: Kamchatka
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6322,8 +6335,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1482847344}
   - component: {fileID: 1482847345}
+  - component: {fileID: 1482847346}
   m_Layer: 0
-  m_Name: MAP
+  m_Name: WorldMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6338,7 +6352,7 @@ Transform:
   m_GameObject: {fileID: 1482847343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13632423, y: -0.79952234, z: -9.916034}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6358,9 +6372,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482847343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f75349fb9769c2a4bb4283d883e39fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1482847346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482847343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a12a47b3ba4b3774ba28919808de7f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1616825851
@@ -6376,7 +6402,7 @@ GameObject:
   - component: {fileID: 1616825854}
   m_Layer: 0
   m_Name: Siberia
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6558,8 +6584,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667264203}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6582,7 +6608,7 @@ GameObject:
   - component: {fileID: 1805606423}
   m_Layer: 0
   m_Name: Siam
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6729,7 +6755,7 @@ GameObject:
   - component: {fileID: 1834546191}
   m_Layer: 0
   m_Name: Groenlandia
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6893,7 +6919,7 @@ GameObject:
   - component: {fileID: 1874709627}
   m_Layer: 0
   m_Name: Nuova Guinea
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7041,7 +7067,7 @@ GameObject:
   - component: {fileID: 1879873163}
   m_Layer: 0
   m_Name: Congo
-  m_TagString: Untagged
+  m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7202,8 +7228,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939236209}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7306,8 +7332,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039925439}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13632423, y: 0.79952234, z: 9.916034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
