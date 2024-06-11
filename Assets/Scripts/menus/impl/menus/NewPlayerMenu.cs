@@ -36,19 +36,24 @@ public class NewPlayerMenu : AbstractMenu
     okButton = root.Q<Button>("OkButton");
     dropdownField = root.Q<DropdownField>("DropdownField");
     nicknameField = root.Q<TextField>("NicknameField");
+    return new VisualElement[] { backButton, okButton, dropdownField };
+  }
+
+  protected override void SetUICallbacks()
+  {
+    SetDropdownLogic();
+    backButton.clicked += OnBackButtonClicked;
+    okButton.clicked += OnOkButtonClicked;
+  }
+
+  private void SetDropdownLogic()
+  {
     // Fetch all users from the database and put name + surname in the dropdown field
     Dictionary<string, string> users = SqlUtils.ExecuteQuery(Queries.GET_USERS,
       reader => (reader.GetString("codiceFiscale"), reader["nome"] + " " + reader["cognome"]))
       .ToDictionary(k => k.Item1, v => v.Item2);
     dropdownField.choices = users.Select(x => $"{x.Value} ({x.Key})").ToList();
     dropdownField.value = dropdownField.choices[0]; // Set the first element as default value
-    return new VisualElement[] { backButton, okButton, dropdownField };
-  }
-
-  protected override void SetUICallbacks()
-  {
-    backButton.clicked += OnBackButtonClicked;
-    okButton.clicked += OnOkButtonClicked;
   }
 
   /// stay in this menu and add players to the DB until playersLeft is 0

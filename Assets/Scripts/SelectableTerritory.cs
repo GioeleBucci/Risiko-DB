@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectableObject : MonoBehaviour
+public class SelectableTerritory : MonoBehaviour
 {
   private SpriteRenderer spriteRenderer;
 
@@ -12,16 +12,8 @@ public class SelectableObject : MonoBehaviour
 
   void OnMouseDown()
   {
-    Debug.Log("click!");
     Debug.Log("Selected: " + gameObject.name);
     spriteRenderer.color = Color.white;
-    // if (!EventSystem.current.IsPointerOverGameObject()) // Ensure we're not clicking on a UI element
-    // {
-    //   if (IsClickingOnSprite())
-    //   {
-    //     SelectObject();
-    //   }
-    // }
   }
 
   bool IsClickingOnSprite()

@@ -9,7 +9,9 @@ public class MapManager : MonoBehaviour
   private void Awake()
   {
     getTerritories();
+    Debug.Log($"(MapManager) Found {territories.Count} territories");
     setMapToInteractive(false);
+    territories.ForEach(t => t.AddComponent<SelectableTerritory>());
   }
 
   public void setMapToInteractive(bool interactive)

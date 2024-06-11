@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MapSelectMenu : AbstractMenu
@@ -10,18 +11,25 @@ public class MapSelectMenu : AbstractMenu
 
   protected override void RecieveParameters(object[] args)
   {
-    playerID = (int)args[0];
-    matchID = (int)args[1];
+    matchID = (int)args[0];
+    playerID = (int)args[1];
     turnNumber = (int)args[2];
+    Debug.Log($"(MapSelectorMenu) Recieved: MatchID: {matchID}, PlayerID: {playerID}, TurnNumber: {turnNumber}");
+    Init();
+  }
+
+  private void Init()
+  {
+    manager.popupManager.ShowInfoPopup($"Registering turn {turnNumber}");
+    manager.mapManager.setMapToInteractive(true);
   }
 
   protected override VisualElement[] FetchUIElements()
   {
-    throw new System.NotImplementedException();
+    return new VisualElement[] { };
   }
 
   protected override void SetUICallbacks()
   {
-    throw new System.NotImplementedException();
   }
 }
