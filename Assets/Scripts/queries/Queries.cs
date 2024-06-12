@@ -23,5 +23,8 @@ public class Queries
   public static string GET_PLAYER_LATEST_TURN = "SELECT MAX(numeroTurno) " +
                                                 "FROM turno " +
                                                 "WHERE codGiocatore = @playerID;";
-  // Operations to add the player's controlled territories in a certain turn TODO
+  // Actual turn creation
+  public static string CREATE_TURN = "insert into turno(codGiocatore, codPartita, numeroTurno) " + 
+                                      "VALUES (@playerID, @matchID, @turnNumber);";
+
 }

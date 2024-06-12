@@ -9,7 +9,7 @@ public class NewTurnMenu : AbstractMenu
   private DropdownField playerSelector;
   private Button backButton;
   private Button okButton;
-  private int currentPlayerID;
+  private int playerID;
   public NewTurnMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
@@ -39,7 +39,7 @@ public class NewTurnMenu : AbstractMenu
         reader =>
         {
           string nickname = reader.GetString("nickname");
-          currentPlayerID = reader.GetInt32("codGiocatore");
+          playerID = reader.GetInt32("codGiocatore");
           return nickname;
         },
         new MySqlParameter[] { new MySqlParameter("matchID", evt.newValue) });
@@ -53,9 +53,21 @@ public class NewTurnMenu : AbstractMenu
   {
     // get the player latest turn number, if it's null then it's the first turn
     int turnNumber = SqlUtils.ExecuteQuery(Queries.GET_PLAYER_LATEST_TURN,
-      reader => reader.IsDBNull(0) ? 1 : reader.GetInt32(0),
-      new MySqlParameter[] { new("@playerID", 40) }).First();
-    // TODO create turn in the DB
-    manager.ChangeMenu(manager.mapSelectMenu, int.Parse(matchSelector.value), currentPlayerID, turnNumber);
+      reader => reader.IsDBNull(0) ? 1 : reader.GetInt32(0) + 1,
+      new MySqlParameter[] { new("@playerID", playerID) }).First();
+    int matchID = int.Parse(matchSelector.value);
+    try
+    {
+      SqlUtils.ExecuteNonQuery(Queries.CREATE_TURN, new MySqlParameter[] {
+      new("@playerID", playerID),
+      new("@matchID", matchID),
+      new("@turnNumber", turnNumber)
+    });
+    }
+    catch (System.Exception ex)
+    {
+      manager.popupManager.ShowErrorPopup(ex.Message);
+    }
+    manager.ChangeMenu(manager.mapSelectMenu, matchID, playerID, turnNumber);
   }
 }
