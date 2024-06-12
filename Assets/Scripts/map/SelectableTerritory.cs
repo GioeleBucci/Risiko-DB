@@ -52,25 +52,23 @@ public class SelectableTerritory : MonoBehaviour
     if (EventSystem.current.IsPointerOverGameObject()) return;
 
     isSelected = !isSelected;
-    spriteRenderer.color = isSelected ? selectedColor : originalColor;
     if (isSelected)
     {
-      ShowLabel();
+      Select();
     }
-    else
-    {
-      troops = 0;
-      HideLabel();
-    }
+    else Deselect();
   }
 
-  private void HideLabel()
+  public void Deselect()
   {
-    labelContainer.SetActive(false);
+    isSelected = false;
+    spriteRenderer.color = originalColor;
+    labelContainer?.SetActive(false);
   }
 
-  private void ShowLabel()
+  private void Select()
   {
+    spriteRenderer.color = selectedColor;
     if (labelContainer == null) CreateLabel();
     troops = 1;
     labelContainer.SetActive(true);
@@ -84,7 +82,6 @@ public class SelectableTerritory : MonoBehaviour
     labelContainer.transform.position = labelPosition;
     labelContainer.transform.SetParent(transform);
     troopsLabel = labelContainer.AddComponent<TextMesh>();
-    troopsLabel.text = "0";
     troopsLabel.anchor = TextAnchor.MiddleCenter;
     troopsLabel.alignment = TextAlignment.Center;
     troopsLabel.characterSize = 0.1f;

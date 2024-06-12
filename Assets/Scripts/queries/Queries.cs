@@ -24,7 +24,9 @@ public class Queries
                                                 "FROM turno " +
                                                 "WHERE codGiocatore = @playerID;";
   // Actual turn creation
-  public static string CREATE_TURN = "insert into turno(codGiocatore, codPartita, numeroTurno) " + 
+  public static string CREATE_TURN = "insert into turno(codGiocatore, codPartita, numeroTurno) " +
                                       "VALUES (@playerID, @matchID, @turnNumber);";
 
+  public static string CREATE_TERRITORY_CONTROL = "insert into controllo_territorio (codGiocatore, codPartita, numeroTurno, territorio, numArmate) "
+                                                + "VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";
 }

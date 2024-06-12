@@ -19,6 +19,11 @@ public class MapManager : MonoBehaviour
     territories.ForEach(t => t.GetComponent<PolygonCollider2D>().enabled = interactive);
   }
 
+  public void deselectTerritories()
+  {
+    territories.ForEach(t => t.GetComponent<SelectableTerritory>().Deselect());
+  }
+
   public List<(string, int)> GetTerritoriesAndArmies()
   {
     return territories

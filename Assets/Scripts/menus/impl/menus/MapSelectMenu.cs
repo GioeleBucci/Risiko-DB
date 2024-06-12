@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MySqlConnector;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -35,16 +36,40 @@ public class MapSelectMenu : AbstractMenu
   protected override void SetUICallbacks()
   {
     okButton.clicked += OnOkButtonClicked;
-    // TODO register selected territories in the DB
   }
 
   private void OnOkButtonClicked()
   {
     manager.mapManager.setMapToInteractive(false);
+    manager.mapManager.deselectTerritories();
     List<(string, int)> territoryArmyPairs = manager.mapManager.GetTerritoriesAndArmies();
-    foreach (var pair in territoryArmyPairs)
+    AddTerritoryControlToDB(territoryArmyPairs);
+    manager.ChangeMenu(manager.mainMenu);
+  }
+
+  private void AddTerritoryControlToDB(List<(string, int)> territoryArmyPairs)
+  {
+    try
     {
-      Debug.Log($"Territory: {pair.Item1}, Armies: {pair.Item2}");
+      foreach (var pair in territoryArmyPairs)
+      {
+        string territory = pair.Item1;
+        int troops = pair.Item2;
+        Debug.Log($"Adding Territory: {territory}, Armies: {troops}");
+        SqlUtils.ExecuteNonQuery(Queries.CREATE_TERRITORY_CONTROL,
+          new MySqlParameter[] {
+            new("@playerID", playerID),
+            new("@matchID", matchID),
+            new("@turnNumber", turnNumber),
+            new("@territory", territory),
+            new("@troops", troops)
+          });
+      }
+      manager.popupManager.ShowInfoPopup("Succesfully added to DB!"); // TODO we probably need a success popup
+    }
+    catch (Exception ex)
+    {
+      manager.popupManager.ShowErrorPopup(ex.Message);
     }
   }
 }
