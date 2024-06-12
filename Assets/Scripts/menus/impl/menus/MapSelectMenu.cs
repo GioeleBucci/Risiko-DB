@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 public class MapSelectMenu : AbstractMenu
 {
   public MapSelectMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
-
+  private Button okButton;
   private int playerID;
   private int matchID;
   private int turnNumber;
@@ -26,10 +26,12 @@ public class MapSelectMenu : AbstractMenu
 
   protected override VisualElement[] FetchUIElements()
   {
-    return new VisualElement[] { };
+    okButton = root.Q<Button>("OkButton");
+    return new VisualElement[] { okButton };
   }
 
   protected override void SetUICallbacks()
   {
+    // TODO register selected territories in the DB
   }
 }

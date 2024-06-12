@@ -1,9 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
+    <ui:Label tabindex="-1" text="Select owned Territories" parse-escape-sequences="true" display-tooltip-when-elided="true" class="header" style="margin-top: 0; font-size: 85px;" />
+    <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="position: absolute; top: 853px; left: 51px; height: 131px; width: 373px;" />
+</ui:UXML>
