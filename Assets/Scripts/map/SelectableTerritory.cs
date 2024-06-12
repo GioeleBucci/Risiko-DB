@@ -87,6 +87,7 @@ public class SelectableTerritory : MonoBehaviour
     troopsLabel.characterSize = 0.1f;
     troopsLabel.fontSize = 20;
     troopsLabel.color = Color.black;
+    troopsLabel.fontStyle = FontStyle.Bold;
     Collider2D collider = GetComponent<Collider2D>();
     Bounds bounds = collider.bounds;
     Vector3 colliderCenter = bounds.center;
