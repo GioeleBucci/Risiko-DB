@@ -53,18 +53,6 @@ public class NewTurnMenu : AbstractMenu
       reader => reader.IsDBNull(0) ? 1 : reader.GetInt32(0) + 1,
       new MySqlParameter[] { new("@playerID", playerID) }).First();
     int matchID = int.Parse(matchSelector.value);
-    try
-    {
-      SqlUtils.ExecuteNonQuery(Queries.CREATE_TURN, new MySqlParameter[] {
-      new("@playerID", playerID),
-      new("@matchID", matchID),
-      new("@turnNumber", turnNumber)
-    });
-    }
-    catch (System.Exception ex)
-    {
-      manager.popupManager.ShowErrorPopup(ex.Message);
-    }
     manager.ChangeMenu(manager.mapSelectMenu, matchID, playerID, turnNumber);
   }
 }

@@ -1,5 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
     <ui:Label tabindex="-1" text="Select owned Territories" parse-escape-sequences="true" display-tooltip-when-elided="true" class="header" style="margin-top: 0; font-size: 85px;" />
-    <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="position: absolute; top: 853px; left: 51px; height: 131px; width: 373px;" />
+    <ui:Button text="Add Attack" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AttackButton" class="button" style="position: absolute; top: 855px; left: 45px; height: 130px; width: 260px; white-space: normal; font-size: 42px;" />
+    <ui:Button text="Add Movement" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MovementButton" class="button" style="position: absolute; top: 855px; left: 348px; height: 130px; width: 260px; white-space: normal; font-size: 42px;" />
+    <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="position: absolute; top: 855px; left: 651px; height: 130px; width: 260px;" />
 </ui:UXML>

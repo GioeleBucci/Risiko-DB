@@ -41,10 +41,27 @@ public class MapSelectMenu : AbstractMenu
   private void OnOkButtonClicked()
   {
     manager.mapManager.setMapToInteractive(false);
-    manager.mapManager.deselectTerritories();
     List<(string, int)> territoryArmyPairs = manager.mapManager.GetTerritoriesAndArmies();
+    manager.mapManager.deselectTerritories();
+    CreateTurn();
     AddTerritoryControlToDB(territoryArmyPairs);
     manager.ChangeMenu(manager.mainMenu);
+  }
+
+  private void CreateTurn()
+  {
+    try
+    {
+      SqlUtils.ExecuteNonQuery(Queries.CREATE_TURN, new MySqlParameter[] {
+      new("@playerID", playerID),
+      new("@matchID", matchID),
+      new("@turnNumber", turnNumber)
+    });
+    }
+    catch (Exception ex)
+    {
+      manager.popupManager.ShowErrorPopup("Error while creating turn: " + ex.Message);
+    }
   }
 
   private void AddTerritoryControlToDB(List<(string, int)> territoryArmyPairs)
@@ -69,7 +86,7 @@ public class MapSelectMenu : AbstractMenu
     }
     catch (Exception ex)
     {
-      manager.popupManager.ShowErrorPopup(ex.Message);
+      manager.popupManager.ShowErrorPopup("Error while adding territories: " + ex.Message);
     }
   }
 }
