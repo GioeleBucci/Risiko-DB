@@ -13,7 +13,7 @@ public class SelectableTerritory : MonoBehaviour
   void OnMouseDown()
   {
     Debug.Log("Selected: " + gameObject.name);
-    spriteRenderer.color = Color.white;
+    spriteRenderer.color = Color.black;
   }
 
   bool IsClickingOnSprite()
