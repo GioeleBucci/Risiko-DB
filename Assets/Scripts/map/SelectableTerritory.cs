@@ -4,12 +4,23 @@ using UnityEngine.EventSystems;
 
 public class SelectableTerritory : MonoBehaviour
 {
-  private SpriteRenderer spriteRenderer;
   public bool isSelected { get; private set; }
+  private int _troops;
+  public int troops
+  {
+    get { return _troops; }
+    private set
+    {
+      if (value < 0) throw new ArgumentException("Troops cannot be negative");
+      _troops = value;
+      troopsLabel.text = value.ToString();
+    }
+  }
+  private SpriteRenderer spriteRenderer;
   private Color originalColor;
   private Color selectedColor;
   private GameObject labelContainer;
-  private TextMesh troopsLabel; // amount of troops on territory
+  private TextMesh troopsLabel;
 
   void Start()
   {
@@ -18,14 +29,39 @@ public class SelectableTerritory : MonoBehaviour
     selectedColor = originalColor + new Color(0.3f, 0.3f, 0.3f, 0);
   }
 
+  void Update()
+  {
+    if (Input.GetMouseButtonDown(1))
+    {
+      Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+      if (hit.collider != null && hit.collider.gameObject == gameObject)
+      {
+        HandleRightClick();
+      }
+    }
+  }
+
+  void HandleRightClick()
+  {
+    if (isSelected) { troops++; }
+  }
+
   void OnMouseDown()
   {
     if (EventSystem.current.IsPointerOverGameObject()) return;
 
     isSelected = !isSelected;
     spriteRenderer.color = isSelected ? selectedColor : originalColor;
-    if (isSelected) ShowLabel();
-    else HideLabel();
+    if (isSelected)
+    {
+      ShowLabel();
+    }
+    else
+    {
+      troops = 0;
+      HideLabel();
+    }
   }
 
   private void HideLabel()
