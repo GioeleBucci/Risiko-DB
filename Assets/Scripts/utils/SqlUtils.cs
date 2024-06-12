@@ -11,6 +11,14 @@ public static class SqlUtils
     return new MySqlConnection(connectionString);
   }
 
+  /// <summary>
+  /// Executes a SQL query and returns a list of results.
+  /// </summary>
+  /// <typeparam name="T">The type of the result objects.</typeparam>
+  /// <param name="query">The SQL query to execute.</param>
+  /// <param name="mapFunction">A function that maps the data from the SQL reader to the result objects.</param>
+  /// <param name="parameters">Optional parameters to be used in the SQL query.</param>
+  /// <returns>A list of results obtained from executing the SQL query.</returns>
   public static List<T> ExecuteQuery<T>(string query, Func<MySqlDataReader, T> mapFunction, params MySqlParameter[] parameters)
   {
     List<T> resultList = new List<T>();
@@ -28,6 +36,11 @@ public static class SqlUtils
     return resultList;
   }
 
+  /// <summary>
+  /// Executes a SQL query that does not return any data.
+  /// </summary>
+  /// <param name="query">The SQL query to execute.</param>
+  /// <param name="parameters">Optional parameters to be used in the query.</param>
   public static void ExecuteNonQuery(string query, params MySqlParameter[] parameters)
   {
     MySqlConnection connection = NewConnection();
@@ -39,17 +52,9 @@ public static class SqlUtils
   }
 
   /// <summary>
-  /// Returns a MySqlCommand object with the given query and parameters
+  /// Executes a transaction using the provided transaction function.
   /// </summary>
-  public static MySqlCommand GetCommand(string query, params MySqlParameter[] parameters)
-  {
-    MySqlConnection connection = NewConnection();
-    connection.Open();
-    MySqlCommand command = new MySqlCommand(query, connection);
-    command.Parameters.AddRange(parameters);
-    return command;
-  }
-
+  /// <param name="transactionFunction">The function that defines the transaction logic.</param>
   public static void ExecuteTransaction(Action<MySqlConnection, MySqlTransaction> transactionFunction)
   {
     MySqlConnection connection = NewConnection();
