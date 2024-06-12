@@ -28,5 +28,5 @@ public class Queries
                                       "VALUES (@playerID, @matchID, @turnNumber);";
 
   public static string CREATE_TERRITORY_CONTROL = "insert into controllo_territorio (codGiocatore, codPartita, numeroTurno, territorio, numArmate) "
-                                                + "VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";
+                                                + "VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";  
 }
