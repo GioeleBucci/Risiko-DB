@@ -19,6 +19,8 @@ public class MapManager : MonoBehaviour
     territories.ForEach(t => t.GetComponent<PolygonCollider2D>().enabled = interactive);
   }
 
+  // public List<string>
+
   private void getTerritories()
   {
     territories = GameObject.FindGameObjectsWithTag("Territory").ToList();
