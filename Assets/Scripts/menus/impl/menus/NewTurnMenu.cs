@@ -55,6 +55,7 @@ public class NewTurnMenu : AbstractMenu
     int turnNumber = SqlUtils.ExecuteQuery(Queries.GET_PLAYER_LATEST_TURN,
       reader => reader.IsDBNull(0) ? 1 : reader.GetInt32(0),
       new MySqlParameter[] { new("@playerID", 40) }).First();
+    // TODO create turn in the DB
     manager.ChangeMenu(manager.mapSelectMenu, int.Parse(matchSelector.value), currentPlayerID, turnNumber);
   }
 }

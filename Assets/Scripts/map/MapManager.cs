@@ -19,7 +19,12 @@ public class MapManager : MonoBehaviour
     territories.ForEach(t => t.GetComponent<PolygonCollider2D>().enabled = interactive);
   }
 
-  // public List<string>
+  public List<(string, int)> GetTerritoriesAndArmies()
+  {
+    return territories
+    .Where(t => t.GetComponent<SelectableTerritory>().isSelected)
+    .Select(t => (t.name, t.GetComponent<SelectableTerritory>().troops)).ToList();
+  }
 
   private void getTerritories()
   {

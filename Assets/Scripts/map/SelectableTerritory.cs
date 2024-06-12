@@ -72,6 +72,7 @@ public class SelectableTerritory : MonoBehaviour
   private void ShowLabel()
   {
     if (labelContainer == null) CreateLabel();
+    troops = 1;
     labelContainer.SetActive(true);
   }
 

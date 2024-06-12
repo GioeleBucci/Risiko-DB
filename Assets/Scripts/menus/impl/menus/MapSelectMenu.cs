@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -32,6 +34,17 @@ public class MapSelectMenu : AbstractMenu
 
   protected override void SetUICallbacks()
   {
+    okButton.clicked += OnOkButtonClicked;
     // TODO register selected territories in the DB
+  }
+
+  private void OnOkButtonClicked()
+  {
+    manager.mapManager.setMapToInteractive(false);
+    List<(string, int)> territoryArmyPairs = manager.mapManager.GetTerritoriesAndArmies();
+    foreach (var pair in territoryArmyPairs)
+    {
+      Debug.Log($"Territory: {pair.Item1}, Armies: {pair.Item2}");
+    }
   }
 }
