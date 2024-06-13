@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class MapSelectMenu : AbstractMenu
 {
   public MapSelectMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
-  private Button okButton;
+  private Button selectButton;
   private int playerID;
   private int matchID;
   private int turnNumber;
@@ -31,16 +31,16 @@ public class MapSelectMenu : AbstractMenu
 
   protected override VisualElement[] FetchUIElements()
   {
-    okButton = root.Q<Button>("OkButton");
-    return new VisualElement[] { okButton };
+    selectButton = root.Q<Button>("SelectButton");
+    return new VisualElement[] { selectButton };
   }
 
   protected override void SetUICallbacks()
   {
-    okButton.clicked += OnOkButtonClicked;
+    selectButton.clicked += TrySelectTerritories;
   }
 
-  private void OnOkButtonClicked()
+  private void TrySelectTerritories()
   {
     territoryArmyPairs = manager.mapManager.GetTerritoriesAndArmies();
     if (territoryArmyPairs.Count == 0)

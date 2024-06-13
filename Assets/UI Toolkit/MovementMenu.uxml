@@ -8,11 +8,11 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center; align-self: center;">
             <ui:Label tabindex="-1" text="Troops " parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font: resource(&apos;Fonts/gunplay rg&apos;); -unity-text-align: middle-left; font-size: 63px; -unity-font-definition: initial;" />
-            <ui:SliderInt high-value="30" low-value="1" show-input-field="true" name="Troops" class="slider" style="margin-top: 2%; align-items: stretch; justify-content: center; font-size: 29px; height: 96px; width: 1104px; margin-left: 0; margin-bottom: 0; -unity-text-align: middle-center; white-space: normal; -unity-font-style: normal;" />
+            <ui:SliderInt high-value="30" low-value="1" show-input-field="true" name="Troops" class="slider" style="margin-top: 2%; align-items: stretch; justify-content: center; font-size: 29px; height: 96px; width: 1151px; margin-left: 0; margin-bottom: 0; -unity-text-align: middle-center; white-space: normal; -unity-font-style: normal;" />
         </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore" style="height: 100%; flex-direction: row; justify-content: center; align-self: auto; width: 100%; margin-top: 5%; align-items: center;">
-            <ui:Button text="Register" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RegisterButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 50px; margin-left: 0;" />
-            <ui:Button text="Skip" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SkipButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 0; margin-left: 49px;" />
+            <ui:Button text="Skip" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SkipButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 50px; margin-left: 0;" />
+            <ui:Button text="Register" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RegisterButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 0; margin-left: 49px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

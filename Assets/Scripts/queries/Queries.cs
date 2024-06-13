@@ -30,20 +30,46 @@ public class Queries
   public static string CREATE_TERRITORY_CONTROL = "INSERT INTO CONTROLLO_TERRITORIO (codGiocatore, codPartita, numeroTurno, territorio, numArmate) "
                                                 + "VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";
 
-  // OP 5 Register a new attack TODO
-  // OP 6 Register a new movement
+  // OP 5 Get the player that's controlling a territory at the n-th turn
+  public static string GET_TERRITORY_CONTROL = "SELECT codGiocatore FROM CONTROLLO_TERRITORIO " +
+                                              "WHERE codPartita = @matchID " +
+                                              "AND territorio = @territory " +
+                                              "AND numeroTurno = @turnNumber;";
+
+  // OP 6 Register a new attack 
   public static string GET_CONTROLLED_TERRITORIES = "SELECT territorio FROM CONTROLLO_TERRITORIO " +
                                                     "WHERE codPartita = @matchID " +
                                                     "AND codGiocatore = @playerID " +
                                                     "AND numeroTurno = @turnNumber;";
   public static string GET_TROOPS_ON_TERRITORY = "SELECT numArmate FROM CONTROLLO_TERRITORIO " +
-                                              "WHERE codPartita = @matchID " +
-                                              "AND codGiocatore = @playerID " +
-                                              "AND numeroTurno = @turnNumber " +
-                                              "AND territorio = @territory;";
+                                                "WHERE codPartita = @matchID " +
+                                                "AND codGiocatore = @playerID " +
+                                                "AND numeroTurno = @turnNumber " +
+                                                "AND territorio = @territory;";
+  public static string CREATE_ATTACK = "INSERT INTO ATTACCO (attaccante, difensore, armateSchierate, armatePerse, difArmateSchierate, difArmatePerse, vittoria) " +
+                                       "VALUES (@attacker, @defender, @atkDeployed, @atkLost, @defDeployed, @defLost, @victory);";
+  public static string ADD_ATTACK_TO_TURN = "UPDATE TURNO " +
+                                            "SET codAttacco = LAST_INSERT_ID() " +
+                                            "WHERE codPartita = @matchID AND codGiocatore = @playerID AND numeroTurno = @turnNumber;";
+  /// <summary> 
+  /// <b>Warning</b>: could return null
+  /// </summary>
+  public static string GET_ENEMY_NEIGHBOUR_TERRITORIES = "SELECT conf.terrB " +
+                                                        "FROM CONFINE conf " +
+                                                        "WHERE conf.terrA = @territory AND conf.terrB IN " +
+                                                        "(" +
+                                                          "SELECT contr.territorio " +
+                                                          "FROM CONTROLLO_TERRITORIO contr " +
+                                                          "WHERE contr.codPartita = @matchID " +
+                                                          "AND contr.codGiocatore != @playerID " +
+                                                          "AND contr.numeroTurno = @turnNumber " +
+                                                        ");";
+  // OP 7 Register a new movement
   public static string CREATE_MOVEMENT = "INSERT INTO SPOSTAMENTO (territorioPartenza, territorioArrivo, numArmate) " +
                                           "VALUES (@from, @to, @troops);";
   public static string ADD_MOVEMENT_TO_TURN = "UPDATE TURNO " +
                                               "SET codSpostamento = LAST_INSERT_ID() " +
                                               "WHERE codPartita = @matchID AND codGiocatore = @playerID AND numeroTurno = @turnNumber;";
+  public static string GET_TERRITORY_NEIGHBOURS = "SELECT terrB FROM CONFINE "
+                                                + "WHERE terrA = @territory;";
 }
