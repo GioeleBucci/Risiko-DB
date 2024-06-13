@@ -42,8 +42,13 @@ public class MapSelectMenu : AbstractMenu
 
   private void OnOkButtonClicked()
   {
-    manager.mapManager.setMapToInteractive(false);
     territoryArmyPairs = manager.mapManager.GetTerritoriesAndArmies();
+    if (territoryArmyPairs.Count == 0)
+    {
+      manager.popupManager.ShowErrorPopup("You must select at least one territory!");
+      return;
+    }
+    manager.mapManager.setMapToInteractive(false);
     manager.mapManager.deselectTerritories();
     try
     {
