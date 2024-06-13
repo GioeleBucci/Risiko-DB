@@ -55,11 +55,16 @@ public class MovementMenu : AbstractMenu
     from.choices = territories;
     from.RegisterValueChangedCallback((evt) =>
     {
-      List<string> territoryNeighbours = SqlUtils.ExecuteQuery(Queries.GET_TERRITORY_NEIGHBOURS,
+      List<string> territoryNeighbours = SqlUtils.ExecuteQuery(Queries.GET_ALLIED_TERRITORY_NEIGHBOURS,
         reader => reader.GetString(0),
-        new MySqlParameter[] { new("@territory", evt.newValue) });
+        new MySqlParameter[] {
+          new("@territory", evt.newValue),
+          new("@matchID", matchID),
+          new("@playerID", playerID),
+          new("@turnNumber", turnNumber)
+        });
       to.choices = territoryNeighbours;
-      to.value = to.choices[0];
+      to.value = territoryNeighbours.Count > 0 ? to.choices[0] : "";
     });
     from.value = from.choices[0];
   }
@@ -98,14 +103,9 @@ public class MovementMenu : AbstractMenu
     addMovementToTurn.ExecuteNonQuery();
   }
 
-  private void CheckValidMovement(string fromTerritory, string toTerritory, int troopsToMove)
+  private void CheckValidMovement(string fromTerritory, string _toTerritory, int troopsToMove)
   {
-    // check if the territories are the same
-    if (fromTerritory.Equals(toTerritory))
-    {
-      throw new Exception("Cannot move troops to the same territory");
-    }
-    // check if the player has enough troops on the selected territory
+    // check if the player has enough troops to perform the selected movement
     int armiesOnTerritory = SqlUtils.ExecuteQuery(Queries.GET_TROOPS_ON_TERRITORY,
       reader => reader.GetInt32(0),
       new MySqlParameter[] {
@@ -114,22 +114,9 @@ public class MovementMenu : AbstractMenu
         new("@turnNumber", turnNumber),
         new("@territory", fromTerritory)
     }).First();
-    Debug.Log($"Armies on territory {fromTerritory}: {armiesOnTerritory}");
     if (troopsToMove >= armiesOnTerritory)
     {
       throw new Exception("Not enough troops on the selected territory");
-    }
-    // check if the territories belong to the same player
-    int toPlayer = SqlUtils.ExecuteQuery(Queries.GET_TERRITORY_CONTROL,
-      reader => reader.GetInt32(0),
-      new MySqlParameter[] {
-        new("@matchID", matchID),
-        new("@territory", toTerritory),
-        new("@turnNumber", turnNumber)
-    }).First();
-    if (toPlayer != playerID)
-    {
-      throw new Exception("Cannot move troops a territory that's not yours");
     }
   }
 

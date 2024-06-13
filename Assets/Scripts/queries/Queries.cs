@@ -70,6 +70,14 @@ public class Queries
   public static string ADD_MOVEMENT_TO_TURN = "UPDATE TURNO " +
                                               "SET codSpostamento = LAST_INSERT_ID() " +
                                               "WHERE codPartita = @matchID AND codGiocatore = @playerID AND numeroTurno = @turnNumber;";
-  public static string GET_TERRITORY_NEIGHBOURS = "SELECT terrB FROM CONFINE "
-                                                + "WHERE terrA = @territory;";
+  public static string GET_ALLIED_TERRITORY_NEIGHBOURS = "SELECT conf.terrB " +
+                                                        "FROM CONFINE conf " +
+                                                        "WHERE conf.terrA = @territory AND conf.terrB IN " +
+                                                        "(" +
+                                                          "SELECT contr.territorio " +
+                                                          "FROM CONTROLLO_TERRITORIO contr " +
+                                                          "WHERE contr.codPartita = @matchID " +
+                                                          "AND contr.codGiocatore = @playerID " +
+                                                          "AND contr.numeroTurno = @turnNumber " +
+                                                        ");";
 }

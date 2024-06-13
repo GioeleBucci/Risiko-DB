@@ -4153,7 +4153,7 @@ GameObject:
   - component: {fileID: 1147191572}
   - component: {fileID: 1147191573}
   m_Layer: 0
-  m_Name: India
+  m_Name: Medio Oriente
   m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5846,7 +5846,7 @@ GameObject:
   - component: {fileID: 1380446134}
   - component: {fileID: 1380446135}
   m_Layer: 0
-  m_Name: Medio Oriente
+  m_Name: India
   m_TagString: Territory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
