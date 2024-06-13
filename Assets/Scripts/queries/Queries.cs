@@ -41,4 +41,9 @@ public class Queries
                                               "AND codGiocatore = @playerID " +
                                               "AND numeroTurno = @turnNumber " +
                                               "AND territorio = @territory;";
+  public static string CREATE_MOVEMENT = "INSERT INTO SPOSTAMENTO (territorioPartenza, territorioArrivo, numArmate) " +
+                                          "VALUES (@from, @to, @troops);";
+  public static string ADD_MOVEMENT_TO_TURN = "UPDATE TURNO " +
+                                              "SET codSpostamento = LAST_INSERT_ID() " +
+                                              "WHERE codPartita = @matchID AND codGiocatore = @playerID AND numeroTurno = @turnNumber;";
 }

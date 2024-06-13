@@ -9,7 +9,7 @@ public class MovementMenu : AbstractMenu
 {
   private DropdownField from;
   private DropdownField to;
-  private SliderInt troops;
+  private SliderInt troopsSlider;
   private Button registerButton;
   private Button skipButton;
   private int matchID;
@@ -30,10 +30,17 @@ public class MovementMenu : AbstractMenu
   {
     from = root.Q<DropdownField>("From");
     to = root.Q<DropdownField>("To");
-    troops = root.Q<SliderInt>("Troops");
+    troopsSlider = root.Q<SliderInt>("Troops");
     registerButton = root.Q<Button>("RegisterButton");
     skipButton = root.Q<Button>("SkipButton");
-    return new VisualElement[] { from, to, troops, registerButton, skipButton };
+    return new VisualElement[] { from, to, troopsSlider, registerButton, skipButton };
+  }
+
+  protected override void SetUICallbacks()
+  {
+    SetDropdownLogic();
+    registerButton.clicked += RegisterMovement;
+    skipButton.clicked += GoToMainMenu;
   }
 
   private void SetDropdownLogic()
@@ -45,40 +52,44 @@ public class MovementMenu : AbstractMenu
         new("@playerID", playerID),
         new("@turnNumber", turnNumber)
       });
-    territories.ForEach(t => Debug.Log($"Territory fetched: {t}"));
     from.choices = territories;
     from.value = from.choices[0];
     to.choices = territories;
     to.value = to.choices[0];
   }
 
-  protected override void SetUICallbacks()
+  private void RegisterMovement()
   {
-    SetDropdownLogic();
-    registerButton.clicked += RegisterMovementAndGoToMainMenu;
-    skipButton.clicked += GoToMainMenu;
-  }
-
-  private void RegisterMovementAndGoToMainMenu()
-  {
-    string fromTerritory = from.value;
-    string toTerritory = to.value;
-    int troopsToMove = troops.value;
-    Debug.Log($"Registering movement from {fromTerritory} to {toTerritory} with {troopsToMove} troops");
-    RegisterMovement(fromTerritory, toTerritory, troopsToMove);
-    GoToMainMenu();
-  }
-
-  private void RegisterMovement(string fromTerritory, string toTerritory, int troopsToMove)
-  {
+    Debug.Log($"Attempting to register movement from {from.value} to {to.value} with {troopsSlider.value} troops");
     try
     {
-      CheckValidMovement(fromTerritory, toTerritory, troopsToMove);
+      CheckValidMovement(from.value, to.value, troopsSlider.value);
+      SqlUtils.ExecuteTransaction(CreateMovement);
+      GoToMainMenu();
     }
     catch (Exception ex)
     {
-      manager.popupManager.ShowInfoPopup("Error while registering movement: " + ex.Message);
+      manager.popupManager.ShowErrorPopup("Error while registering movement: " + ex.Message);
+      return;
     }
+  }
+
+  private void CreateMovement(MySqlConnection conn, MySqlTransaction trans)
+  {
+    MySqlCommand createMovement = new(Queries.CREATE_MOVEMENT, conn, trans);
+    createMovement.Parameters.AddRange(new MySqlParameter[] {
+      new("@from", from.value),
+      new("@to", to.value),
+      new("@troops", troopsSlider.value)
+    });
+    createMovement.ExecuteNonQuery();
+    MySqlCommand addMovementToTurn = new(Queries.ADD_MOVEMENT_TO_TURN, conn, trans);
+    addMovementToTurn.Parameters.AddRange(new MySqlParameter[] {
+      new("@matchID", matchID),
+      new("@playerID", playerID),
+      new("@turnNumber", turnNumber)
+    });
+    addMovementToTurn.ExecuteNonQuery();
   }
 
   private void CheckValidMovement(string fromTerritory, string toTerritory, int troopsToMove)
@@ -100,6 +111,7 @@ public class MovementMenu : AbstractMenu
     {
       throw new Exception("Not enough troops on the selected territory");
     }
+    // TODO check if the territories are adjacent !!
   }
 
   private void GoToMainMenu()
