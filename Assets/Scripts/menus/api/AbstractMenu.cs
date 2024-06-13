@@ -47,10 +47,11 @@ public abstract class AbstractMenu
   /// Changes the current menu to a new menu.
   /// </summary>
   /// <param name="newMenu">The new menu to be displayed.</param>
-  protected void ChangeMenu(AbstractMenu newMenu)
+  /// <param name="args">The arguments to be passed to the new menu.</param>
+  protected void ChangeMenu(AbstractMenu newMenu, params object[] args)
   {
     manager.oldMenu = this;
-    manager.ChangeMenu(newMenu);
+    manager.ChangeMenu(newMenu, args);
   }
 
   /// <summary>

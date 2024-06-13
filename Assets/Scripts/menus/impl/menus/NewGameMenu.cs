@@ -43,7 +43,7 @@ public class NewGameMenu : AbstractMenu
         reader => reader.GetInt32("numArmate"),
         new MySqlParameter[] { new("@playerCount", playerCount) }).First();
       manager.popupManager.ShowInfoPopup($"Match created successfully!\nEach player will starts with {troopCount} troops.");
-      manager.ChangeMenu(manager.newPlayerMenu, playerCount); 
+      ChangeMenu(manager.newPlayerMenu, playerCount); 
     }
     else
     {

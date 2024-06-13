@@ -14,6 +14,8 @@ public class MenuManager : MonoBehaviour
   [SerializeField] private VisualTreeAsset newPlayerMenuTree;
   [SerializeField] private VisualTreeAsset newTurnMenuTree;
   [SerializeField] private VisualTreeAsset mapSelectMenuTree;
+  [SerializeField] private VisualTreeAsset movementMenuTree;
+  [SerializeField] private VisualTreeAsset attackMenuTree;
   public PopupManager popupManager { get; private set; }
   public MapManager mapManager { get; private set; }
   public AbstractMenu oldMenu { get; set; }
@@ -24,6 +26,8 @@ public class MenuManager : MonoBehaviour
   public AbstractMenu newPlayerMenu { get; private set; }
   public AbstractMenu newTurnMenu { get; private set; }
   public AbstractMenu mapSelectMenu { get; private set; }
+  public AbstractMenu movementMenu { get; private set; }
+  public AbstractMenu attackMenu { get; private set; }
 
   protected void Awake()
   {
@@ -36,6 +40,8 @@ public class MenuManager : MonoBehaviour
     newPlayerMenu = new NewPlayerMenu(this, newPlayerMenuTree);
     newTurnMenu = new NewTurnMenu(this, newTurnMenuTree);
     mapSelectMenu = new MapSelectMenu(this, mapSelectMenuTree);
+    movementMenu = new MovementMenu(this, movementMenuTree);
+    attackMenu = new AttackMenu(this, attackMenuTree);
     ChangeMenu(mainMenu);
   }
 

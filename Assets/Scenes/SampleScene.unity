@@ -1252,6 +1252,8 @@ MonoBehaviour:
   newPlayerMenuTree: {fileID: 9197481963319205126, guid: ad8c5c62c5322cc4ab82ae5209f516f6, type: 3}
   newTurnMenuTree: {fileID: 9197481963319205126, guid: 6fbcf8dfd89cc4d44886968d5112fde9, type: 3}
   mapSelectMenuTree: {fileID: 9197481963319205126, guid: 5350d64ee110fe642a83adac1a7e791c, type: 3}
+  movementMenuTree: {fileID: 9197481963319205126, guid: 304767470fab3774e89a5b00cccf46e6, type: 3}
+  attackMenuTree: {fileID: 0}
 --- !u!1 &343377911
 GameObject:
   m_ObjectHideFlags: 0

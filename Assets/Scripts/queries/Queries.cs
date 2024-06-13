@@ -21,12 +21,19 @@ public class Queries
   public static string GET_PLAYERS_IN_MATCH = "SELECT * FROM GIOCATORE where codPartita = @matchID;";
 
   public static string GET_PLAYER_LATEST_TURN = "SELECT MAX(numeroTurno) " +
-                                                "FROM turno " +
+                                                "FROM TURNO " +
                                                 "WHERE codGiocatore = @playerID;";
   // Actual turn creation
-  public static string CREATE_TURN = "insert into turno(codGiocatore, codPartita, numeroTurno) " +
+  public static string CREATE_TURN = "INSERT INTO TURNO(codGiocatore, codPartita, numeroTurno) " +
                                       "VALUES (@playerID, @matchID, @turnNumber);";
 
-  public static string CREATE_TERRITORY_CONTROL = "insert into controllo_territorio (codGiocatore, codPartita, numeroTurno, territorio, numArmate) "
-                                                + "VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";  
+  public static string CREATE_TERRITORY_CONTROL = "INSERT INTO CONTROLLO_TERRITORIO (codGiocatore, codPartita, numeroTurno, territorio, numArmate) "
+                                                + "VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";
+
+  // OP 5 Register a new attack TODO
+  // OP 6 Register a new movement
+  public static string GET_CONTROLLED_TERRITORIES = "SELECT territorio FROM CONTROLLO_TERRITORIO " +
+                                                    "WHERE codPartita = @matchID " +
+                                                    "AND codGiocatore = @playerID " +
+                                                    "AND numeroTurno = @turnNumber;";
 }
