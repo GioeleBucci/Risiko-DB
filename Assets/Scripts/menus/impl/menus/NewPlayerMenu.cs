@@ -71,7 +71,7 @@ public class NewPlayerMenu : AbstractMenu
     int armyID = armyAndObj.Item1.Item1;
     int objectiveID = armyAndObj.Item2.Item1;
     // Show a popup window with a message 
-    manager.popupManager.ShowPlayerCreatedPopup(armyAndObj.Item1.Item2, armyAndObj.Item2.Item2);
+    manager.popupManager.ShowPlayerCreatedPopup(matchID, armyAndObj.Item1.Item2, armyAndObj.Item2.Item2);
     // Add player to the database
     try
     {

@@ -15,9 +15,11 @@ public class PopupManager : MonoBehaviour
     document.visualTreeAsset = null;
   }
 
-  public void ShowPlayerCreatedPopup(string army, string objective)
+  public void ShowPlayerCreatedPopup(int matchID, string army, string objective)
   {
     document.visualTreeAsset = playerCreatedPopup;
+    Label title = root.Q<Label>("Title");
+    title.text = $"{title.text} (Match ID: {matchID})";
     Label armyLabel = root.Q<Label>("ArmyLabel");
     armyLabel.text = $"ARMY: {army}";
     Label objectiveLabel = root.Q<Label>("ObjectiveLabel");
