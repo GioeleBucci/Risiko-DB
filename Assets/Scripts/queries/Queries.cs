@@ -36,4 +36,9 @@ public class Queries
                                                     "WHERE codPartita = @matchID " +
                                                     "AND codGiocatore = @playerID " +
                                                     "AND numeroTurno = @turnNumber;";
+  public static string GET_TROOPS_ON_TERRITORY = "SELECT numArmate FROM CONTROLLO_TERRITORIO " +
+                                              "WHERE codPartita = @matchID " +
+                                              "AND codGiocatore = @playerID " +
+                                              "AND numeroTurno = @turnNumber " +
+                                              "AND territorio = @territory;";
 }

@@ -14,8 +14,8 @@ public class MenuManager : MonoBehaviour
   [SerializeField] private VisualTreeAsset newPlayerMenuTree;
   [SerializeField] private VisualTreeAsset newTurnMenuTree;
   [SerializeField] private VisualTreeAsset mapSelectMenuTree;
-  [SerializeField] private VisualTreeAsset movementMenuTree;
   [SerializeField] private VisualTreeAsset attackMenuTree;
+  [SerializeField] private VisualTreeAsset movementMenuTree;
   public PopupManager popupManager { get; private set; }
   public MapManager mapManager { get; private set; }
   public AbstractMenu oldMenu { get; set; }

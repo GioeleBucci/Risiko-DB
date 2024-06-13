@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MySqlConnector;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,8 +10,8 @@ public class MovementMenu : AbstractMenu
   private DropdownField from;
   private DropdownField to;
   private SliderInt troops;
-  private Button backButton;
-  private Button okButton;
+  private Button registerButton;
+  private Button skipButton;
   private int matchID;
   private int playerID;
   private int turnNumber;
@@ -30,9 +31,9 @@ public class MovementMenu : AbstractMenu
     from = root.Q<DropdownField>("From");
     to = root.Q<DropdownField>("To");
     troops = root.Q<SliderInt>("Troops");
-    backButton = root.Q<Button>("BackButton");
-    okButton = root.Q<Button>("OkButton");
-    return new VisualElement[] { from, to, troops, backButton, okButton };
+    registerButton = root.Q<Button>("RegisterButton");
+    skipButton = root.Q<Button>("SkipButton");
+    return new VisualElement[] { from, to, troops, registerButton, skipButton };
   }
 
   private void SetDropdownLogic()
@@ -54,12 +55,56 @@ public class MovementMenu : AbstractMenu
   protected override void SetUICallbacks()
   {
     SetDropdownLogic();
-    backButton.clicked += OnBackButtonClicked;
-    okButton.clicked += RegisterMovement;
+    registerButton.clicked += RegisterMovementAndGoToMainMenu;
+    skipButton.clicked += GoToMainMenu;
   }
 
-  private void RegisterMovement()
+  private void RegisterMovementAndGoToMainMenu()
   {
-    throw new NotImplementedException();
+    string fromTerritory = from.value;
+    string toTerritory = to.value;
+    int troopsToMove = troops.value;
+    Debug.Log($"Registering movement from {fromTerritory} to {toTerritory} with {troopsToMove} troops");
+    RegisterMovement(fromTerritory, toTerritory, troopsToMove);
+    GoToMainMenu();
+  }
+
+  private void RegisterMovement(string fromTerritory, string toTerritory, int troopsToMove)
+  {
+    try
+    {
+      CheckValidMovement(fromTerritory, toTerritory, troopsToMove);
+    }
+    catch (Exception ex)
+    {
+      manager.popupManager.ShowInfoPopup("Error while registering movement: " + ex.Message);
+    }
+  }
+
+  private void CheckValidMovement(string fromTerritory, string toTerritory, int troopsToMove)
+  {
+    if (fromTerritory.Equals(toTerritory))
+    {
+      throw new Exception("Cannot move troops to the same territory");
+    }
+    int armiesOnTerritory = SqlUtils.ExecuteQuery(Queries.GET_TROOPS_ON_TERRITORY,
+      reader => reader.GetInt32(0),
+      new MySqlParameter[] {
+        new("@matchID", matchID),
+        new("@playerID", playerID),
+        new("@turnNumber", turnNumber),
+        new("@territory", fromTerritory)
+    }).First();
+    Debug.Log($"Armies on territory {fromTerritory}: {armiesOnTerritory}");
+    if (troopsToMove >= armiesOnTerritory)
+    {
+      throw new Exception("Not enough troops on the selected territory");
+    }
+  }
+
+  private void GoToMainMenu()
+  {
+    manager.popupManager.ShowInfoPopup("Turn registered successfully!");
+    ChangeMenu(manager.mainMenu);
   }
 }

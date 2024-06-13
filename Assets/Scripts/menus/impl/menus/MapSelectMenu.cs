@@ -9,8 +9,6 @@ public class MapSelectMenu : AbstractMenu
 {
   public MapSelectMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
   private Button okButton;
-  private Button movementButton;
-  private Button attackButton;
   private int playerID;
   private int matchID;
   private int turnNumber;
@@ -29,34 +27,17 @@ public class MapSelectMenu : AbstractMenu
   {
     manager.popupManager.ShowInfoPopup($"Registering turn {turnNumber}");
     manager.mapManager.setMapToInteractive(true);
-    DisableMovementAndAttackButtons();
   }
 
   protected override VisualElement[] FetchUIElements()
   {
     okButton = root.Q<Button>("OkButton");
-    movementButton = root.Q<Button>("MovementButton");
-    attackButton = root.Q<Button>("AttackButton");
     return new VisualElement[] { okButton };
   }
 
   protected override void SetUICallbacks()
   {
     okButton.clicked += OnOkButtonClicked;
-    movementButton.clicked += OnMovementButtonClicked;
-    attackButton.clicked += OnAttackButtonClicked;
-  }
-
-  private void OnAttackButtonClicked()
-  {
-    manager.mapManager.setMapToInteractive(false);
-    throw new NotImplementedException();
-  }
-
-  private void OnMovementButtonClicked()
-  {
-    manager.mapManager.setMapToInteractive(false);
-    ChangeMenu(manager.movementMenu, matchID, playerID, turnNumber);
   }
 
   private void OnOkButtonClicked()
@@ -68,35 +49,13 @@ public class MapSelectMenu : AbstractMenu
     {
       SqlUtils.ExecuteTransaction(CreateTurnAndControlledTerritories);
       manager.popupManager.ShowInfoPopup("Territories registered successfully!");
+      ChangeMenu(manager.attackMenu, matchID, playerID, turnNumber);
     }
     catch (Exception ex)
     {
       manager.popupManager.ShowErrorPopup("An error occourred while registering territories: " + ex.Message);
       ChangeMenu(manager.mainMenu);
     }
-    EnableMovementAndAttackButtons();
-  }
-
-  private void DisableMovementAndAttackButtons()
-  {
-    attackButton.SetEnabled(false);
-    movementButton.SetEnabled(false);
-  }
-
-  private void EnableMovementAndAttackButtons()
-  {
-    attackButton.SetEnabled(true);
-    movementButton.SetEnabled(true);
-    okButton.text = "Finish";
-    okButton.clicked -= OnOkButtonClicked;
-    okButton.clicked += OnFinishButtonClicked;
-  }
-
-  private void OnFinishButtonClicked()
-  {
-    okButton.clicked -= OnFinishButtonClicked;
-    manager.popupManager.ShowInfoPopup("Turn registered successfully!");
-    ChangeMenu(manager.mainMenu);
   }
 
   // execute the queries together in a transaction to ensure integrity

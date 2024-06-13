@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Container" class="background">
-        <ui:Label text="Register Movement" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal;" />
+        <ui:Label text="Register Attack" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" enable-rich-text="true" class="header" style="-unity-font-style: normal;" />
         <ui:VisualElement style="flex-grow: 1; height: 109%; flex-direction: row; justify-content: center;">
             <ui:DropdownField label="From" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="From" class="slider" style="width: 40%; margin-top: 2%;" />
             <ui:DropdownField label="To" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="To" class="slider" style="margin-top: 2%; width: 40%;" />
