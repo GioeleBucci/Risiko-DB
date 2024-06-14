@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using MySqlConnector;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,8 +27,44 @@ public class MapSelectMenu : AbstractMenu
 
   private void Init()
   {
-    manager.popupManager.ShowInfoPopup($"Registering turn {turnNumber}");
+    ShowTroopsToPlacePopup();
     manager.mapManager.setMapToInteractive(true);
+  }
+
+  private void ShowTroopsToPlacePopup()
+  {
+    string startTurnMessage = $"Registering turn {turnNumber}.";
+    // on the first turn, the player's troops are based off the total number of players
+    if (turnNumber == 1)
+    {
+      int players = SqlUtils.ExecuteQuery(Queries.GET_PLAYERS_IN_MATCH,
+        reader => reader.GetInt32(0),
+        new MySqlParameter[] { new("@matchID", matchID) }).Count;
+      int troops = SqlUtils.ExecuteQuery(Queries.GET_INITIAL_TROOPS,
+        reader => reader.GetInt32("numArmate"),
+        new MySqlParameter[] { new("@playerCount", players) }).First();
+      manager.popupManager.ShowInfoPopup($"{startTurnMessage}" +
+                                        $"\nYou have {troops} troops to place.");
+      return;
+    }
+    // on subsequent turns, the player's troops are based off the territories they control
+    int territoryTroops = SqlUtils.ExecuteQuery(Queries.GET_TERRITORIES_BONUS,
+      reader => reader.GetInt32(0),
+      new MySqlParameter[] {
+        new("@playerID", playerID),
+        new("@matchID", matchID),
+        new("@turnNumber", turnNumber - 1)
+      }).First();
+    int continentTroops = SqlUtils.ExecuteQuery(Queries.GET_CONTINENTS_BONUS,
+      reader => reader.GetInt32(0),
+      new MySqlParameter[] {
+        new("@playerID", playerID),
+        new("@matchID", matchID),
+        new("@turnNumber", turnNumber - 1)
+      }).First();
+    manager.popupManager.ShowInfoPopup($"{startTurnMessage}" +
+                                  $"\nYou have {territoryTroops + continentTroops} troops to place." +
+                                  $"\n({territoryTroops} from territories and {continentTroops} from continents)");
   }
 
   protected override VisualElement[] FetchUIElements()
