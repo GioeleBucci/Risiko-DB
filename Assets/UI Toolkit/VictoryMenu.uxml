@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" class="background">
+        <ui:Label text="Register Victory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal;" />
+        <ui:DropdownField label="Pick Match ID" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="DropdownMatch" class="slider" />
+        <ui:DropdownField label="Pick Player" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="DropdownPlayer" class="slider" style="margin-top: 2%;" />
+        <ui:VisualElement picking-mode="Ignore" style="height: 100%; flex-direction: row; justify-content: center; align-self: auto; width: 100%; margin-top: -5%;">
+            <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-left: 50px; margin-right: 50px;" />
+            <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 0; margin-left: 50px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
