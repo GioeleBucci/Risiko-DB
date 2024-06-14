@@ -5,7 +5,7 @@ public class Queries
   public static string CREATE_USER = 
   @"INSERT INTO UTENTE (codiceFiscale, nome, cognome)
     VALUES (@id, @name, @surname);";
-    
+
   // OP 2 Create a new match
   public static string CREATE_MATCH =
   @"INSERT INTO PARTITA (data)
@@ -107,12 +107,12 @@ public class Queries
     );";
 
   // OP 8 Get the number of troops to assign to a player at the beginning of his turn
-  public static string GET_BONUS_TROOPS = 
+  public static string GET_TERRITORIES_BONUS = 
   @"SELECT FLOOR(COUNT(C.territorio) / 3) AS truppeBonus
     FROM CONTROLLO_TERRITORIO C
-    WHERE C.codPartita = 28
-    		AND C.codGiocatore = 45
-        AND C.numeroTurno = 1
+    WHERE C.codPartita = @matchID
+    		AND C.codGiocatore = @playerID
+        AND C.numeroTurno = @turnNumber
     GROUP BY C.codPartita, C.codGiocatore, C.numeroTurno;";
   
   public static string GET_CONTINENTS_BONUS = 
@@ -141,6 +141,6 @@ public class Queries
       ON 
         TERR_TOTALI.continente = TERR_GIOCATORE.continente
       WHERE 
-        TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti;
-    )";
+        TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti
+    );";
 }
