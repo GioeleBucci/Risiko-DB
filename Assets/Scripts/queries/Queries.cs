@@ -2,7 +2,7 @@
 public class Queries
 {
   // OP 1 Create a new user
-  public static string CREATE_USER = 
+  public static string CREATE_USER =
   @"INSERT INTO UTENTE (codiceFiscale, nome, cognome)
     VALUES (@id, @name, @surname);";
 
@@ -10,71 +10,78 @@ public class Queries
   public static string CREATE_MATCH =
   @"INSERT INTO PARTITA (data)
     VALUES(@date);";
-  public static string GET_USERS = 
+  public static string GET_USERS =
   @"SELECT * FROM utente;";
 
-  public static string GET_ID_OF_LAST_MATCH_CREATED = 
+  public static string GET_ID_OF_LAST_MATCH_CREATED =
   @"SELECT codPartita 
     FROM PARTITA 
     WHERE codPartita = (SELECT MAX(codPartita) FROM PARTITA);";
-  public static string CREATE_PLAYER = 
+  public static string CREATE_PLAYER =
   @"INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) 
     VALUES (@nickname, @matchID, @userID, @objID, @armyID);";
 
   // OP 3 Get the number of troops each player has at the beginning of the match
-  public static string GET_INITIAL_TROOPS = 
+  public static string GET_INITIAL_TROOPS =
   @"SELECT numArmate FROM ARMATE_INIZIALI where numGiocatori = @playerCount;";
 
   // OP 4 Register a new turn in a certain match
-  public static string GET_MATCHES_IDS = 
-  @"SELECT codPartita FROM PARTITA;";
+  // Get only the matches that are still ongoing
+  public static string GET_MATCHES_IDS =
+  @"SELECT P.codPartita
+    FROM PARTITA P
+    WHERE P.codPartita NOT IN 
+    (
+      SELECT V.codPartita
+      FROM VINCITORE V
+    );";
 
-  public static string GET_PLAYERS_IN_MATCH = 
+  public static string GET_PLAYERS_IN_MATCH =
   @"SELECT * FROM GIOCATORE where codPartita = @matchID;";
 
-  public static string GET_PLAYER_LATEST_TURN = 
+  public static string GET_PLAYER_LATEST_TURN =
   @"SELECT MAX(numeroTurno) 
     FROM TURNO 
     WHERE codGiocatore = @playerID;";
   // Actual turn creation
-  public static string CREATE_TURN = 
+  public static string CREATE_TURN =
   @"INSERT INTO TURNO(codGiocatore, codPartita, numeroTurno) 
     VALUES (@playerID, @matchID, @turnNumber);";
 
-  public static string CREATE_TERRITORY_CONTROL = 
+  public static string CREATE_TERRITORY_CONTROL =
   @"INSERT INTO CONTROLLO_TERRITORIO (codGiocatore, codPartita, numeroTurno, territorio, numArmate) 
     VALUES (@playerID, @matchID, @turnNumber, @territory, @troops);";
 
   // OP 5 Get the player that's controlling a territory at the n-th turn
-  public static string GET_TERRITORY_CONTROL = 
+  public static string GET_TERRITORY_CONTROL =
   @"SELECT codGiocatore FROM CONTROLLO_TERRITORIO 
     WHERE codPartita = @matchID 
     AND territorio = @territory 
     AND numeroTurno = @turnNumber;";
 
   // OP 6 Register a new attack 
-  public static string GET_CONTROLLED_TERRITORIES = 
+  public static string GET_CONTROLLED_TERRITORIES =
   @"SELECT territorio FROM CONTROLLO_TERRITORIO 
     WHERE codPartita = @matchID 
     AND codGiocatore = @playerID 
     AND numeroTurno = @turnNumber;";
-  public static string GET_TROOPS_ON_TERRITORY = 
+  public static string GET_TROOPS_ON_TERRITORY =
   @"SELECT numArmate FROM CONTROLLO_TERRITORIO 
     WHERE codPartita = @matchID 
     AND codGiocatore = @playerID 
     AND numeroTurno = @turnNumber 
     AND territorio = @territory;";
-  public static string CREATE_ATTACK = 
+  public static string CREATE_ATTACK =
   @"INSERT INTO ATTACCO (attaccante, difensore, armateSchierate, armatePerse, difArmateSchierate, difArmatePerse, vittoria) 
     VALUES (@attacker, @defender, @atkDeployed, @atkLost, @defDeployed, @defLost, @victory);";
-  public static string ADD_ATTACK_TO_TURN = 
+  public static string ADD_ATTACK_TO_TURN =
   @"UPDATE TURNO 
     SET codAttacco = LAST_INSERT_ID() 
     WHERE codPartita = @matchID AND codGiocatore = @playerID AND numeroTurno = @turnNumber;";
   /// <summary> 
   /// <b>Warning</b>: could return null
   /// </summary>
-  public static string GET_ENEMY_NEIGHBOUR_TERRITORIES = 
+  public static string GET_ENEMY_NEIGHBOUR_TERRITORIES =
   @"SELECT conf.terrB 
     FROM CONFINE conf 
     WHERE conf.terrA = @territory AND conf.terrB IN 
@@ -87,14 +94,14 @@ public class Queries
     );";
 
   // OP 7 Register a new movement
-  public static string CREATE_MOVEMENT = 
+  public static string CREATE_MOVEMENT =
   @"INSERT INTO SPOSTAMENTO (territorioPartenza, territorioArrivo, numArmate) 
     VALUES (@from, @to, @troops);";
-  public static string ADD_MOVEMENT_TO_TURN = 
+  public static string ADD_MOVEMENT_TO_TURN =
   @"UPDATE TURNO 
     SET codSpostamento = LAST_INSERT_ID() 
     WHERE codPartita = @matchID AND codGiocatore = @playerID AND numeroTurno = @turnNumber;";
-  public static string GET_ALLIED_TERRITORY_NEIGHBOURS = 
+  public static string GET_ALLIED_TERRITORY_NEIGHBOURS =
   @"SELECT conf.terrB 
     FROM CONFINE conf 
     WHERE conf.terrA = @territory AND conf.terrB IN 
@@ -107,15 +114,15 @@ public class Queries
     );";
 
   // OP 8 Get the number of troops to assign to a player at the beginning of his turn
-  public static string GET_TERRITORIES_BONUS = 
+  public static string GET_TERRITORIES_BONUS =
   @"SELECT FLOOR(COUNT(C.territorio) / 3) AS truppeBonus
     FROM CONTROLLO_TERRITORIO C
     WHERE C.codPartita = @matchID
     		AND C.codGiocatore = @playerID
         AND C.numeroTurno = @turnNumber
     GROUP BY C.codPartita, C.codGiocatore, C.numeroTurno;";
-  
-  public static string GET_CONTINENTS_BONUS = 
+
+  public static string GET_CONTINENTS_BONUS =
   @"SELECT COALESCE(SUM(C1.bonusArmate), 0) AS bonusArmate -- COALESCE avoids null (if no continent is owned returns 0)
     FROM CONTINENTE C1
     WHERE C1.nome IN
@@ -143,4 +150,7 @@ public class Queries
       WHERE 
         TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti
     );";
+  // OP 10 register a victory
+  public static string CREATE_VICTORY =
+  "INSERT INTO VINCITORE (codPartita, codGiocatore) VALUES (@matchID, @playerID);";
 }
