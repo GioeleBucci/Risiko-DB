@@ -112,7 +112,7 @@ public class Queries
     GROUP BY C.codPartita, C.codGiocatore, C.numeroTurno;";
   
   public static string GET_CONTINENTS_BONUS = 
-  @"SELECT C1.bonusArmate
+  @"SELECT COALESCE(SUM(C1.bonusArmate), 0) AS bonusArmate -- COALESCE avoids null (if no continent is owned returns 0)
     FROM CONTINENTE C1
     WHERE C1.nome IN
     (
