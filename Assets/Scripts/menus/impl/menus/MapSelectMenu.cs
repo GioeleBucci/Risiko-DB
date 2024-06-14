@@ -9,6 +9,7 @@ public class MapSelectMenu : AbstractMenu
 {
   public MapSelectMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
   private Button selectButton;
+  private Button backButton;
   private int playerID;
   private int matchID;
   private int turnNumber;
@@ -32,12 +33,14 @@ public class MapSelectMenu : AbstractMenu
   protected override VisualElement[] FetchUIElements()
   {
     selectButton = root.Q<Button>("SelectButton");
-    return new VisualElement[] { selectButton };
+    backButton = root.Q<Button>("BackButton");
+    return new VisualElement[] { selectButton, backButton };
   }
 
   protected override void SetUICallbacks()
   {
     selectButton.clicked += TrySelectTerritories;
+    backButton.clicked += OnBackButtonClicked;
   }
 
   private void TrySelectTerritories()

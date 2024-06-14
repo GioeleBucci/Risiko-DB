@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MySqlConnector;
@@ -24,8 +25,13 @@ public class NewTurnMenu : AbstractMenu
   protected override void SetUICallbacks()
   {
     SetDropdownLogic();
-    backButton.clicked += OnBackButtonClicked;
+    backButton.clicked += GoToMainMenu;
     okButton.clicked += GoToMapSelector;
+  }
+
+  private void GoToMainMenu()
+  {
+    ChangeMenu(manager.mainMenu);
   }
 
   private void SetDropdownLogic()

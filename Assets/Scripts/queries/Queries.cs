@@ -5,6 +5,7 @@ public class Queries
   public static string CREATE_USER = 
   @"INSERT INTO UTENTE (codiceFiscale, nome, cognome)
     VALUES (@id, @name, @surname);";
+    
   // OP 2 Create a new match
   public static string CREATE_MATCH =
   @"INSERT INTO PARTITA (data)
@@ -19,9 +20,11 @@ public class Queries
   public static string CREATE_PLAYER = 
   @"INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) 
     VALUES (@nickname, @matchID, @userID, @objID, @armyID);";
+
   // OP 3 Get the number of troops each player has at the beginning of the match
   public static string GET_INITIAL_TROOPS = 
   @"SELECT numArmate FROM ARMATE_INIZIALI where numGiocatori = @playerCount;";
+
   // OP 4 Register a new turn in a certain match
   public static string GET_MATCHES_IDS = 
   @"SELECT codPartita FROM PARTITA;";
@@ -82,6 +85,7 @@ public class Queries
       AND contr.codGiocatore != @playerID 
       AND contr.numeroTurno = @turnNumber 
     );";
+
   // OP 7 Register a new movement
   public static string CREATE_MOVEMENT = 
   @"INSERT INTO SPOSTAMENTO (territorioPartenza, territorioArrivo, numArmate) 
@@ -101,8 +105,8 @@ public class Queries
       AND contr.codGiocatore = @playerID 
       AND contr.numeroTurno = @turnNumber 
     );";
+
   // OP 8 Get the number of troops to assign to a player at the beginning of his turn
-  
   public static string GET_BONUS_TROOPS = 
   @"SELECT FLOOR(COUNT(C.territorio) / 3) AS truppeBonus
     FROM CONTROLLO_TERRITORIO C
