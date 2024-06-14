@@ -1,3 +1,4 @@
+// TODO the matchID in all the queries is useless! we already have the playerID and that's enough to identify the match
 public class Queries
 {
   // OP 1 Create a new user
@@ -101,29 +102,41 @@ public class Queries
       AND contr.numeroTurno = @turnNumber 
     );";
   // OP 8 Get the number of troops to assign to a player at the beginning of his turn
-  // Get the continents the player controls
-  public static string GET_CONTINENTS_CONTROLLED_BY_PLAYER = 
-  @"SELECT TERR_TOTALI.continente
-    FROM 
-      (
-      SELECT C.nome AS continente, COUNT(*) AS numTerrPerCont
-      FROM CONTINENTE C, TERRITORIO T 
-      WHERE T.continente = C.nome 
-      GROUP BY C.nome
-      ) AS TERR_TOTALI
-    JOIN 
-      (
-      SELECT T.continente, COUNT(*) AS numTerrPerContPosseduti 
-      FROM CONTROLLO_TERRITORIO CT, TERRITORIO T 
-      WHERE CT.territorio = T.nome 
-          AND CT.codPartita = @matchID 
-          AND CT.codGiocatore = @playerID 
-          AND CT.numeroTurno = @turnNumber
-      GROUP BY T.continente
-      ) AS TERR_GIOCATORE 
-    ON 
-      TERR_TOTALI.continente = TERR_GIOCATORE.continente
-    WHERE 
-      TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti;
-    ";
+  
+  public static string GET_BONUS_TROOPS = 
+  @"SELECT FLOOR(COUNT(C.territorio) / 3) AS truppeBonus
+    FROM CONTROLLO_TERRITORIO C
+    WHERE C.codPartita = 28
+    		AND C.codGiocatore = 45
+        AND C.numeroTurno = 1
+    GROUP BY C.codPartita, C.codGiocatore, C.numeroTurno;";
+  
+  public static string GET_CONTINENTS_BONUS = 
+  @"SELECT C1.bonusArmate
+    FROM CONTINENTE C1
+    WHERE C1.nome IN
+    (
+      SELECT TERR_TOTALI.continente
+      FROM 
+        (
+        SELECT C.nome AS continente, COUNT(*) AS numTerrPerCont
+        FROM CONTINENTE C, TERRITORIO T 
+        WHERE T.continente = C.nome 
+        GROUP BY C.nome
+        ) AS TERR_TOTALI
+      JOIN 
+        (
+        SELECT T.continente, COUNT(*) AS numTerrPerContPosseduti 
+        FROM CONTROLLO_TERRITORIO CT, TERRITORIO T 
+        WHERE CT.territorio = T.nome 
+            AND CT.codPartita = @matchID 
+            AND CT.codGiocatore = @playerID 
+            AND CT.numeroTurno = @turnNumber
+        GROUP BY T.continente
+        ) AS TERR_GIOCATORE 
+      ON 
+        TERR_TOTALI.continente = TERR_GIOCATORE.continente
+      WHERE 
+        TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti;
+    )";
 }
