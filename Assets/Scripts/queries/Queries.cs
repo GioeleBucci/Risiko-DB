@@ -153,4 +153,9 @@ public class Queries
   // OP 10 register a victory
   public static string CREATE_VICTORY =
   "INSERT INTO VINCITORE (codPartita, codGiocatore) VALUES (@matchID, @playerID);";
+  // OP 11 show leaderboards
+  public static string GET_LEADERBOARDS =
+  @"SELECT U.nome, U.cognome, U.vittorie 
+    FROM UTENTE U
+    ORDER BY U.vittorie DESC;";
 }
