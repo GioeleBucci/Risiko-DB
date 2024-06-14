@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 public class PlayerCreatedPopup : AbstractMenu
 {
   private Button okButton;
-  public PlayerCreatedPopup(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public PlayerCreatedPopup(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {

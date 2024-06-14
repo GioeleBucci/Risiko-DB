@@ -9,7 +9,7 @@ public class NewUserMenu : AbstractMenu
   private TextField idField;
   private TextField nameField;
   private TextField surnameField;
-  public NewUserMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public NewUserMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {

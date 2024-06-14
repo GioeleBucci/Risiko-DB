@@ -7,14 +7,14 @@ public abstract class AbstractMenu
 
   protected VisualElement root { get => manager.document.rootVisualElement; }
 
-  protected MenuManager manager { get; }
+  protected UIManager manager { get; }
 
   /// <summary>
   /// Initializes a new instance of the <see cref="AbstractMenu"/> class.
   /// </summary>
   /// <param name="manager">The menu manager.</param>
   /// <param name="menu">The VisualTreeAsset representing the menu.</param>
-  public AbstractMenu(MenuManager manager, VisualTreeAsset menu)
+  public AbstractMenu(UIManager manager, VisualTreeAsset menu)
   {
     this.manager = manager;
     this.visualTree = menu;

@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
 
-public class MenuManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
   [SerializeField] private VisualTreeAsset mainMenuTree;
   [SerializeField] private VisualTreeAsset newUserMenuTree;

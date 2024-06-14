@@ -16,7 +16,7 @@ public class MovementMenu : AbstractMenu
   private int playerID;
   private int turnNumber;
 
-  public MovementMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public MovementMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override void RecieveParameters(object[] args)
   {

@@ -11,7 +11,7 @@ public class NewTurnMenu : AbstractMenu
   private Dictionary<string, int> nicksAndIDs; // player nicknames and IDs
   private Button backButton;
   private Button okButton;
-  public NewTurnMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public NewTurnMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {

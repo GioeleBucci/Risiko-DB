@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class MapSelectMenu : AbstractMenu
 {
-  public MapSelectMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public MapSelectMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
   private Button selectButton;
   private Button backButton;
   private int playerID;

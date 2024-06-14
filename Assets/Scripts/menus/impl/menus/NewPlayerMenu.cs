@@ -15,7 +15,7 @@ public class NewPlayerMenu : AbstractMenu
   private Button okButton;
   private DropdownField dropdownField;
   private TextField nicknameField;
-  public NewPlayerMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public NewPlayerMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override void RecieveParameters(object[] args)
   {

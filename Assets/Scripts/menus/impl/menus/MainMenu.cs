@@ -6,7 +6,7 @@ public class MainMenu : AbstractMenu
   private Button newUserButton;
   private Button newTurnButton;
 
-  public MainMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public MainMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override VisualElement[] FetchUIElements()
   {

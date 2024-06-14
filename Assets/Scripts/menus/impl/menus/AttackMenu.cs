@@ -18,7 +18,7 @@ public class AttackMenu : AbstractMenu
   private int matchID;
   private int playerID;
   private int turnNumber;
-  public AttackMenu(MenuManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+  public AttackMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
   protected override void RecieveParameters(object[] args)
   {
