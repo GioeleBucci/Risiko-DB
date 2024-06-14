@@ -6,7 +6,7 @@
             <ui:Button text="New User" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewUserButton" class="button" style="height: 120px; margin-top: 0;" />
             <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewGameButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px;" />
             <ui:Button text="Register a new Turn" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewTurnButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px;" />
-            <ui:Button text="Register a Victory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LeaderboardsButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
+            <ui:Button text="Register a Victory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="VictoryButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
             <ui:Button text="Leaderboards" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LeaderboardsButton" class="button" style="-unity-background-image-tint-color: rgb(234, 176, 76); color: rgb(225, 225, 225); margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
         </ui:VisualElement>
     </ui:VisualElement>

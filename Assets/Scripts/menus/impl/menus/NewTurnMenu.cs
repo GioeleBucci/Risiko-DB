@@ -19,7 +19,7 @@ public class NewTurnMenu : AbstractMenu
     playerSelector = root.Q<DropdownField>("DropdownPlayer");
     backButton = root.Q<Button>("BackButton");
     okButton = root.Q<Button>("OkButton");
-    return new VisualElement[] { matchSelector, playerSelector, okButton };
+    return new VisualElement[] { matchSelector, playerSelector, backButton, okButton };
   }
 
   protected override void SetUICallbacks()
@@ -46,9 +46,9 @@ public class NewTurnMenu : AbstractMenu
       new MySqlParameter[] { new MySqlParameter("matchID", evt.newValue) })
         .ToDictionary(k => k.Item1, v => v.Item2);
       playerSelector.choices = nicksAndIDs.Keys.ToList();
-      playerSelector.value = playerSelector.choices[0];
+      playerSelector.value = nicksAndIDs.Count > 0 ? playerSelector.choices[0] : "";
     });
-    matchSelector.value = matchSelector.choices[0];
+    matchSelector.value = matches.Count > 0 ? matchSelector.choices[0] : "";
   }
 
   private void GoToMapSelector()
