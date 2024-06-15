@@ -77,7 +77,13 @@ public class MapSelectMenu : AbstractMenu
   protected override void SetUICallbacks()
   {
     selectButton.clicked += TrySelectTerritories;
-    backButton.clicked += OnBackButtonClicked;
+    backButton.clicked += GoBackToMainMenu;
+  }
+
+  private void GoBackToMainMenu()
+  {
+    DisableInteractiveMap();
+    ChangeMenu(manager.mainMenu);
   }
 
   private void TrySelectTerritories()
@@ -88,8 +94,7 @@ public class MapSelectMenu : AbstractMenu
       manager.popupManager.ShowErrorPopup("You must select at least one territory!");
       return;
     }
-    manager.mapManager.setMapToInteractive(false);
-    manager.mapManager.deselectTerritories();
+    DisableInteractiveMap();
     try
     {
       SqlUtils.ExecuteTransaction(CreateTurnAndControlledTerritories);
@@ -101,6 +106,12 @@ public class MapSelectMenu : AbstractMenu
       manager.popupManager.ShowErrorPopup("An error occourred while registering territories: " + ex.Message);
       ChangeMenu(manager.mainMenu);
     }
+  }
+
+  private void DisableInteractiveMap()
+  {
+    manager.mapManager.setMapToInteractive(false);
+    manager.mapManager.deselectTerritories();
   }
 
   // execute the queries together in a transaction to ensure integrity
