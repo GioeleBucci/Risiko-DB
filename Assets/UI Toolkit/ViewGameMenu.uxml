@@ -4,6 +4,6 @@
         <ui:Label tabindex="-1" text="Turn 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TurnLabel" class="header" style="margin-top: 0; font-size: 110px;" />
         <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="width: 320px; height: 100px; margin-top: 0; margin-left: 50px; margin-right: 50px; position: absolute; top: 959px; left: -21px; font-size: 50px;" />
         <ui:Button text="Next Turn" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextTurnButton" class="button" style="width: 320px; height: 100px; margin-top: 0; margin-left: 50px; margin-right: 50px; position: absolute; top: 834px; left: -22px; -unity-font-style: normal; font-size: 50px;" />
-        <ui:Label tabindex="-1" text="P1&#10;P2&#10;P3&#10;P4&#10;P5&#10;P6" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayersLabel" style="position: absolute; top: 424px; left: 31px; -unity-font-definition: initial; -unity-font: resource(&apos;Fonts/gunplay rg&apos;); font-size: 55px; height: 404px; width: 461px;" />
+        <ui:Label tabindex="-1" text="P1&#10;P2&#10;P3&#10;P4&#10;P5&#10;P6" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayersLabel" style="position: absolute; top: 379px; left: 33px; -unity-font-definition: initial; -unity-font: resource(&apos;Fonts/gunplay rg&apos;); font-size: 55px; height: 404px; width: 461px;" />
     </ui:VisualElement>
 </ui:UXML>
