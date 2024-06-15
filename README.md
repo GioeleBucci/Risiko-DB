@@ -9,7 +9,7 @@ This was created as a project for the Databases course (2023/24).
 
 ## Installing
 
-### Setup the database
+### Setting up the database
 Ensure you have a MySQL server running on your machine.
 Load the content of the `RisiKoDB.sql` dump file to create and populate the database.
 > Note: **Do not change any database configuration parameters**. 
