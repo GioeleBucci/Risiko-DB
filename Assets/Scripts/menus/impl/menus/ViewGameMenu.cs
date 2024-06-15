@@ -13,6 +13,7 @@ class ViewGameMenu : AbstractMenu
   private Label turnLabel;
   private int matchID;
   private int turnNumber;
+  private int highestTurnNumber;
   Dictionary<string, (Color, int)> terrColorAndTroops; // territory name, color and troops
   public ViewGameMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
 
@@ -33,11 +34,19 @@ class ViewGameMenu : AbstractMenu
 
   protected override void SetUICallbacks()
   {
-    turnNumber = 1;
+    SetTurnLogic();
     SetPlayersLabel();
     ShowTurnMap();
     backButton.clicked += ResetMapAndGoBack;
     nextTurnButton.clicked += ShowNextTurn;
+  }
+
+  private void SetTurnLogic()
+  {
+    turnNumber = 1;
+    highestTurnNumber = SqlUtils.ExecuteQuery(Queries.GET_MATCH_HIGHEST_TURN_NUMBER,
+      reader => reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+      new MySqlParameter[] { new("@matchID", matchID) }).First();
   }
 
   private void ShowNextTurn()
@@ -58,6 +67,10 @@ class ViewGameMenu : AbstractMenu
       new("@turnNumber", turnNumber), // todo change this to the actual turn number 
     }).ToDictionary(k => k.Item1, v => (ArmyColors.GetArmyColor(v.Item2.Item1), v.Item2.Item2));
     manager.mapManager.ShowTurnMap(terrColorAndTroops);
+    if (turnNumber >= highestTurnNumber)
+    {
+      nextTurnButton.SetEnabled(false);
+    }
   }
 
   private void SetPlayersLabel()

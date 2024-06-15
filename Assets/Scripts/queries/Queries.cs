@@ -175,4 +175,6 @@ public class Queries
     FROM GIOCATORE G, ESERCITO E
     WHERE G.codEsercito = E.codEsercito
           AND G.codPartita = @matchID;";
+  public static string GET_MATCH_HIGHEST_TURN_NUMBER =
+  "SELECT MAX(numeroTurno) FROM TURNO WHERE codPartita = @matchID";
 }
