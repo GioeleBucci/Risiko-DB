@@ -27,7 +27,7 @@ public class Queries
 
   // OP 4 Register a new turn in a certain match
   // Get only the matches that are still ongoing
-  public static string GET_MATCHES_IDS =
+  public static string GET_ONGOING_MATCHES_IDS =
   @"SELECT P.codPartita
     FROM PARTITA P
     WHERE P.codPartita NOT IN 
@@ -159,6 +159,9 @@ public class Queries
     FROM UTENTE U
     ORDER BY U.vittorie DESC;";
   // OP 12 show a match in a certain turn
+  public static string GET_MATCHES_IDS =
+  "SELECT P.codPartita FROM PARTITA P";
+
   public static string GET_TERRITORIES_AND_COLORS =
   @"SELECT CT.territorio, CT.numArmate, E.colore
     FROM CONTROLLO_TERRITORIO CT, GIOCATORE G, ESERCITO E

@@ -36,7 +36,7 @@ public class NewTurnMenu : AbstractMenu
 
   private void SetDropdownLogic()
   {
-    List<int> matches = SqlUtils.ExecuteQuery(Queries.GET_MATCHES_IDS, reader => reader.GetInt32("codPartita"));
+    List<int> matches = SqlUtils.ExecuteQuery(Queries.GET_ONGOING_MATCHES_IDS, reader => reader.GetInt32("codPartita"));
     matchSelector.choices = matches.ConvertAll(x => x.ToString());
     matchSelector.RegisterValueChangedCallback((evt) =>
     {

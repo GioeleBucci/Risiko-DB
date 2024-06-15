@@ -28,7 +28,7 @@ public class MainMenu : AbstractMenu
     newUserButton.clicked += () => ChangeMenu(manager.newUserMenu);
     newTurnButton.clicked += () => ChangeMenu(manager.newTurnMenu);
     victoryButton.clicked += () => ChangeMenu(manager.victoryMenu);
-    viewGameButton.clicked += () => ChangeMenu(manager.viewGameMenu);
+    viewGameButton.clicked += () => ChangeMenu(manager.macthSelectMenu);
     leaderboardsButton.clicked += () => ChangeMenu(manager.leaderboardsMenu);
   }
 }

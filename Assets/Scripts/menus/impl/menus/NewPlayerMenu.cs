@@ -19,10 +19,7 @@ public class NewPlayerMenu : AbstractMenu
 
   protected override void RecieveParameters(object[] args)
   {
-    if (args.Length == 0)
-    {
-      throw new ArgumentException("Expected 1 argument (player count).");
-    }
+    if (args.Length == 0) throw new ArgumentException("Expected 1 argument (player count).");
     playersLeft = (int)args[0];
     Debug.Log("Recieved player count: " + playersLeft);
     randomPool = GetRandomPool(playersLeft);

@@ -10,8 +10,14 @@ class ViewGameMenu : AbstractMenu
   private Button nextTurnButton;
   private Button backButton;
   private Label playersLabel;
-  private int matchID = 28; // TODO this should be passed as argument from a previous menu
+  private int matchID;
   public ViewGameMenu(UIManager manager, VisualTreeAsset menu) : base(manager, menu) { }
+
+  protected override void RecieveParameters(object[] args)
+  {
+    if (args.Length == 0) throw new ArgumentException("Expected 1 argument (match ID).");
+    matchID = (int)args[0];
+  }
 
   protected override VisualElement[] FetchUIElements()
   {
@@ -54,6 +60,6 @@ class ViewGameMenu : AbstractMenu
   private void ResetMapAndGoBack()
   {
     manager.mapManager.ResetMap();
-    ChangeMenu(manager.mainMenu);
+    OnBackButtonClicked();
   }
 }
