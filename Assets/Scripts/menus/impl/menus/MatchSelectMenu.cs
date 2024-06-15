@@ -32,7 +32,8 @@ class MatchSelectMenu : AbstractMenu
     if (matches.Count == 0)
     {
       manager.popupManager.ShowInfoPopup("No matches found!");
-      ChangeMenu(manager.mainMenu);
+      okButton.SetEnabled(false);
+      return;
     }
     matchDropdown.choices = matches;
     matchDropdown.value = matches[0];

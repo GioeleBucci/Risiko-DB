@@ -68,7 +68,7 @@ public class AttackMenu : AbstractMenu
           new("@territory", evt.newValue),
           new("@matchID", matchID),
           new("@playerID", playerID),
-          new("@turnNumber", turnNumber)
+          new("@turnNumber", turnNumber - 1)
         });
       defender.choices = defenderTerritories;
       defender.value = defenderTerritories.Count > 0 ? defender.choices[0] : "";

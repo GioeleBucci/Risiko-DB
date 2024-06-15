@@ -37,6 +37,12 @@ public class NewTurnMenu : AbstractMenu
   private void SetDropdownLogic()
   {
     List<int> matches = SqlUtils.ExecuteQuery(Queries.GET_ONGOING_MATCHES_IDS, reader => reader.GetInt32("codPartita"));
+    if (matches.Count == 0)
+    {
+      manager.popupManager.ShowInfoPopup("No ongoing matches found.");
+      okButton.SetEnabled(false);
+      return;
+    }
     matchSelector.choices = matches.ConvertAll(x => x.ToString());
     matchSelector.RegisterValueChangedCallback((evt) =>
     {
