@@ -13,13 +13,13 @@ This was created as a project for the Databases course (2023/24).
 Ensure you have a MySQL server running on your machine.
 Load the content of the `RisiKoDB.sql` dump file to create and populate the database.
 > Note: **Do not change any database configuration parameters**. 
-> The application is pre-configured to connect to the database using the following connection string:
-> `"server=localhost ; database=unitytest; user=root ; password= ; charset=utf8 ; SslMode=None;"`
+> The application is pre-configured to connect to the database using the following connection string: \
+> `"server=localhost ; database=unitytest; user=root ; password= ; charset=utf8 ; SslMode=None;"` \
 > If you want to change any of these parameters you can edit the connection string [here](Assets/Scripts/utils/SqlUtils.cs).
 ### Running the application
-You can find the executable file in the project's releases tab. If you did not change any database parameter just clicking on it will make the application start. \
-If you changed any parameters you will need to rebuild the project from scratch using a Unity (*version should be >= 2022.3.20f1*).
-Just clone the repo, open it with Unity and modify the connection string.
+You can find the executable file in the project's releases tab. After setting up the database, if you did not change any parameter, you can launch the application without further setup. \
+If you changed any parameters you will need to rebuild the project from scratch using Unity (*version should be >= 2022.3.20f1*).
+Clone the repo, open it with Unity and modify the connection string.
 
 ## Screenshots
 
