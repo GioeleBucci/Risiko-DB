@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" class="background" style="justify-content: flex-start;">
+        <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-left: 50px; margin-right: 50px; position: absolute; top: 841px; left: 562px; -unity-background-image-tint-color: rgb(255, 168, 18); color: rgb(239, 239, 239);" />
+    </ui:VisualElement>
+</ui:UXML>

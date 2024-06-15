@@ -158,4 +158,12 @@ public class Queries
   @"SELECT U.nome, U.cognome, U.vittorie 
     FROM UTENTE U
     ORDER BY U.vittorie DESC;";
+  // OP 12 show a match in a certain turn
+  public static string GET_TERRITORIES_AND_COLORS = 
+  @"SELECT CT.territorio, CT.numArmate, E.colore
+    FROM CONTROLLO_TERRITORIO CT, GIOCATORE G, ESERCITO E
+    WHERE CT.codGiocatore = G.codGiocatore
+      AND G.codEsercito = E.codEsercito
+      AND CT.codPartita = 28
+      AND CT.numeroTurno = 1;";
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-  List<GameObject> territories;
+  private List<GameObject> territories;
 
   private void Awake()
   {
@@ -29,6 +29,11 @@ public class MapManager : MonoBehaviour
     return territories
     .Where(t => t.GetComponent<SelectableTerritory>().isSelected)
     .Select(t => (t.name, t.GetComponent<SelectableTerritory>().troops)).ToList();
+  }
+
+  public void TestColoredTerritories()
+  {
+    territories.ForEach(t => t.GetComponent<SpriteRenderer>().color = Color.white);
   }
 
   private void getTerritories()

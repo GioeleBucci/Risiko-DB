@@ -1,14 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=dfb3c2e310342d84caacd7c6e2213020&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="Container" class="container background" style="background-color: rgba(59, 100, 91, 0.51);">
-        <ui:Label text="RisiKo! DB" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal; color: rgb(255, 255, 255); margin-top: 2%;" />
+        <ui:Label text="RisiKo! DB" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="-unity-font-style: normal; color: rgb(255, 255, 255); margin-top: 0;" />
         <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: space-around; align-items: center; width: 1920px;">
             <ui:Button text="New User" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewUserButton" class="button" style="height: 120px; margin-top: 0;" />
             <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewGameButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px;" />
             <ui:Button text="Register a new Turn" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewTurnButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px;" />
             <ui:Button text="Register a Victory" parse-escape-sequences="true" display-tooltip-when-elided="true" name="VictoryButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
-            <ui:Button text="Leaderboards" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LeaderboardsButton" class="button" style="-unity-background-image-tint-color: rgb(234, 176, 76); color: rgb(225, 225, 225); margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
+            <ui:Button text="View a Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ViewGameButton" class="button" style="margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
+            <ui:Button text="Leaderboards" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LeaderboardsButton" class="button" style="-unity-background-image-tint-color: rgb(255, 168, 18); color: rgb(225, 225, 225); margin-top: 0; margin-bottom: 0; height: 120px; width: 40%;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Button text="Leaderboards" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LeaderboardsButton" class="button" style="-unity-background-image-tint-color: rgb(255, 168, 18); color: rgb(243, 242, 245); margin-top: 0; margin-bottom: 0; height: 143px; width: 447px; position: absolute; top: 67px; left: 1409px;" />
 </ui:UXML>

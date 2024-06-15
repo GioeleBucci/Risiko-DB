@@ -1255,6 +1255,7 @@ MonoBehaviour:
   attackMenuTree: {fileID: 9197481963319205126, guid: aa6337287613d1b4b98cb72d10157add, type: 3}
   movementMenuTree: {fileID: 9197481963319205126, guid: 304767470fab3774e89a5b00cccf46e6, type: 3}
   victoryMenuTree: {fileID: 9197481963319205126, guid: 5869f46c6e11eef41bdbd0ddd314144a, type: 3}
+  viewGameMenuTree: {fileID: 9197481963319205126, guid: c99a67c0308befe40ab088271f082472, type: 3}
   leaderboardsMenuTree: {fileID: 9197481963319205126, guid: 99f1dfc9ba4a9ab4eaff3f94e60499b3, type: 3}
 --- !u!1 &343377911
 GameObject:
