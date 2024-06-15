@@ -159,11 +159,17 @@ public class Queries
     FROM UTENTE U
     ORDER BY U.vittorie DESC;";
   // OP 12 show a match in a certain turn
-  public static string GET_TERRITORIES_AND_COLORS = 
+  public static string GET_TERRITORIES_AND_COLORS =
   @"SELECT CT.territorio, CT.numArmate, E.colore
     FROM CONTROLLO_TERRITORIO CT, GIOCATORE G, ESERCITO E
     WHERE CT.codGiocatore = G.codGiocatore
       AND G.codEsercito = E.codEsercito
-      AND CT.codPartita = 28
-      AND CT.numeroTurno = 1;";
+      AND CT.codPartita = @matchID
+      AND CT.numeroTurno = @turnNumber;";
+
+  public static string GET_NICKNAMES_AND_COLORS =
+  @"SELECT G.nickname, E.colore
+    FROM GIOCATORE G, ESERCITO E
+    WHERE G.codEsercito = E.codEsercito
+          AND G.codPartita = @matchID;";
 }

@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PolygonCollider2D))]
+
 public class SelectableTerritory : MonoBehaviour
 {
   public bool isSelected { get; private set; }
@@ -16,20 +19,32 @@ public class SelectableTerritory : MonoBehaviour
       troopsLabel.text = value.ToString();
     }
   }
-  private SpriteRenderer spriteRenderer;
+  private Color _color;
+  public Color Color
+  {
+    get { return _color; }
+    set
+    {
+      _color = value;
+      spriteRenderer.color = value;
+    }
+  }
+  public PolygonCollider2D Collider { get; private set; }
   private Color originalColor;
   private Color selectedColor;
+  private SpriteRenderer spriteRenderer;
   private GameObject labelContainer;
   private TextMesh troopsLabel;
 
-  void Start()
+  private void Awake()
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
+    Collider = GetComponent<PolygonCollider2D>();
     originalColor = spriteRenderer.color;
     selectedColor = originalColor + new Color(0.3f, 0.3f, 0.3f, 0);
   }
 
-  void Update()
+  private void Update()
   {
     if (Input.GetMouseButtonDown(1))
     {
@@ -42,40 +57,55 @@ public class SelectableTerritory : MonoBehaviour
     }
   }
 
-  void HandleRightClick()
+  private void HandleRightClick()
   {
     if (isSelected) { troops++; }
   }
 
-  void OnMouseDown()
+  private void OnMouseDown()
   {
     if (EventSystem.current.IsPointerOverGameObject()) return;
-
     isSelected = !isSelected;
     if (isSelected)
     {
       Select();
     }
-    else Deselect();
+    else Reset();
   }
 
-  public void Deselect()
+  public void Reset()
   {
     isSelected = false;
     spriteRenderer.color = originalColor;
-    labelContainer?.SetActive(false);
+    if (labelContainer != null)
+    {
+      labelContainer.SetActive(false);
+      troopsLabel.color = Color.black;
+    }
   }
 
   private void Select()
   {
     spriteRenderer.color = selectedColor;
+    SetTroopsLabel(1);
+  }
+
+  public void SetTroopsLabel(int troops)
+  {
     if (labelContainer == null) CreateLabel();
-    troops = 1;
+    this.troops = troops;
     labelContainer.SetActive(true);
+  }
+
+  public void SetTroopsLabelColor(Color color)
+  {
+    if (troopsLabel != null) troopsLabel.color = color;
   }
 
   private void CreateLabel()
   {
+    bool colliderState = Collider.enabled; // the collider must be enabled to center the label
+    Collider.enabled = true;
     Vector3 center = transform.position;
     Vector3 labelPosition = center + new Vector3(0, 0, -1);
     labelContainer = new GameObject("Label");
@@ -85,7 +115,7 @@ public class SelectableTerritory : MonoBehaviour
     troopsLabel.anchor = TextAnchor.MiddleCenter;
     troopsLabel.alignment = TextAlignment.Center;
     troopsLabel.characterSize = 0.1f;
-    troopsLabel.fontSize = 20;
+    troopsLabel.fontSize = 22;
     troopsLabel.color = Color.black;
     troopsLabel.fontStyle = FontStyle.Bold;
     Collider2D collider = GetComponent<Collider2D>();
@@ -93,5 +123,6 @@ public class SelectableTerritory : MonoBehaviour
     Vector3 colliderCenter = bounds.center;
     labelContainer.transform.position = colliderCenter;
     labelContainer.transform.position = colliderCenter + new Vector3(0, 0, -1);
+    Collider.enabled = colliderState;
   }
 }
