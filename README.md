@@ -18,15 +18,15 @@ Load the content of the `RisiKoDB.sql` dump file to create and populate the data
 > If you want to change any of these parameters you can edit the connection string [here](Assets/Scripts/utils/SqlUtils.cs).
 ### Running the application
 You can find the executable file in the project's releases tab. If you did not change any database parameter just clicking on it will make the application start. \
-If you changed any parameters you will need to rebuild the project from scratch using a Unity (version should be >= 2022.3.20f1).
+If you changed any parameters you will need to rebuild the project from scratch using a Unity (*version should be >= 2022.3.20f1*).
 Just clone the repo, open it with Unity and modify the connection string.
 
 ## Screenshots
-<p align="center">
-  <img src="https://imgur.com/tRFmCdi.png" width=400>
-</p>
 
 <p align="center">
   <img src="https://imgur.com/uhh7out.png" width=400>
 </p>
 
+<p align="center">
+  <img src="https://imgur.com/tRFmCdi.png" width=400>
+</p>
