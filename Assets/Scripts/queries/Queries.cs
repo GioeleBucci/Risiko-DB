@@ -11,12 +11,8 @@ public class Queries
     VALUES(@date);";
   public static string GET_USERS =
   @"SELECT * FROM utente;";
-
-  public static string GET_ID_OF_LAST_MATCH_CREATED =
-  @"SELECT codPartita 
-    FROM PARTITA 
-    WHERE codPartita = (SELECT MAX(codPartita) FROM PARTITA);";
-  // TODO change @matchID for a LAST_INSERT_ID()
+  public static string GET_LATEST_MATCH_ID = 
+  "SELECT MAX(P.codPartita) from PARTITA P";
   public static string CREATE_PLAYER =
   @"INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) 
     VALUES (@nickname, @matchID, @userID, @objID, @armyID);";

@@ -5,8 +5,7 @@
         <ui:DropdownField label="Pick User" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="DropdownField" class="slider" />
         <ui:TextField label="Nickname" name="NicknameField" class="textfield" />
         <ui:VisualElement picking-mode="Ignore" style="height: 100%; flex-direction: row; justify-content: center; align-self: auto; width: 100%; margin-top: -5%;">
-            <ui:Button text="Go Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-left: 50px; margin-right: 50px;" />
-            <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 0; margin-left: 50px;" />
+            <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button" style="width: 700px; height: 200px; margin-top: 0; margin-right: 0; margin-left: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

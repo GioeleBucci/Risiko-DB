@@ -35,15 +35,16 @@ public class NewGameMenu : AbstractMenu
     if (DateTime.TryParse(date, out parsedDate))
     {
       string arg = parsedDate.ToString("yyyy-MM-dd");
-      Debug.Log("Creating match with date: " + arg);
       MySqlParameter dateParam = new MySqlParameter("@date", parsedDate);
       SqlUtils.ExecuteNonQuery(Queries.CREATE_MATCH, dateParam);
       // Tell how many troops each player has (OP 3)
       int troopCount = SqlUtils.ExecuteQuery(Queries.GET_INITIAL_TROOPS,
         reader => reader.GetInt32("numArmate"),
         new MySqlParameter[] { new("@playerCount", playerCount) }).First();
-      manager.popupManager.ShowInfoPopup($"Match created successfully!\nEach player will starts with {troopCount} troops.");
-      ChangeMenu(manager.newPlayerMenu, playerCount); 
+      int matchID = SqlUtils.ExecuteQuery(Queries.GET_LATEST_MATCH_ID,
+        reader => reader.GetInt32(0)).First();
+      manager.popupManager.ShowInfoPopup($"Match created successfully! (Match ID: {matchID})\nEach player will starts with {troopCount} troops.");
+      ChangeMenu(manager.newPlayerMenu, matchID, playerCount);
     }
     else
     {
