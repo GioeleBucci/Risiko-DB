@@ -9,9 +9,8 @@ using UnityEngine.UIElements;
 public class NewPlayerMenu : AbstractMenu
 {
   private int playersLeft; // Number of players left to add
-  private int matchID;
+  private int matchID; 
   private List<((int, string), (int, string))> randomPool; // List of random objectives and armies
-  private Button backButton;
   private Button okButton;
   private DropdownField dropdownField;
   private TextField nicknameField;
@@ -19,27 +18,23 @@ public class NewPlayerMenu : AbstractMenu
 
   protected override void RecieveParameters(object[] args)
   {
-    if (args.Length == 0) throw new ArgumentException("Expected 1 argument (player count).");
-    playersLeft = (int)args[0];
-    Debug.Log("Recieved player count: " + playersLeft);
+    if (args.Length != 2) throw new ArgumentException("Expected 2 arguments (matchID, player count).");
+    matchID = (int)args[0];
+    playersLeft = (int)args[1];
     randomPool = GetRandomPool(playersLeft);
-    // get ID of the latest match created
-    matchID = SqlUtils.ExecuteQuery(Queries.GET_ID_OF_LAST_MATCH_CREATED, reader => reader.GetInt32("codPartita")).First();
   }
 
   protected override VisualElement[] FetchUIElements()
   {
-    backButton = root.Q<Button>("BackButton");
     okButton = root.Q<Button>("OkButton");
     dropdownField = root.Q<DropdownField>("DropdownField");
     nicknameField = root.Q<TextField>("NicknameField");
-    return new VisualElement[] { backButton, okButton, dropdownField };
+    return new VisualElement[] { okButton, dropdownField };
   }
 
   protected override void SetUICallbacks()
   {
     SetDropdownLogic();
-    backButton.clicked += OnBackButtonClicked;
     okButton.clicked += OnOkButtonClicked;
   }
 
