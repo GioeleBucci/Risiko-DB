@@ -11,7 +11,7 @@ public class Queries
     VALUES(@date);";
   public static string GET_USERS =
   @"SELECT * FROM utente;";
-  public static string GET_LATEST_MATCH_ID = 
+  public static string GET_LATEST_MATCH_ID =
   "SELECT MAX(P.codPartita) from PARTITA P";
   public static string CREATE_PLAYER =
   @"INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) 
@@ -109,13 +109,14 @@ public class Queries
       AND contr.numeroTurno = @turnNumber 
     );";
 
-  // OP 8 Get the number of troops to assign to a player at the beginning of his turn
+  // OP 8 Get territory bonus
   public static string GET_TERRITORIES_BONUS =
   @"SELECT FLOOR(T.territoriControllati / 3) AS truppeBonus
     FROM TURNO T
     WHERE T.codPartita = @matchID
     		AND T.codGiocatore = @playerID
         AND T.numeroTurno = @turnNumber";
+  // OP 9 Get continent bonus
   public static string GET_CONTINENTS_BONUS =
   @"SELECT COALESCE(SUM(C1.bonusArmate), 0) AS bonusArmate -- COALESCE avoids null (if no continent is owned returns 0)
     FROM CONTINENTE C1
@@ -145,9 +146,8 @@ public class Queries
         TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti
     );";
 
-  // OP 9 Get the number of territories players control in a certain turn
-
-  public static string GET_TURN_LEADERBOARD = 
+  // OP 10 Get the turn leaderboard
+  public static string GET_TURN_LEADERBOARD =
   @"SELECT G.nickname, E.colore, T.territoriControllati
     FROM GIOCATORE G, TURNO T, ESERCITO E
     WHERE T.codPartita = @matchID
@@ -156,7 +156,6 @@ public class Queries
           AND G.codGiocatore = T.codGiocatore
     ORDER BY T.territoriControllati DESC;";
 
-  // OP 10 show a match in a certain turn
   public static string GET_MATCHES_IDS =
   "SELECT P.codPartita FROM PARTITA P";
 
