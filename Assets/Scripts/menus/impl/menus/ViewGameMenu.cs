@@ -35,7 +35,6 @@ class ViewGameMenu : AbstractMenu
   protected override void SetUICallbacks()
   {
     SetTurnLogic();
-    SetPlayersLabel();
     ShowTurnMap();
     backButton.clicked += ResetMapAndGoBack;
     nextTurnButton.clicked += ShowNextTurn;
@@ -57,6 +56,7 @@ class ViewGameMenu : AbstractMenu
 
   private void ShowTurnMap()
   {
+    UpdateTurnLeaderboard();
     manager.mapManager.ResetMap();
     turnLabel.text = $"Turn {turnNumber}";
     terrColorAndTroops = SqlUtils.ExecuteQuery(Queries.GET_TERRITORIES_AND_COLORS,
@@ -73,16 +73,16 @@ class ViewGameMenu : AbstractMenu
     }
   }
 
-  private void SetPlayersLabel()
+  private void UpdateTurnLeaderboard()
   {
-    List<(string, string)> nicksAndColors =
-      SqlUtils.ExecuteQuery(Queries.GET_NICKNAMES_AND_COLORS,
-        r => (r.GetString("nickname"), r.GetString("colore")),
-        new MySqlParameter[] { new("@matchID", matchID) });
+    List<(int, string, string)> turnLeaderboard =
+      SqlUtils.ExecuteQuery(Queries.GET_TURN_LEADERBOARD,
+        r => (r.GetInt32("territoriControllati"), r.GetString("nickname"), r.GetString("colore")),
+        new MySqlParameter[] { new("@matchID", matchID), new("@turnNumber", turnNumber) });
     playersLabel.text = "";
-    foreach (var pair in nicksAndColors)
+    foreach (var entry in turnLeaderboard)
     {
-      playersLabel.text += $"\n<color={ArmyColors.GetRTColorTag(pair.Item2)}>{pair.Item1}</color>";
+      playersLabel.text += $"\n<color={ArmyColors.GetRTColorTag(entry.Item3)}>{entry.Item2} {entry.Item1}</color>";
     }
   }
 

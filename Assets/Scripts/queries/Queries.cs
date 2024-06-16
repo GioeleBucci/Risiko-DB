@@ -16,6 +16,7 @@ public class Queries
   @"SELECT codPartita 
     FROM PARTITA 
     WHERE codPartita = (SELECT MAX(codPartita) FROM PARTITA);";
+  // TODO change @matchID for a LAST_INSERT_ID()
   public static string CREATE_PLAYER =
   @"INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) 
     VALUES (@nickname, @matchID, @userID, @objID, @armyID);";
@@ -114,13 +115,11 @@ public class Queries
 
   // OP 8 Get the number of troops to assign to a player at the beginning of his turn
   public static string GET_TERRITORIES_BONUS =
-  @"SELECT FLOOR(COUNT(C.territorio) / 3) AS truppeBonus
-    FROM CONTROLLO_TERRITORIO C
-    WHERE C.codPartita = @matchID
-    		AND C.codGiocatore = @playerID
-        AND C.numeroTurno = @turnNumber
-    GROUP BY C.codPartita, C.codGiocatore, C.numeroTurno;";
-
+  @"SELECT FLOOR(T.territoriControllati / 3) AS truppeBonus
+    FROM TURNO T
+    WHERE T.codPartita = @matchID
+    		AND T.codGiocatore = @playerID
+        AND T.numeroTurno = @turnNumber";
   public static string GET_CONTINENTS_BONUS =
   @"SELECT COALESCE(SUM(C1.bonusArmate), 0) AS bonusArmate -- COALESCE avoids null (if no continent is owned returns 0)
     FROM CONTINENTE C1
@@ -149,15 +148,19 @@ public class Queries
       WHERE 
         TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti
     );";
-  // OP 10 register a victory
-  public static string CREATE_VICTORY =
-  "INSERT INTO VINCITORE (codPartita, codGiocatore) VALUES (@matchID, @playerID);";
-  // OP 11 show leaderboards
-  public static string GET_LEADERBOARDS =
-  @"SELECT U.nome, U.cognome, U.vittorie 
-    FROM UTENTE U
-    ORDER BY U.vittorie DESC;";
-  // OP 12 show a match in a certain turn
+
+  // OP 9 Get the number of territories players control in a certain turn
+
+  public static string GET_TURN_LEADERBOARD = 
+  @"SELECT G.nickname, E.colore, T.territoriControllati
+    FROM GIOCATORE G, TURNO T, ESERCITO E
+    WHERE T.codPartita = @matchID
+          AND T.numeroTurno = @turnNumber
+          AND G.codEsercito = E.codEsercito
+          AND G.codGiocatore = T.codGiocatore
+    ORDER BY T.territoriControllati DESC;";
+
+  // OP 10 show a match in a certain turn
   public static string GET_MATCHES_IDS =
   "SELECT P.codPartita FROM PARTITA P";
 
@@ -168,12 +171,15 @@ public class Queries
       AND G.codEsercito = E.codEsercito
       AND CT.codPartita = @matchID
       AND CT.numeroTurno = @turnNumber;";
-
-  public static string GET_NICKNAMES_AND_COLORS =
-  @"SELECT G.nickname, E.colore
-    FROM GIOCATORE G, ESERCITO E
-    WHERE G.codEsercito = E.codEsercito
-          AND G.codPartita = @matchID;";
   public static string GET_MATCH_HIGHEST_TURN_NUMBER =
   "SELECT MAX(numeroTurno) FROM TURNO WHERE codPartita = @matchID";
+
+  // OP 11 register a victory
+  public static string CREATE_VICTORY =
+  "INSERT INTO VINCITORE (codPartita, codGiocatore) VALUES (@matchID, @playerID);";
+  // OP 12 show leaderboards
+  public static string GET_LEADERBOARDS =
+  @"SELECT U.nome, U.cognome, U.vittorie 
+    FROM UTENTE U
+    ORDER BY U.vittorie DESC;";
 }
