@@ -64,7 +64,7 @@ class ViewGameMenu : AbstractMenu
       (r.GetString("territorio"), (r.GetString("colore"), r.GetInt32("numArmate"))),
     new MySqlParameter[] {
       new("@matchID", matchID),
-      new("@turnNumber", turnNumber), // todo change this to the actual turn number 
+      new("@turnNumber", turnNumber),
     }).ToDictionary(k => k.Item1, v => (ArmyColors.GetArmyColor(v.Item2.Item1), v.Item2.Item2));
     manager.mapManager.ShowTurnMap(terrColorAndTroops);
     if (turnNumber >= highestTurnNumber)

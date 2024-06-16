@@ -1,4 +1,3 @@
-// TODO the matchID in all the queries is useless! we already have the playerID and that's enough to identify the match
 public class Queries
 {
   // OP 1 Create a new user
