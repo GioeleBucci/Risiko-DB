@@ -12,6 +12,10 @@
 \usepackage[italian]{cleveref}
 \usepackage[margin=1in]{geometry}
 \usepackage{enumitem}
+% for syntax highlighting 
+\usepackage{minted}
+\usepackage{xcolor}
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
 
 % Set the top margin to 0.5 inch
 \setlength{\topmargin}{-0.3in}
@@ -24,7 +28,6 @@
 \author{Gioele Bucci
 \\ \texttt{gioele.bucci@studio.unibo.it}}
 \date{\today}
-
 
 \begin{document}
 
@@ -51,7 +54,7 @@ Le nuove armate ottenute vanno immediatamente posizionate dal giocatore di turno
 Ciascun turno all’interno di una partita è identificato da un numero e il nome del giocatore di turno. In aggiunta vanno registrati anche il numero di truppe presenti sui territori del giocatore dopo la fase di rinforzo, ed eventuali azioni compiute (uno spostamento e/o un attacco). \par
 Per poter attaccare un territorio avversario, l’attaccante deve controllare un territorio ad esso adiacente. Per ciascun attacco vanno memorizzati l’attaccante, il difensore, il numero di truppe impiegate e perse da entrambe le parti e l’eventuale successo dell’attacco, che è considerato riuscito se tutte le truppe sul territorio avversario vengono eliminate. \par
 Lo spostamento consiste nel muovere una parte delle proprie truppe da un territorio ad un altro ad esso adiacente (entrambi i territori devono appartenere allo stesso giocatore). Per ciascuno spostamento vanno memorizzati il territorio di partenza, quello di arrivo e il numero di truppe mobilitate. \par
-I territori non possono mai essere lasciati vuoti e tale vincolo vale anche nel caso di attacchi e spostamenti: in entrambi i casi occorre che nel territorio di partenza rimanga almeno un’unità. Questo implica che in ogni momento di gioco ciascun territorio è controllato da un giocatore.
+I territori non possono mai essere lasciati vuoti e tale vincolo vale anche nel caso di attacchi e spostamenti: in entrambi i casi occorre che nel territorio di partenza rimanga almeno un’unità.
 
 \section{Estrazione dei concetti principali}
 
@@ -185,10 +188,11 @@ Segue una lista delle operazioni da effettuare e la relativa frequenza:
         5 & Mostrare il giocatore a cui appartiene un territorio in un certo turno & 500/g \\ 
         6 & Registrare un attacco & 120/g \\ 
         7 & Registrare uno spostamento & 140/g \\ 
-        8 & Determinare le armate da assegnare ad un giocatore nella fase di rinforzo & 160/g \\ 
-        9 & Mostrare la classifica dei giocatori, in base al numero di territori posseduti & 160/g \\
-        10 & Registrare una vittoria & 9/g \\
-        11 & Mostrare la classifica globale degli utenti, in base al numero di vittorie & 1/set \\
+        8 & Determinare il bonus territori da assegnare ad un giocatore & 160/g \\ 
+        9 & Determinare il bonus continenti da assegnare ad un giocatore & 160/g \\ 
+        10 & Mostrare la classifica dei giocatori, in base al numero di territori posseduti & 160/g \\
+        11 & Registrare una vittoria & 9/g \\
+        12 & Mostrare la classifica globale degli utenti, in base al numero di vittorie & 1/set \\
     \end{tabular}
 \end{table}
 
@@ -205,7 +209,7 @@ Si noti che, al fine del calcolo dei costi, gli accessi in scrittura sono consid
         \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo} \\ \hline 
         Utente & E & 1 & S \\ \hline
         \rowcolor{lime!50} 
-        \multicolumn{4}{c}{\textbf{Totale:} 2L * 2 $\rightarrow$ 4 al giorno } \\ 
+        \multicolumn{4}{c}{\textbf{Totale:} 1S * 2 $\rightarrow$ 4 al giorno } \\ 
     \end{tabular}
 \end{table}
 
@@ -340,24 +344,48 @@ Per portare a termine l'operazione è necessario verificare che i due territori 
     \end{tabular}
 \end{table}
 
-\subsubsection{OP 8 - Determinare le armate da assegnare ad un giocatore nella fase di rinforzo} 
+\subsubsection{OP 8 - Determinare il bonus territori da assegnare ad un giocatoreo} 
 
-Tale operazione viene eseguita nel contesto di un turno. Occorre leggere tutti i territori controllati dal giocatore e verificare se possiede uno o più continenti (6 in totale).
+Il bonus territori è determinato dividendo per 3 il numero di territori controllati: sarà quindi necessario leggere tutte le
+tuple da \textit{"Controllo Territorio"} associate al turno.
 
 \begin{table}[H]
     \begin{tabular}{cccc}
         \rowcolor{lime!50} 
         \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 1 & L \\ \hline
         Controllo Territorio & R & 9.33 & L \\ \hline
-        Continente & E & 6 & L \\ \hline
         \rowcolor{lime!50} 
         \multicolumn{4}{c}{\textbf{Totale:} 10.33L * 160 $\rightarrow$ 2453 al giorno } \\ 
     \end{tabular}
 \end{table}
 
-\subsubsection{OP 9 - Mostrare la classifica dei giocatori, in base al numero di territori posseduti}
+\subsubsection{OP 9 - Determinare il bonus continenti da assegnare ad un giocatore}
 
-Tale operazione viene eseguita nel contesto di un certo turno di numero $n$. \par
+Per ottenere i continenti posseduti da un giocatore occorre prima raggrupparne i territori controllati per continente.
+Successivamente è possibile confrontare il numero di territori per ciascun gruppo con il numero totale di territori 
+da cui il relativo continente è composto: se i due numeri coincidono allora il giocatore possiede il continente.
+Ciò si traduce in una lettura completa di \textit{"Composizione"} per associare ciascun territorio al relativo continente, e una
+ulteriore lettura di \textit{"Territorio"} e \textit{"Composizione"} per ogni territorio controllato dal giocatore.
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 1 & L \\ \hline
+        Controllo Territorio & R & 9.33 & L \\ \hline
+        Territorio & E & 9.33 & L \\ \hline
+        Composizione & R & 9.33 & L \\ \hline
+        Continente & E & 6 & L \\ \hline
+        Composizione & R & 42 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 77L * 160 $\rightarrow$ 12.320 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 10 - Mostrare la classifica dei giocatori, in base al numero di territori posseduti}
+
+Tale operazione viene eseguita nel contesto di un turno $n$. \par
 Per ciascun giocatore è necessario contare i relativi territori posseduti al turno $n$-esimo.
 
 \begin{table}[H]
@@ -371,7 +399,7 @@ Per ciascun giocatore è necessario contare i relativi territori posseduti al tu
     \end{tabular}
 \end{table}
 
-\subsubsection{OP 10 - Registrare una vittoria}
+\subsubsection{OP 11 - Registrare una vittoria}
 
 \begin{table}[H]
     \begin{tabular}{cccc}
@@ -383,7 +411,7 @@ Per ciascun giocatore è necessario contare i relativi territori posseduti al tu
     \end{tabular}
 \end{table}
 
-\subsubsection{OP 11 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}        
+\subsubsection{OP 12 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}        
 
 Leggendo tutte le tuple da "\textit{Vincitore}" è possibile risalire ai giocatori e successivamente ai relativi utenti. 
 
@@ -428,10 +456,36 @@ Nello schema E/R sono state eliminate le seguenti relazioni:
 
 \section{Analisi delle ridondanze}
 
-\subsubsection{OP 9 - Mostrare la classifica dei giocatori, in base al numero di territori controllati}
+\subsubsection{OP 8 - Determinare il bonus territorio da assegnare ad un giocatore}
 
 È stata inserita una ridondanza aggiungendo in Turno l'attributo ridondante \textit{territoriControllati}.
 Come si può vedere dalla tabella sottostante, tale ridondanza agevola notevolmente l'operazione di conteggio dei territori:
+
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{lime!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 1 & L \\ \hline
+        \rowcolor{lime!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 1L * 160 $\rightarrow$ 160 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+Senza ridondanza:
+\begin{table}[H]
+    \begin{tabular}{cccc}
+        \rowcolor{yellow!50} 
+        \textbf{Concetto}& \textbf{Costrutto}& \textbf{Accessi} & \textbf{Tipo}\\ \hline
+        Turno & E & 1 & L \\ \hline
+        Controllo Territorio & R & 9.33 & L \\ \hline
+        \rowcolor{yellow!50} 
+        \multicolumn{4}{c}{\textbf{Totale:} 10.33L * 160 $\rightarrow$ 2453 al giorno } \\ 
+    \end{tabular}
+\end{table}
+
+\subsubsection{OP 10 - Mostrare la classifica dei giocatori, in base al numero di territori controllati}
+
+L'antecedente introduzione dell'attributo ridondante \textit{territoriControllati} agevola anche questa operazione.
 
 \begin{table}[H]
     \begin{tabular}{cccc}
@@ -456,7 +510,7 @@ Senza ridondanza:
     \end{tabular}
 \end{table}
 
-\subsubsection{OP 11 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}        
+\subsubsection{OP 12 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}        
 
 Introducendo l'attributo ridondante "\textit{vittorie}" in Utente è possibile redigere la classifica effettuando molte meno letture, poichè è suficiente leggere tutti gli utenti. \par
 
@@ -484,7 +538,7 @@ Senza ridondanza:
     \end{tabular}
 \end{table}
 
-Per completezza si sottolinea che l'introduzione di un attributo ridondante comporta anche un aumento nel costo dell'operazione 10 (registrazione di una vittoria), che passa da 18/g a 45/g, come mostrato nella tabella sottostante. \par 
+Per completezza si sottolinea che l'introduzione di un attributo ridondante comporta anche un aumento nel costo dell'operazione 11 (registrazione di una vittoria), che passa da 18/g a 45/g, come mostrato nella tabella sottostante. \par 
 
 \begin{table}[H]
     \begin{tabular}{cccc}
@@ -498,12 +552,10 @@ Per completezza si sottolinea che l'introduzione di un attributo ridondante comp
     \end{tabular}
 \end{table}
 
-\pagebreak
-
 Calcolo dei costi senza ridondanza:
 
 \begin{itemize}
-    \item OP 10: 285000 a settimana
+    \item OP 12: 285000 a settimana
     \item OP 11: 18 * 7 = 126 a settimana
 \end{itemize}
 
@@ -511,12 +563,14 @@ Calcolo dei costi senza ridondanza:
 Con ridondanza:
 
 \begin{itemize}
-    \item OP 10: 10000 a settimana
+    \item OP 12: 10000 a settimana
     \item OP 11: 45 * 7 = 315 a settimana
 \end{itemize}
 
 \textbf{Totale}: 10315 a settimana. \par
 Dopo aver analizzato la variazione nei costi delle due operazioni sull'arco di una settimana, emerge che conviene mantenere la ridondanza.  
+
+\pagebreak
 
 \section{Traduzione di entità e associazioni in relazioni}
 
@@ -537,9 +591,295 @@ Dopo aver analizzato la variazione nei costi delle due operazioni sull'arco di u
     \item \textbf{CONTROLLI\_TERRITORIO} (((\underline{numeroTurno}, \underline{codParita}, \underline{codGiocatore}): TURNI, \underline{territorio}: TERRITORI), numArmate) \par
 \end{description}
 
+\pagebreak
+
 \section{Schema relazione finale}
+
+\begin{figure}[H]
+\centering{}
+\begin{center}
+\includegraphics[width=\textwidth]{img/report/relFinale.png}
+\end{center}
+\label{img:schemaRelFinale}
+\end{figure}
+
+\pagebreak
+
 \section{Traduzione delle operazioni in query SQL}
+
+\subsubsection{OP 1 - Registrare un nuovo utente}
+
+\begin{minted}{mySQL}
+INSERT INTO UTENTE (codiceFiscale, nome, cognome, dataNascita)
+VALUES (?, ?, ?, ?);
+\end{minted}
+
+\subsubsection{OP 2 - Registrare una nuova partita}
+
+\begin{minted}{mySQL}
+INSERT INTO PARTITA (data)
+VALUES (?);
+\end{minted}
+
+In seguito alla creazione della partita occorre anche registrare i giocatori partecipanti.
+\begin{minted}{mySQL}
+INSERT INTO GIOCATORE (nickname, codPartita, codUtente, codObiettivo, codEsercito) 
+VALUES (?, ?, ?, ?, ?);
+\end{minted}
+
+\subsubsection{OP 3 - Determinare il numero di armate iniziali da assegnare ai giocatori}
+
+\begin{minted}{mySQL}
+SELECT numArmate
+FROM ARMATE_INIZIALI 
+WHERE numGiocatori = ?;
+\end{minted}
+
+\subsubsection{OP 4 - Registrare un nuovo turno}
+
+Registrare un nuovo turno deve essere possibile solo per partite non ancora concluse (ovvero quelle che non hanno un vincitore).
+Per ottenere la lista delle partite non concluse si utilizza la seguente query:
+
+\begin{minted}{mySQL}
+SELECT P.codPartita
+FROM PARTITA P
+WHERE P.codPartita NOT IN 
+(
+  SELECT V.codPartita
+  FROM VINCITORE V
+);
+\end{minted}
+
+Si può poi procedere alla creazione del turno:
+
+\begin{minted}{mySQL}
+INSERT INTO TURNO(codGiocatore, codPartita, numeroTurno) 
+VALUES (?, ?, ?);
+\end{minted}
+
+Infine occorre registrare tutti i territori controllati dal giocatore durante il turno.
+
+\begin{minted}{mySQL}
+INSERT INTO CONTROLLO_TERRITORIO (codGiocatore, codPartita, numeroTurno,
+                                  territorio, numArmate) 
+VALUES (?, ?, ?, ?, ?);
+\end{minted}
+
+\subsubsection{OP 5 - Mostrare il giocatore a cui appartiene un territorio}
+
+\begin{minted}{mySQL}
+SELECT codGiocatore FROM CONTROLLO_TERRITORIO 
+WHERE codPartita = ? 
+    AND territorio = ? 
+    AND numeroTurno = ?;
+\end{minted}
+
+\subsubsection{OP 6 - Registrare un attacco}
+
+Per registrare un attacco occorre verificare che il territorio attaccante appartenga al giocatore di turno e
+il territorio difensore sia confinante a quello attaccante ed appartenente ad un altro giocatore.
+
+Tramite la seguente query si ottiene la lista dei territori controllati dal giocatore durante il proprio turno:
+\begin{minted}{mySQL}
+SELECT territorio FROM CONTROLLO_TERRITORIO
+WHERE codPartita = ? 
+AND codGiocatore = ? 
+AND numeroTurno = ?;
+\end{minted}
+
+Occorre poi verificare che il territorio difensore sia confinante a quello attaccante \\ (\texttt{@territorioAttaccante}) e appartenente ad un altro giocatore (codGiocatore != \\ \texttt{@giocatoreAttaccante}).
+\begin{minted}{mySQL}
+SELECT conf.terrB 
+FROM CONFINE conf 
+WHERE conf.terrA = @territorioAttaccante AND conf.terrB IN 
+(
+  SELECT contr.territorio 
+  FROM CONTROLLO_TERRITORIO contr 
+  WHERE contr.codPartita = ? 
+    AND contr.codGiocatore != @giocatoreAttaccante
+    AND contr.numeroTurno = ? 
+);
+\end{minted}
+
+Al termine di tali verifiche è possibile registrare l'attacco:
+
+\begin{minted}{mySQL}
+INSERT INTO ATTACCO (attaccante, difensore, armateSchierate, 
+                     armatePerse, difArmateSchierate, difArmatePerse, vittoria) 
+VALUES (?, ?, ?, ?, ?, ?, ?)
+\end{minted}
+Infine va aggiornato il relativo turno.
+\begin{minted}{mySQL}
+UPDATE TURNO 
+SET codAttacco = ? 
+WHERE codPartita = ? 
+    AND codGiocatore = ?
+    AND numeroTurno = ?;
+\end{minted}
+
+\subsubsection{OP 7 - Registrare uno spostamento}
+
+I controlli sono analoghi a quelli effettuati per l'attacco ma in questo caso si verifica che il territorio di arrivo sia
+appartenente allo stesso giocatore, invece che ad un giocatore differente.
+
+Al termine delle verifiche è possibile registrare lo spostamento:
+\begin{minted}{mySQL}
+INSERT INTO SPOSTAMENTO (territorioPartenza, territorioArrivo, numArmate) 
+VALUES (?, ?, ?);
+\end{minted}
+Infine va aggiornato il relativo turno.
+\begin{minted}{mySQL}
+UPDATE TURNO 
+SET codSpostamento = ?
+WHERE codPartita = ? 
+    AND codGiocatore = ? 
+    AND numeroTurno = ?;
+\end{minted}
+
+\subsubsection{OP 8 - Determinare il bonus territori da assegnare ad un giocatore}
+
+\begin{minted}{mySQL}
+SELECT FLOOR(COUNT(C.territorio) / 3) AS truppeBonus
+FROM CONTROLLO_TERRITORIO C
+WHERE C.codPartita = ?
+        AND C.codGiocatore = ?
+        AND C.numeroTurno = ?;
+\end{minted}
+
+\subsubsection{OP 9 - Determinare il bonus continenti da assegnare ad un giocatore}
+
+Per verificare se un giocatore controlla completamente un continente, occorre controllare se il numero di territori posseduti 
+dal giocatore per un certo continente sia uguale al numero totale dei territori dai quali esso è composto.
+
+\begin{minted}{mySQL}
+SELECT COALESCE(SUM(C1.bonusArmate), 0) AS bonusArmate
+FROM CONTINENTE C1
+WHERE C1.nome IN
+(
+  SELECT TERR_TOTALI.continente
+  FROM 
+    (
+    SELECT C.nome AS continente, COUNT(*) AS numTerrPerCont
+    FROM CONTINENTE C, TERRITORIO T 
+    WHERE T.continente = C.nome 
+    GROUP BY C.nome
+    ) AS TERR_TOTALI
+  JOIN 
+    (
+    SELECT T.continente, COUNT(*) AS numTerrPerContPosseduti 
+    FROM CONTROLLO_TERRITORIO CT, TERRITORIO T 
+    WHERE CT.territorio = T.nome 
+        AND CT.codPartita = ? 
+        AND CT.codGiocatore = ? 
+        AND CT.numeroTurno = ?
+    GROUP BY T.continente
+    ) AS TERR_GIOCATORE 
+  ON 
+    TERR_TOTALI.continente = TERR_GIOCATORE.continente
+  WHERE 
+    TERR_TOTALI.numTerrPerCont = TERR_GIOCATORE.numTerrPerContPosseduti
+)
+\end{minted}
+
+\subsubsection{OP 10 - Mostrare la classifica di un turno, in base ai territori posseduti}
+
+\begin{minted}{mySQL}
+SELECT G.nickname, T.territoriControllati
+FROM GIOCATORE G, TURNO T
+WHERE T.codPartita = ?
+      AND T.numeroTurno = ?
+      AND G.codGiocatore = T.codGiocatore
+ORDER BY T.territoriControllati DESC;"
+\end{minted}
+
+\subsubsection{OP 11 - Registrare una vittoria}
+
+\begin{minted}{mySQL}
+INSERT INTO VINCITORE (codPartita, codGiocatore) 
+VALUES (?, ?);
+\end{minted}
+
+\subsubsection{OP 12 - Mostrare la classifica globale degli utenti, in base al numero di vittorie}
+
+\begin{minted}{mySQL}
+SELECT U.nome, U.cognome, U.vittorie 
+FROM UTENTE U
+ORDER BY U.vittorie DESC;
+\end{minted}
+
 \chapter{Progettazione dell'applicazione}
-\section{Descrizione dell'architettura dell'applicazione realizzata}
+
+L'applicazione per interfacciarsi al database è stata realizzata in Unity, una piattaforma di sviluppo software basata sul framework .NET, sfruttando il connettore "MySqlConnector" per interfacciarsi al database, che risiede in locale. Il DBMS usato è "MySQL" e il codice è scritto in C\#.
+L'applicazione è costituita da un'interfaccia utente che fa uso di file UXML (uno per ogni finestra indipendente). A ciascuna finestra è associato uno script che si occupa della gestione degli input utente e delle interrogazioni al database.
+All'avvio dell'applicazione viene presentata all'utente una schermata principale dalla quale 
+è possibile selezionare le varie operazioni. 
+
+\begin{figure}[H]
+\centering{}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{img/report/app/mainMenu.png}
+\end{center}
+\emph{\caption{Menù principale dell'applicazione.}}
+\label{img:app_main_menu}
+\end{figure}
+
+\subsection{Controllo dei dati e gestione degli errori}
+La correttezza dei dati inseriti viene verificata sia dal DBMS, tramite opportuni check, che dall'applicazione. Per impedire all'utente di inserire dati non pertinenti sono stati sfruttati anche elementi grafici come menù a tendina, che limitano i dati che l'utente può inserire all'interno del database, assicurandone la correttezza.
+
+\begin{figure}[H]
+\centering{}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{img/report/app/turnCreation.png}
+\end{center}
+\emph{\caption{Schermata di creazione di un nuovo turno. Consentendo all'utente di selezionare i dati tramite un menù a tendina si può fare in modo che, scelta una partita, sia possibile registrare un turno solamente per i giocatori che ne fanno parte.}}
+\label{img:app_turn_creation}
+\end{figure}
+
+Impedire a priori inserimenti errati da parte dell'utente non è sempre possibile: è stato perciò creato un sistema di "popup", gestito dalla classe \textit{PopupManager}, che notifica l'utente in seguito all'inserimento di dati errati.
+
+\begin{figure}[H]
+\centering{}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{img/report/app/errorPopup.png}
+\end{center}
+\emph{\caption{Un popup di errore causato dal mancato inserimento dei parametri richiesti nella schermata di creazione utente.}}
+\label{img:app_error_popup}
+\end{figure}
+
+\subsection{Operazioni principali}
+\subsubsection{Creazione del turno (OP 4, 6 e 7)}
+L'inserimento di un turno è l'operazione più complessa ed è divisa in tre fasi, ciascuna gestita in un'apposita schermata. 
+\begin{enumerate}
+    \item Selezione dei territori controllati
+    \item Registrazione di un eventuale spostamento
+    \item Registrazione di un eventuale attacco
+\end{enumerate}
+
+In particolare, sfruttando alcune funzionalità di Unity, è stato possibile rendere la schermata 
+di selezione dei territori controllati completamente interattiva, rendendo il processo più 
+agevole ed intuitivo.
+
+\begin{figure}[H]
+\centering{}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{img/report/app/territoryMenu.png}
+\end{center}
+\emph{\caption{Utilizzando il mouse l'utente può selezionare i diversi territori direttamente dalla mappa e specificare tramite tasto destro il numero di truppe presenti su ciascuno di essi.}}
+\label{img:app_terr_selection}
+\end{figure}
+
+\subsubsection{Classifica dei giocatori in un certo turno (OP 10)}
+
+Sfruttando la GUI e opportune query è stato possibile dare all'utente una rappresentazione
+visiva dello stato di un turno. La classifica dei giocatori in base al numero di territori controllati è situata a destra.
+
+\begin{figure}[H]
+\centering{}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{img/report/app/turnView.png}
+\end{center}
+\label{img:app_turn_view}
+\end{figure}
+
 
 \end{document}
