@@ -27,5 +27,5 @@ If you changed the connection string, you will need to rebuild the project from 
 </p>
 
 <p align="center">
-  <img src="https://imgur.com/tRFmCdi.png" width=400>
+  <img src="https://imgur.com/hZifzqc.png" width=400>
 </p>
